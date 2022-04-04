@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +9,97 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: black;
+  color: white;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.image{
+  display: flex;
+  flex-direction: column;
+  font-size: 4vw;
+  font-weight: bolder;
+  color: white;
+  height: 92vh;
+  object-fit: contain;
+  animation: fadein 1s;
+}
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  max-width: 100%;
+  border-bottom: 1px solid white;
+  /* margin-bottom: 2%; */
+  padding:0% 0% 0% 0%;
+  color: white;
+  font-weight: bold;
+  font-size: 40px;
+  background-color: black;
+}
+
+.searchInput{
+  color: white;
+  width: 100%;
+  font-size: 100  ;
+  padding:10px;
+  background-color: black;
+  border: 1px gray solid;
+}
+
+.searchbarItem{
+  border: 1px solid white;
+  background:  linear-gradient(
+    to right,
+    rgb(0, 0, 0) 70%,
+    rgba(0, 0, 0, 0)
+  ); 
+  display: flex;
+  padding: 5px;
+  width:225px;
+}
+
+.dropdown {
+  position: absolute;
+  z-index: 1;
+  right:41px;
+  top:50px;
+  display: flex;
+}
+
+.cart{
+  animation: slide-in 0.5s both;
+  z-index: inherit;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  
+  to {
+    transform: translateX(0);
+  }
+}
+
+.icon{
+  color:white;
+  object-fit:contain;
+  width:25px;
+  padding-left: 1%;
+}
+
+.video{
+  width: 100%;
+  height: 100%;
+  /* offset: ; */
+  position:fixed;
+  top: 0;
+  align-self: center;
+  z-index: -1;
 }
