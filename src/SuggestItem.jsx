@@ -1,12 +1,12 @@
-export default function SuggestItem({ data, handleClick}) {
+export default function SuggestItem({ data, handleClick }) {
+  function indexBestRatioUrl(ratio, data) {
+    if (data.images !== undefined) {
+      return data.images.findIndex((item) => {
+        return item.ratio === ratio && item.width > 2000;
+      });
+    }
+  }
 
-    function indexBestRatioUrl(ratio,data) {
-        if (data.images !== undefined) {
-          return data.images.findIndex((item) => {
-            return item.ratio === ratio && item.width > 2000;
-          });
-        }
-      }
   return (
     <>
       <div
@@ -14,9 +14,9 @@ export default function SuggestItem({ data, handleClick}) {
         style={{
           background: `linear-gradient(to right, black 10%, rgba(0, 0, 0, 0)),url(${
             data.images[indexBestRatioUrl("16_9", data)].url
-          }) no-repeat 50% 30%`
+          }) no-repeat 50% 30%`,
         }}
-        onClick={() => handleClick( data)}
+        onClick={() => handleClick(data)}
       >
         <div className=" text-4xl md:text-5xl font-extrabold ">{data.name}</div>
         <div className="text-xs text-gray-400">
@@ -24,7 +24,10 @@ export default function SuggestItem({ data, handleClick}) {
           {data.classifications[0].genre.name}/
           {data.classifications[0].subGenre.name}
         </div>
-        <div className="text-xs text-gray-400">{data.upcomingEvents._total} upcoming {data.upcomingEvents._total >1?"events" :"event"}</div>
+        <div className="text-xs text-gray-400">
+          {data.upcomingEvents._total} upcoming{" "}
+          {data.upcomingEvents._total > 1 ? "events" : "event"}
+        </div>
       </div>
     </>
   );
