@@ -4,11 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export default function Navbar({
-  handleChange,
   setOnScreen,
   cart,
   setCart,
-  display,
 }) {
   const APIKEY = "cD2XNWSCGooPNOAAgXStTr5H6ks3ZfmD";
   let [search, setSearch] = useState("");
@@ -69,9 +67,8 @@ export default function Navbar({
           className="flex-row flex p-1 border border-white hover:border-amber-500 bg-black cursor-pointer  hover:bg-gray-800 hover:text-amber-500"
           onClick={() => {
             setOnScreen(data);
-            // navigate("/second");
-    navigate(`/${data.name.replace(/ /g, '_')}`)
-            setSearchbarDisplay("none")
+            navigate(`/${data.name.replace(/ /g, "_")}`);
+            setSearchbarDisplay("none");
           }}
         >
           <div className=" flex flex-col">
@@ -95,8 +92,7 @@ export default function Navbar({
       <SearchbarItems
         data={item}
         key={item.id}
-        // handleClickSearch={handleClickSearch}
-        // setDisplay={setDisplay}
+
       />
     ));
     return (

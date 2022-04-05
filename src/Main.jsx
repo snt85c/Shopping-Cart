@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import { useState } from "react";
 import "./index.css";
 import Navbar from "./Navbar";
@@ -18,7 +18,7 @@ export default function Main() {
 
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
         <Navbar cart={cart} setCart={setCart} setOnScreen={setOnAttractionScreen}/>
         <Cart cart={cart} setCart={setCart}/>
         <Routes>
@@ -46,7 +46,7 @@ export default function Main() {
 
           <Route path="*" element={<NoPath />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }
