@@ -62,14 +62,14 @@ export default function Third({ onScreen, cart, setCart }) {
   return (
     <div >
       <div >
-      <IoArrowBackCircleSharp className="absolute right-0 top-32 md:top-24 cursor-pointer h-12 w-12"
+      <IoArrowBackCircleSharp className="absolute right-0 top-30 md:top-20 cursor-pointer h-12 w-12"
         onClick={() => {
           navigate(-1);
         }}
       />
       </div>
       <div
-        className="flex flex-col md:flex-row md:mt-10 h-2/4 justify-center "
+        className="flex flex-col md:flex-row md:mt-10 h-1/3 md:h-2/4 justify-center "
         style={{
           background: `linear-gradient(to right, black, rgba(0, 0, 0, 0.6), black),
                           url(${

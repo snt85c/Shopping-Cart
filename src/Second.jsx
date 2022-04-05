@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { convertDate, indexBestRatioUrl } from "./Services";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoArrowBackCircleSharp } from "react-icons/io5";
+import { convertDate,SearchEvents, indexBestRatioUrl } from "./Services";
 import {
   BsSpotify,
   BsFacebook,
@@ -14,7 +14,6 @@ import { AiOutlineHome } from "react-icons/ai";
 export default function Third({ onScreen, setOnScreen }) {
   const [eventData, setEventData] = useState([]);
   const navigate = useNavigate();
-  const APIKEY = "cD2XNWSCGooPNOAAgXStTr5H6ks3ZfmD";
   let params = useParams();
 
   function AttractionShow({ data, eventData, setOnScreen }) {
@@ -199,31 +198,11 @@ export default function Third({ onScreen, setOnScreen }) {
     );
   }
 
-  function SearchEvents(data, setEventData) {
-    useEffect(() => {
-      async function getData() {
-        if (data !== undefined) {
-          let events = [];
-          const url = `https://app.ticketmaster.com/discovery/v2/events.json?attractionId=${data.id}&apikey=${APIKEY}`;
-          const response = await fetch(url, { mode: "cors" });
-          const result = await response.json();
-          try {
-            result._embedded.events.forEach((item) => {
-              events.push(item);
-            });
-            setEventData(events);
-          } catch (e) {}
-        }
-      }
-      getData();
-    }, [data]);
-  }
-
   SearchEvents(onScreen, setEventData);
 
   return (
     <>
-      <IoArrowBackCircleSharp className=" absolute right-0 cursor-pointer h-12 w-12"
+      <IoArrowBackCircleSharp className="absolute right-0 top-30 md:top-20 cursor-pointer h-12 w-12"
         onClick={() => {
           navigate(-1);
         }}

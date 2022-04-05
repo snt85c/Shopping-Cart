@@ -20,7 +20,6 @@ export default function Main() {
     <>
       <BrowserRouter>
         <Navbar cart={cart} setCart={setCart} setOnScreen={setOnAttractionScreen}/>
-        <nav>about</nav>
         <Cart cart={cart} setCart={setCart}/>
         <Routes>
           <Route

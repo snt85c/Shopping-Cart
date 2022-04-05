@@ -1,31 +1,12 @@
 import { Outlet, useNavigate} from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import {indexBestRatioUrl, SearchSuggest} from "./Services"
 
 export default function SecondPage({ setOnScreen }) {
   const [suggest, setSuggest] = useState([]);
   const navigate = useNavigate();
-  const APIKEY = "cD2XNWSCGooPNOAAgXStTr5H6ks3ZfmD";
-
-  function SearchSuggest(setSuggest) {
-    useEffect(() => {
-      async function getData() {
-        let suggest = [];
-        const url = `https://app.ticketmaster.com/discovery/v2/suggest?&countryCode=UK&apikey=${APIKEY}`;
-        const response = await fetch(url, { mode: "cors" });
-        const result = await response.json();
-        try {
-          result._embedded.attractions.forEach((item) => {
-            suggest.push(item);
-          });
-          setSuggest(suggest);
-        } catch (e) {}
-      }
-      getData();
-    }, []);
-  }
 
   SearchSuggest(setSuggest);
-
 
   function handleClick(item) {
     setOnScreen(item);
@@ -33,13 +14,6 @@ export default function SecondPage({ setOnScreen }) {
   }
 
   function SuggestItem({ data, handleClick }) {
-    function indexBestRatioUrl(ratio, data) {
-      if (data.images !== undefined) {
-        return data.images.findIndex((item) => {
-          return item.ratio === ratio && item.width > 2000;
-        });
-      }
-    }
 
     return (
       <>
