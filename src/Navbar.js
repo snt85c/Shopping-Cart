@@ -98,7 +98,7 @@ export default function Navbar({
     return (
       <>
         <div
-          className=" absolute flex flex-col z-20  right-auto top-48  md:right-12 md:top-14"
+          className=" absolute flex flex-col z-20  right-auto top-24  md:right-12 md:top-14"
           style={{ display: searchbarDisplay }}
         >
           {searchItemsList}
