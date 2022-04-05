@@ -1,12 +1,10 @@
-import { Outlet, useNavigate } from "react-router-dom"
-import { useParams } from "react-router-dom";
+import { Outlet, useNavigate} from "react-router-dom";
 import { useState, useEffect } from "react";
-export default function SecondPage({suggest, setSuggest, onScreen, setOnScreen}){
 
-    const navigate= useNavigate();
-    let params = useParams();
-    const APIKEY = "cD2XNWSCGooPNOAAgXStTr5H6ks3ZfmD";
-
+export default function SecondPage({ setOnScreen }) {
+  const [suggest, setSuggest] = useState([]);
+  const navigate = useNavigate();
+  const APIKEY = "cD2XNWSCGooPNOAAgXStTr5H6ks3ZfmD";
 
   function SearchSuggest(setSuggest) {
     useEffect(() => {
@@ -26,13 +24,12 @@ export default function SecondPage({suggest, setSuggest, onScreen, setOnScreen})
     }, []);
   }
 
-  
+  SearchSuggest(setSuggest);
+
 
   function handleClick(item) {
     setOnScreen(item);
-    // navigate(`/${item.name.replace(/ /g, '_')}`)
-    navigate("/second")
-    console.log(onScreen, "onScreen");
+    navigate(`/${item.name.replace(/ /g, "_")}`);
   }
 
   function SuggestItem({ data, handleClick }) {
@@ -43,7 +40,7 @@ export default function SecondPage({suggest, setSuggest, onScreen, setOnScreen})
         });
       }
     }
-  
+
     return (
       <>
         <div
@@ -55,7 +52,9 @@ export default function SecondPage({suggest, setSuggest, onScreen, setOnScreen})
           }}
           onClick={() => handleClick(data)}
         >
-          <div className=" text-4xl md:text-5xl font-extrabold ">{data.name}</div>
+          <div className=" text-4xl md:text-5xl font-extrabold ">
+            {data.name}
+          </div>
           <div className="text-xs text-gray-400">
             {data.classifications[0].segment.name}:{" "}
             {data.classifications[0].genre.name}/
@@ -71,20 +70,14 @@ export default function SecondPage({suggest, setSuggest, onScreen, setOnScreen})
   }
 
   const suggestions = suggest.map((item) => (
-    <SuggestItem
-      data={item}
-      key={item.id}
-      handleClick={handleClick}
-    />
+    <SuggestItem data={item} key={item.id} handleClick={handleClick} />
   ));
 
-  SearchSuggest(setSuggest);
 
-    return (
-        <>
-        <div> First Page </div>
-        <div>{suggestions}</div>
-        <Outlet />
-        </>
-    )
+  return (
+    <>
+      <div>{suggestions}</div>
+      <Outlet />
+    </>
+  );
 }

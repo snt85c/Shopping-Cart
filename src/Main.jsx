@@ -1,38 +1,52 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NoPath from "./NoPath";
+import { useState } from "react";
+import "./index.css";
+import Navbar from "./Navbar";
+import Cart from "./Cart";
 import First from "./First";
 import Second from "./Second";
 import Third from "./Third";
-import { useState } from "react";
-import Navbar from "./Navbar";
-import "./index.css";
+import NoPath from "./NoPath";
 
 export default function Main() {
-  const [suggest, setSuggest] = useState([]);
-  let [onScreen, setOnScreen] = useState([]);
+  let [onAttractionScreen, setOnAttractionScreen] = useState([]);
+  let [onEventScreen, setOnEventScreen] = useState([]);
+  let [cart, setCart] = useState({
+    display:"none",
+    items: []
+  })
 
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+        <Navbar cart={cart} setCart={setCart} setOnScreen={setOnAttractionScreen}/>
+        <nav>about</nav>
+        <Cart cart={cart} setCart={setCart}/>
         <Routes>
           <Route
             path="/"
             element={
               <First
-                suggest={suggest}
-                setSuggest={setSuggest}
-                onScreen={onScreen}
-                setOnScreen={setOnScreen}
+                setOnScreen={setOnAttractionScreen}
               />
             }
           />
-            <Route path="second" element={<Second data={onScreen} />} />
-            <Route path="third" element={<Third  />} />
+          <Route
+            path=":second"
+            element={
+              <Second
+                onScreen={onAttractionScreen}
+                setOnScreen={setOnEventScreen}
+              />
+            }
+          />
+          <Route
+            path=":second/:third"
+            element={<Third onScreen={onEventScreen} cart={cart} setCart={setCart} />}
+          />
 
           <Route path="*" element={<NoPath />} />
         </Routes>
-        <div className="flex justify-center items-center h-6 p-2 bg-gray-900">Created by Snt</div>
       </BrowserRouter>
     </>
   );
