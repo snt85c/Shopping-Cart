@@ -109,7 +109,7 @@ export default function Navbar({
 
   return (
     <>
-      <div className="sticky flex top-0 flex-col md:flex-row justify-between items-center max-w-full border-b-amber-500 bg-gray-900 border-b-2 py-2 font-extrabold text-4xl z-40">
+      <div className="sticky flex top-0 flex-col md:flex-row justify-between items-center max-w-full border-b-amber-500 bg-gray-900 border-b-2  font-extrabold text-4xl z-40">
         <div
           className="flex w-full md:justify-start md:pl-2 font-newake subpixel-antialiased tracking-wider justify-center cursor-pointer text-white"
           onClick={() => (
