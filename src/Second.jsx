@@ -36,8 +36,10 @@ export default function Second({ onScreen, setOnScreen }) {
   }
   SearchEvents(localStorage.getItem("id"), setEventData);
 
-  function EventList({ data }) {
-    const options = data.map((item, i) => <EventItem data={item} key={i} />);
+  function EventList() {
+    const options = eventData.map((item, i) => (
+      <EventItem data={item} key={i} />
+    ));
 
     return (
       <div className=" flex flex-col mx-5 h-72 bg-gray-800 bg-opacity-50 overflow-auto cursor-pointer mb-4 ">
@@ -71,7 +73,7 @@ export default function Second({ onScreen, setOnScreen }) {
     );
   }
 
-  function AttractionShow({ data, eventData }) {
+  function AttractionShow() {
     return (
       <div
         className="flex flex-col text-sm font-bold text-white"
@@ -92,7 +94,7 @@ export default function Second({ onScreen, setOnScreen }) {
             {localStorage.getItem("total")}{" "}
             {localStorage.getItem("total") > 1 ? "events" : "event"}
           </div>
-          <EventList data={eventData} />
+          <EventList />
         </div>
         <div
           className="flex justify-center pb-1"
@@ -100,7 +102,7 @@ export default function Second({ onScreen, setOnScreen }) {
             display: localStorage.getItem("icons") ? "flex" : "none",
           }}
         >
-          <AttractionShowIcons data={data} />
+          <AttractionShowIcons />
         </div>
       </div>
     );
@@ -180,7 +182,9 @@ export default function Second({ onScreen, setOnScreen }) {
         </a>
         <a
           href={
-            localStorage.getItem("twitter") ? localStorage.getItem("twitter") : ""
+            localStorage.getItem("twitter")
+              ? localStorage.getItem("twitter")
+              : ""
           }
           style={{
             padding: "1%",
@@ -196,7 +200,9 @@ export default function Second({ onScreen, setOnScreen }) {
         </a>
         <a
           href={
-            localStorage.getItem("youtube") ? localStorage.getItem("youtube") : ""
+            localStorage.getItem("youtube")
+              ? localStorage.getItem("youtube")
+              : ""
           }
           style={{
             padding: "1%",
@@ -224,11 +230,7 @@ export default function Second({ onScreen, setOnScreen }) {
           navigate(-1);
         }}
       />
-      <AttractionShow
-        eventData={eventData}
-        data={onScreen}
-        setOnScreen={setOnScreen}
-      />
+      <AttractionShow />
     </>
   );
 }

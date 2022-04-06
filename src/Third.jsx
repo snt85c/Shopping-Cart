@@ -5,16 +5,32 @@ import { IoArrowBackCircleSharp } from "react-icons/io5";
 
 export default function Third({ onScreen, cart, setCart }) {
   const navigate = useNavigate();
+  if(onScreen.id){
+    localStorage.setItem("name", onScreen.name )
+    localStorage.setItem("date", onScreen.dates.start.localDate)
+    localStorage.setItem("start", onScreen.dates.start.localTime)
+    localStorage.setItem("image", onScreen.images[indexBestRatioUrl("16_9", onScreen)].url)
+    localStorage.setItem("venueName", onScreen._embedded.venues[0].name)
+    localStorage.setItem("address", onScreen._embedded.venues[0].address.line1)
+    localStorage.setItem("city", onScreen._embedded.venues[0].city.name)
+    localStorage.setItem("country", onScreen._embedded.venues[0].country.countryCode)
+    localStorage.setItem("info", onScreen.info)
+  }
+  if(onScreen.seatmap && localStorage.getItem("seatmapUrl") !== onScreen.seatmap.staticUrl ){
+    localStorage.setItem("seatmap", onScreen.seatmap)
+    localStorage.setItem("seatmapUrl", onScreen.seatmap.staticUrl)
+  }
+  
 
-  function EventInfo({ data }) {
+  function EventInfo() {
     return (
       <>
         <div className=" flex flex-col items-center text-4xl text-center font-extrabold p-3 m-1 basis-1/3">
-          {data.name}
+          {localStorage.getItem("name")}
           <br />
           <div className="text-lg">
-            {convertDate(data.dates.start.localDate)}{" "}
-            {data.dates.start.localTime}
+            {convertDate(localStorage.getItem("date"))}{" "}
+            {localStorage.getItem("start")}
           </div>
         </div>
       </>
@@ -24,35 +40,35 @@ export default function Third({ onScreen, cart, setCart }) {
   function VenueAddress() {
     return (
       <div className=" flex flex-col justify-center align-center text-left basis-1/3 m-2   p-1">
-        Venue address: {onScreen._embedded.venues[0].name}
+        Venue address: {localStorage.getItem("venueName")}
         {", "}
-        {onScreen._embedded.venues[0].address.line1}
+        {localStorage.getItem("address")}
         {" - "}
-        {onScreen._embedded.venues[0].city.name}
+        {localStorage.getItem("city")}
         {" ("}
-        {onScreen._embedded.venues[0].country.countryCode}
+        {localStorage.getItem("country")}
         {")"}
         <div className="flex border-t-2 border-white md:h-60 h-auto pt-2 overflow-auto text-xs text-justify overflow-ellipsis">
-          {onScreen.info ? onScreen.info : "no info to display for this event"}
+          {localStorage.getItem("info") ? localStorage.getItem("info") : "no info to display for this event"}
         </div>
       </div>
     );
   }
 
-  function SeatMap({ data }) {
+  function SeatMap() {
     return (
       <>
         <div className="flex flex-col justify-center items-center p-1 basis-1/3">
           <img
             className="p-2 md:w-full object-contain"
-            src={data.seatmap ? data.seatmap.staticUrl : ""}
+            src={localStorage.getItem("seatmap") ? localStorage.getItem("seatmapUrl") : ""}
             alt="#"
             style={{
-              display: data.seatmap ? "flex" : "none",
+              display: localStorage.getItem("seatmap") ? "flex" : "none",
             }}
           ></img>
           <div>
-            {data.seatmap ? "site map" : "no site map available for this venue"}
+            {localStorage.getItem("seatmap") ? "site map" : "no site map available for this venue"}
           </div>
         </div>
       </>
@@ -73,13 +89,13 @@ export default function Third({ onScreen, cart, setCart }) {
         style={{
           background: `linear-gradient(to right, black, rgba(0, 0, 0, 0.6), black),
                           url(${
-                            onScreen.images[indexBestRatioUrl("16_9", onScreen)].url
+                            localStorage.getItem("image")
                           }) no-repeat 50% 30%`,
         }}
       >
-        <EventInfo data={onScreen} />
+        <EventInfo />
         <VenueAddress />
-        <SeatMap data={onScreen} />
+        <SeatMap /> 
       </div>
       <AddToCart  data={onScreen} cart={cart} setCart={setCart} />
     </div>
