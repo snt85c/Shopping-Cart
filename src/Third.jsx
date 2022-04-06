@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import bkgVideo from "./bkgVideo.mp4"
 import { convertDate, indexBestRatioUrl } from "./Services";
 import AddToCart from "./AddToCart";
 import { IoArrowBackCircleSharp } from "react-icons/io5";
@@ -9,7 +10,21 @@ export default function Third({ onScreen, cart, setCart }) {
     localStorage.setItem("onScreen", JSON.stringify(onScreen))
   }
   let data = JSON.parse(localStorage.getItem("onScreen"))
+
   
+  function EventShowBackgroundVideo() {
+    return (
+        <div className=" hidden md:flex object-cover justify-center items-center h-full w-full fixed top-0 -z-10">
+            <video loop autoPlay muted>
+                <source
+                    src={bkgVideo}
+                    type="video/mp4"
+                />
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        )
+}
 
   function EventInfo() {
     return (
@@ -66,6 +81,7 @@ export default function Third({ onScreen, cart, setCart }) {
 
   return (
     <div >
+      <EventShowBackgroundVideo />
       <div >
       <IoArrowBackCircleSharp className="absolute right-0 top-30 md:top-20 cursor-pointer h-12 w-12"
         onClick={() => {
@@ -74,7 +90,7 @@ export default function Third({ onScreen, cart, setCart }) {
       />
       </div>
       <div
-        className="flex flex-col md:flex-row md:mt-10 h-1/3 md:h-2/4 justify-center "
+        className="flex flex-col md:flex-row md:mt-20 h-1/3 md:h-2/4 justify-center "
         style={{
           background: `linear-gradient(to right, black, rgba(0, 0, 0, 0.6), black),
                           url(${

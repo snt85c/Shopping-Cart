@@ -22,7 +22,7 @@ export default function SecondPage({ setOnScreen}) {
           style={{
             background: `linear-gradient(to right, black 10%, rgba(0, 0, 0, 0)),url(${
               data.images[indexBestRatioUrl("16_9", data)].url
-            }) no-repeat 50% 30%`,
+            })no-repeat 50% 30%`,
           }}
           onClick={() => handleClick(data)}
         >
