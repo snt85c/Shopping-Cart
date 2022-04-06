@@ -27,15 +27,15 @@ export default function Main() {
             element={
               <First
                 setOnScreen={setOnAttractionScreen}
+                />
+              }
               />
-            }
-          />
           <Route
             path=":second"
             element={
               <Second
-                onScreen={onAttractionScreen}
-                setOnScreen={setOnEventScreen}
+              onScreen={onAttractionScreen}
+              setOnScreen={setOnEventScreen}
               />
             }
           />

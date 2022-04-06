@@ -2,7 +2,7 @@ import { Outlet, useNavigate} from "react-router-dom";
 import { useState } from "react";
 import {indexBestRatioUrl, SearchSuggest} from "./Services"
 
-export default function SecondPage({ setOnScreen }) {
+export default function SecondPage({ setOnScreen}) {
   const [suggest, setSuggest] = useState([]);
   const navigate = useNavigate();
 

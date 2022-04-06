@@ -25,6 +25,7 @@ export function SearchAttraction(search, setData) {
     }, [search]);
 }
 
+
 //search all the events available for attraction(Artist) id
 export function SearchEvents(data, setEventData) {
     useEffect(() => {
