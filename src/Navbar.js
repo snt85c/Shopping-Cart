@@ -1,18 +1,19 @@
 import { HiOutlineShoppingCart } from "react-icons/hi";
-import { indexBestWidthUrl } from "./Services";
+import { indexBestWidthUrl, SearchAttraction } from "./Services";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 
 export default function Navbar({
   setOnScreen,
   cart,
   setCart,
 }) {
-  const APIKEY = "cD2XNWSCGooPNOAAgXStTr5H6ks3ZfmD";
-  let [search, setSearch] = useState("");
-  let [searchItems, setSearchItems] = useState([]);
-  let [searchbarDisplay, setSearchbarDisplay] = useState("none");
+  const [search, setSearch] = useState("");
+  const [searchItems, setSearchItems] = useState([]);
+  const [searchbarDisplay, setSearchbarDisplay] = useState("none");
   const navigate = useNavigate();
+
+  SearchAttraction(search, setSearchItems);
 
   function cartDisplayToggle() {
     return cart.display === "block" ? "none" : "block";
@@ -28,29 +29,6 @@ export default function Navbar({
     setSearch(event.target.value);
   }
 
-  function SearchAttraction(search, setData) {
-    useEffect(() => {
-      async function getData() {
-        if (search !== "") {
-          let attractions = [];
-          const url = `https://app.ticketmaster.com/discovery/v2/attractions.json?keyword=${search}&countryCode=UK&apikey=${APIKEY}`;
-          const response = await fetch(url, { mode: "cors" });
-          const result = await response.json();
-          try {
-            result._embedded.attractions.forEach((item) => {
-              if (item.upcomingEvents._total !== 0) {
-                attractions.push(item);
-              }
-            });
-            setData(attractions);
-          } catch (e) {}
-        }
-      }
-      getData();
-    }, [search]);
-  }
-
-  SearchAttraction(search, setSearchItems);
 
   function CartCounter() {
     return (
@@ -109,7 +87,7 @@ export default function Navbar({
 
   return (
     <>
-      <div className="sticky flex top-0 flex-col md:flex-row justify-between items-center max-w-full border-b-amber-500 bg-gray-900 border-b-2  font-extrabold text-4xl z-40">
+      <div className=" top-0 md:sticky flex  flex-col md:flex-row justify-between items-center max-w-full border-b-amber-500 bg-gray-900 border-b-2  font-extrabold text-4xl">
         <div
           className="flex w-full md:justify-start md:pl-2 font-newake subpixel-antialiased tracking-wider justify-center cursor-pointer text-white"
           onClick={() => (
