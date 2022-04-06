@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoArrowBackCircleSharp } from "react-icons/io5";
-import { convertDate, SearchEvents, indexBestRatioUrl } from "./Services";
+import {
+  convertDate,
+  SearchEvents,
+  SearchAttraction,
+  indexBestRatioUrl,
+} from "./Services";
 import {
   BsSpotify,
   BsFacebook,
@@ -11,10 +16,17 @@ import {
 } from "react-icons/bs";
 import { AiOutlineHome } from "react-icons/ai";
 
-export default function Third({ onScreen, setOnScreen }) {
+export default function Second({ onScreen, setOnScreen }) {
   const [eventData, setEventData] = useState([]);
   const navigate = useNavigate();
   let params = useParams();
+
+  SearchEvents(onScreen.id, setEventData);
+  SearchAttraction(onScreen.name);
+
+  window.onbeforeunload = function() {
+    return "you can not refresh the page";
+}
 
   function AttractionShow({ data, eventData, setOnScreen }) {
     function EventList({ data }) {
@@ -198,8 +210,6 @@ export default function Third({ onScreen, setOnScreen }) {
       </div>
     );
   }
-
-  SearchEvents(onScreen, setEventData);
 
   return (
     <>

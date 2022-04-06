@@ -31,7 +31,7 @@ export function SearchEvents(data, setEventData) {
         async function getData() {
             if (data !== undefined) {
                 let events = []
-                const url = `https://app.ticketmaster.com/discovery/v2/events.json?attractionId=${data.id}&apikey=${APIKEY}`
+                const url = `https://app.ticketmaster.com/discovery/v2/events.json?attractionId=${data}&apikey=${APIKEY}`
                 const response = await fetch(url, { mode: "cors" })
                 const result = await response.json()
                 try {

@@ -6,6 +6,10 @@ import { IoArrowBackCircleSharp } from "react-icons/io5";
 export default function Third({ onScreen, cart, setCart }) {
   const navigate = useNavigate();
 
+  window.onbeforeunload = function() {
+    return "you can not refresh the page";
+}
+
   function EventInfo({ data }) {
     return (
       <>
