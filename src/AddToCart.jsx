@@ -31,7 +31,6 @@ export default function AddToCart({ setCart, cart, data }) {
                 ...cart,
                 display: "block",
                 items: [...cart.items, data],
-                number: cart.number + counter,
               }))
             : 0
         }

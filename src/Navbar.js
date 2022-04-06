@@ -1,17 +1,31 @@
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { indexBestWidthUrl, SearchAttraction } from "./Services";
 import { useNavigate } from "react-router-dom";
-import { useState} from "react";
+import { useState, useRef, useEffect } from "react";
 
-export default function Navbar({
-  setOnScreen,
-  cart,
-  setCart,
-}) {
+export default function Navbar({ setOnScreen, cart, setCart }) {
   const [search, setSearch] = useState("");
   const [searchItems, setSearchItems] = useState([]);
   const [searchbarDisplay, setSearchbarDisplay] = useState("none");
   const navigate = useNavigate();
+
+  function useOutsideAlerter(ref) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          // ref.current.style.display = "none";
+          setSearchbarDisplay("none")
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  }
+
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef);
 
   SearchAttraction(search, setSearchItems);
 
@@ -28,7 +42,6 @@ export default function Navbar({
   function handleChange(event) {
     setSearch(event.target.value);
   }
-
 
   function CartCounter() {
     return (
@@ -67,15 +80,12 @@ export default function Navbar({
 
   function SearchSuggestions() {
     const searchItemsList = searchItems.map((item) => (
-      <SearchbarItems
-        data={item}
-        key={item.id}
-
-      />
+      <SearchbarItems data={item} key={item.id} />
     ));
     return (
       <>
         <div
+          ref={wrapperRef}
           className=" absolute flex flex-col z-20  right-auto top-24  md:right-12 md:top-14"
           style={{ display: searchbarDisplay }}
         >
@@ -105,7 +115,6 @@ export default function Navbar({
             onClick={() => setCart({ ...cart, display: cartDisplayToggle() })}
           />
           <input
-            ///searchbar on the navbar
             onChange={handleChange}
             className="flex m-2 top-36 bg-black text-white text-sm p-2 mx-2 w-2-3 rounded-md  border-amber-500 border-2"
             placeholder="Search by Artist"

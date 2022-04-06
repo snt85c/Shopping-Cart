@@ -1,4 +1,4 @@
-export default function CartItems({ item, cart, id, setCart }) {
+export default function CartItems({ item, cart, setCart }) {
   function ReduceTickets() {
     return (
       <div

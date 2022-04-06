@@ -1,6 +1,27 @@
 import CartItems from "./CartItems";
+import { useRef, useEffect } from "react";
 
 export default function Cart({ cart, setCart }) {
+  console.log(cart.display)
+
+  function useOutsideAlerter(ref) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          ref.current.style.display = "none"
+          // setCart({...cart,display:"none"})
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  }
+
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef);
+
   const items = cart.items.map((item, i) => (
     <CartItems item={item} cart={cart} key={i} id={i} setCart={setCart} />
   ));
@@ -12,8 +33,10 @@ export default function Cart({ cart, setCart }) {
 
   function Checkout() {
     return (
-      <div className=" border-2 font-bold text-base text-gray-800 bg-amber-500 border-amber-900 p-2 m-2 cursor-pointer "
-      onClick={() => setCart({ ...cart, items: [], number: 0 })}>
+      <div
+        className=" border-2 font-bold text-base text-gray-800 bg-amber-500 border-amber-900 p-2 m-2 cursor-pointer "
+        onClick={() => setCart({ ...cart, items: [], number: 0 })}
+      >
         CHECKOUT
       </div>
     );
@@ -22,6 +45,7 @@ export default function Cart({ cart, setCart }) {
   return (
     <>
       <div
+        ref={wrapperRef}
         className="absolute z-20 top-20 md:mt-2 mt-4 md:top-12 right-0 bg-gray-900 w-2/4 md:w-1/3 text-center text-sm border-amber-500 border-l-2 border-b-2 cartAnimation  pt-2"
         style={{ display: cart.display }}
       >
