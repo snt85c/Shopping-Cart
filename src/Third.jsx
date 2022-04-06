@@ -6,31 +6,20 @@ import { IoArrowBackCircleSharp } from "react-icons/io5";
 export default function Third({ onScreen, cart, setCart }) {
   const navigate = useNavigate();
   if(onScreen.id){
-    localStorage.setItem("name", onScreen.name )
-    localStorage.setItem("date", onScreen.dates.start.localDate)
-    localStorage.setItem("start", onScreen.dates.start.localTime)
-    localStorage.setItem("image", onScreen.images[indexBestRatioUrl("16_9", onScreen)].url)
-    localStorage.setItem("venueName", onScreen._embedded.venues[0].name)
-    localStorage.setItem("address", onScreen._embedded.venues[0].address.line1)
-    localStorage.setItem("city", onScreen._embedded.venues[0].city.name)
-    localStorage.setItem("country", onScreen._embedded.venues[0].country.countryCode)
-    localStorage.setItem("info", onScreen.info)
+    localStorage.setItem("onScreen", JSON.stringify(onScreen))
   }
-  if(onScreen.seatmap && localStorage.getItem("seatmapUrl") !== onScreen.seatmap.staticUrl ){
-    localStorage.setItem("seatmap", onScreen.seatmap)
-    localStorage.setItem("seatmapUrl", onScreen.seatmap.staticUrl)
-  }
+  let data = JSON.parse(localStorage.getItem("onScreen"))
   
 
   function EventInfo() {
     return (
       <>
         <div className=" flex flex-col items-center text-4xl text-center font-extrabold p-3 m-1 basis-1/3">
-          {localStorage.getItem("name")}
+          {data.name}
           <br />
           <div className="text-lg">
-            {convertDate(localStorage.getItem("date"))}{" "}
-            {localStorage.getItem("start")}
+            {convertDate(data.dates.start.localDate)}{" "}
+            {data.dates.start.localTime}
           </div>
         </div>
       </>
@@ -40,16 +29,16 @@ export default function Third({ onScreen, cart, setCart }) {
   function VenueAddress() {
     return (
       <div className=" flex flex-col justify-center align-center text-left basis-1/3 m-2   p-1">
-        Venue address: {localStorage.getItem("venueName")}
+        Venue address: {data._embedded.venues[0].name}
         {", "}
-        {localStorage.getItem("address")}
+        {data._embedded.venues[0].address.line1}
         {" - "}
-        {localStorage.getItem("city")}
+        {data._embedded.venues[0].city.name}
         {" ("}
-        {localStorage.getItem("country")}
+        {data._embedded.venues[0].country.countryCode}
         {")"}
         <div className="flex border-t-2 border-white md:h-60 h-auto pt-2 overflow-auto text-xs text-justify overflow-ellipsis">
-          {localStorage.getItem("info") ? localStorage.getItem("info") : "no info to display for this event"}
+          {data.info ? data.info : "no info to display for this event"}
         </div>
       </div>
     );
@@ -61,14 +50,14 @@ export default function Third({ onScreen, cart, setCart }) {
         <div className="flex flex-col justify-center items-center p-1 basis-1/3">
           <img
             className="p-2 md:w-full object-contain"
-            src={localStorage.getItem("seatmap") ? localStorage.getItem("seatmapUrl") : ""}
+            src={data.seatmap ? data.seatmap.staticUrl : ""}
             alt="#"
             style={{
-              display: localStorage.getItem("seatmap") ? "flex" : "none",
+              display: data.seatmap ? "flex" : "none",
             }}
           ></img>
           <div>
-            {localStorage.getItem("seatmap") ? "site map" : "no site map available for this venue"}
+            {data.seatmap ? "site map" : "no site map available for this venue"}
           </div>
         </div>
       </>

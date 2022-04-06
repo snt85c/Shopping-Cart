@@ -16,25 +16,11 @@ export default function Second({ onScreen, setOnScreen }) {
   const navigate = useNavigate();
   let params = useParams();
 
-  if (onScreen.id) {
-    localStorage.setItem("id", onScreen.id);
-    localStorage.setItem("name", onScreen.name);
-    localStorage.setItem("genre", onScreen.classifications[0].genre.name);
-    localStorage.setItem("subgenre", onScreen.classifications[0].subGenre.name);
-    localStorage.setItem("total", onScreen.upcomingEvents._total);
-    localStorage.setItem(
-      "image",
-      onScreen.images[indexBestRatioUrl("16_9", onScreen)].url
-    );
-    localStorage.setItem("icons", onScreen.externalLinks);
-    localStorage.setItem("homepage", onScreen.externalLinks.homepage);
-    localStorage.setItem("spotify", onScreen.externalLinks.spotify);
-    localStorage.setItem("facebook", onScreen.externalLinks.facebook);
-    localStorage.setItem("instagram", onScreen.externalLinks.instagram);
-    localStorage.setItem("twitter", onScreen.externalLinks.twitter);
-    localStorage.setItem("youtube", onScreen.externalLinks.youtube);
+  if(onScreen.id){
+    localStorage.setItem("onScreen", JSON.stringify(onScreen))
   }
-  SearchEvents(localStorage.getItem("id"), setEventData);
+  let data = JSON.parse(localStorage.getItem("onScreen"))
+  SearchEvents(data.id, setEventData);
 
   function EventList() {
     const options = eventData.map((item, i) => (
@@ -78,28 +64,26 @@ export default function Second({ onScreen, setOnScreen }) {
       <div
         className="flex flex-col text-sm font-bold text-white"
         style={{
-          background: `linear-gradient(to right, black 20%, rgba(0, 0, 0, 0), black), url(${localStorage.getItem(
-            "image"
-          )}) no-repeat 50% 30%`,
+          background: `linear-gradient(to right, black 20%, rgba(0, 0, 0, 0), black), url(${data.images[indexBestRatioUrl("16_9", data)].url}) no-repeat 50% 30%`,
         }}
       >
         <div>
           <div className="mt-5 ml-5 text-4xl md:text-6xl">
-            {localStorage.getItem("name")}
+            {data.name}
           </div>
           <div className="ml-5 text-lg">
-            {localStorage.getItem("genre")}/{localStorage.getItem("subgenre")}
+            {data.classifications[0].genre.name}/{data.classifications[0].subGenre.name}
           </div>
           <div className="m-2 ml-5 text-sm ">
-            {localStorage.getItem("total")}{" "}
-            {localStorage.getItem("total") > 1 ? "events" : "event"}
+            {data.upcomingEvents._total}{" "}
+            {data.upcomingEvents._total > 1 ? "events" : "event"}
           </div>
           <EventList />
         </div>
         <div
           className="flex justify-center pb-1"
           style={{
-            display: localStorage.getItem("icons") ? "flex" : "none",
+            display: data.externalLinks ? "flex" : "none",
           }}
         >
           <AttractionShowIcons />
@@ -109,12 +93,12 @@ export default function Second({ onScreen, setOnScreen }) {
   }
 
   function AttractionShowIcons() {
-    return localStorage.getItem("icons") ? (
+    return data.externalLinks? (
       <>
         <a
           href={
-            localStorage.getItem("homepage")
-              ? localStorage.getItem("homepage")
+            data.externalLinks.homepage
+              ? data.externalLinks.homepage
               : "no url"
           }
           style={{ padding: "1%" }}
@@ -122,19 +106,19 @@ export default function Second({ onScreen, setOnScreen }) {
           <AiOutlineHome
             className="text-white  object-contain w-12 h-12 pl-2 "
             style={{
-              display: localStorage.getItem("homepage") ? "flex" : "none",
+              display: data.externalLinks.homepage ? "flex" : "none",
             }}
           />
         </a>
         <a
           href={
-            localStorage.getItem("homepage")
-              ? localStorage.getItem("homepage")
+            data.externalLinks.homepage
+              ? data.externalLinks.homepage
               : "no url"
           }
           style={{
             padding: "1%",
-            display: localStorage.getItem("spotify") ? "flex" : "none",
+            display: data.externalLinks.spotify ? "flex" : "none",
           }}
           target="_blank"
           rel="noreferrer"
@@ -146,13 +130,13 @@ export default function Second({ onScreen, setOnScreen }) {
         </a>
         <a
           href={
-            localStorage.getItem("facebook")
-              ? localStorage.getItem("facebook")
+            data.externalLinks.facebook
+              ? data.externalLinks.facebook
               : "no url"
           }
           style={{
             padding: "1%",
-            display: localStorage.getItem("facebook") ? "flex" : "none",
+            display: data.externalLinks.facebook ? "flex" : "none",
           }}
           target="_blank"
           rel="noreferrer"
@@ -164,13 +148,13 @@ export default function Second({ onScreen, setOnScreen }) {
         </a>
         <a
           href={
-            localStorage.getItem("instagram")
-              ? localStorage.getItem("instagram")
+            data.externalLinks.instagram
+              ? data.externalLinks.instagram
               : ""
           }
           style={{
             padding: "1%",
-            display: localStorage.getItem("instagram") ? "flex" : "none",
+            display: data.externalLinks.instagram ? "flex" : "none",
           }}
           target="_blank"
           rel="noreferrer"
@@ -182,13 +166,13 @@ export default function Second({ onScreen, setOnScreen }) {
         </a>
         <a
           href={
-            localStorage.getItem("twitter")
-              ? localStorage.getItem("twitter")
+            data.externalLinks.twitter
+              ? data.externalLinks.twitter
               : ""
           }
           style={{
             padding: "1%",
-            display: localStorage.getItem("twitter") ? "flex" : "none",
+            display: data.externalLinks.twitter ? "flex" : "none",
           }}
           target="_blank"
           rel="noreferrer"
@@ -200,13 +184,13 @@ export default function Second({ onScreen, setOnScreen }) {
         </a>
         <a
           href={
-            localStorage.getItem("youtube")
-              ? localStorage.getItem("youtube")
+            data.externalLinks.youtube
+              ? data.externalLinks.youtube
               : ""
           }
           style={{
             padding: "1%",
-            display: localStorage.getItem("youtube") ? "flex" : "none",
+            display: data.externalLinks.youtube ? "flex" : "none",
           }}
           target="_blank"
           rel="noreferrer"
