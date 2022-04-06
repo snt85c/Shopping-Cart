@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./index.css";
 import Navbar from "./Navbar";
 import Cart from "./Cart";
@@ -12,36 +12,72 @@ export default function Main() {
   let [onAttractionScreen, setOnAttractionScreen] = useState([]);
   let [onEventScreen, setOnEventScreen] = useState([]);
   let [cart, setCart] = useState({
-    display:"none",
-    items: []
-  })
+    display: "none",
+    items: [],
+  });
+
+  useEffect(() => {
+    if (localStorage.getItem("cart")) {
+      setCart(JSON.parse(localStorage.getItem("cart")));
+    }
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  useEffect(() => {
+    if (localStorage.getItem("onAttractionScreen")) {
+      setOnAttractionScreen(
+        JSON.parse(localStorage.getItem("onAttractionScreen"))
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "onAttractionScreen",
+      JSON.stringify(onAttractionScreen)
+    );
+  }, [onAttractionScreen]);
+
+  useEffect(() => {
+    if (localStorage.getItem("onEventScreen")) {
+      setOnEventScreen(JSON.parse(localStorage.getItem("onEventScreen")));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("onEventScreen", JSON.stringify(onEventScreen));
+  }, [onEventScreen]);
 
   return (
     <>
       <HashRouter>
-        <Navbar cart={cart} setCart={setCart} setOnScreen={setOnAttractionScreen}/>
-        <Cart cart={cart} setCart={setCart}/>
+        <Navbar
+          cart={cart}
+          setCart={setCart}
+          setOnScreen={setOnAttractionScreen}
+        />
+        <Cart cart={cart} setCart={setCart} />
         <Routes>
           <Route
             path="/"
-            element={
-              <First
-                setOnScreen={setOnAttractionScreen}
-                />
-              }
-              />
+            element={<First setOnScreen={setOnAttractionScreen} />}
+          />
           <Route
             path=":second"
             element={
               <Second
-              onScreen={onAttractionScreen}
-              setOnScreen={setOnEventScreen}
+                onScreen={onAttractionScreen}
+                setOnScreen={setOnEventScreen}
               />
             }
           />
           <Route
             path=":second/:third"
-            element={<Third onScreen={onEventScreen} cart={cart} setCart={setCart} />}
+            element={
+              <Third onScreen={onEventScreen} cart={cart} setCart={setCart} />
+            }
           />
 
           <Route path="*" element={<NoPath />} />
