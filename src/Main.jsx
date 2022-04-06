@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
+import {  Routes, Route, HashRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./index.css";
 import Navbar from "./Navbar";
@@ -21,9 +21,6 @@ export default function Main() {
       setCart(JSON.parse(localStorage.getItem("cart")));
     }
   }, []);
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
 
   useEffect(() => {
     if (localStorage.getItem("onAttractionScreen")) {
@@ -34,17 +31,21 @@ export default function Main() {
   }, []);
 
   useEffect(() => {
+    if (localStorage.getItem("onEventScreen")) {
+      setOnEventScreen(JSON.parse(localStorage.getItem("onEventScreen")));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  useEffect(() => {
     localStorage.setItem(
       "onAttractionScreen",
       JSON.stringify(onAttractionScreen)
     );
   }, [onAttractionScreen]);
-
-  useEffect(() => {
-    if (localStorage.getItem("onEventScreen")) {
-      setOnEventScreen(JSON.parse(localStorage.getItem("onEventScreen")));
-    }
-  }, []);
 
   useEffect(() => {
     localStorage.setItem("onEventScreen", JSON.stringify(onEventScreen));

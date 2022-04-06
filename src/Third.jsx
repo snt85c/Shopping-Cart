@@ -78,7 +78,7 @@ export default function Third({ onScreen, cart, setCart }) {
         style={{
           background: `linear-gradient(to right, black, rgba(0, 0, 0, 0.6), black),
                           url(${
-                            localStorage.getItem("image")
+                            data.images[indexBestRatioUrl("16_9", data)].url
                           }) no-repeat 50% 30%`,
         }}
       >
