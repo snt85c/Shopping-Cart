@@ -11,15 +11,15 @@ import {
 } from "react-icons/bs";
 import { AiOutlineHome } from "react-icons/ai";
 
-export default function Second({ onScreen, setOnScreen }) {
+export default function AttractionPage({ onScreen, setOnScreen }) {
   const [eventData, setEventData] = useState([]);
   const navigate = useNavigate();
   let params = useParams();
 
-  if(onScreen.id){
-    localStorage.setItem("onScreen", JSON.stringify(onScreen))
+  if (onScreen.id) {
+    localStorage.setItem("onScreen", JSON.stringify(onScreen));
   }
-  let data = JSON.parse(localStorage.getItem("onScreen"))
+  let data = JSON.parse(localStorage.getItem("onScreen"));
   SearchEvents(data.id, setEventData);
 
   function EventList() {
@@ -28,7 +28,7 @@ export default function Second({ onScreen, setOnScreen }) {
     ));
 
     return (
-      <div className=" flex flex-col mx-5 h-72 bg-gray-800 bg-opacity-50 overflow-auto cursor-pointer mb-4 ">
+      <div className=" flex flex-col mx-5 h-80 max-h-screen overflow-auto bg-gray-800 bg-opacity-50 cursor-pointer mb-4 ">
         {options}
       </div>
     );
@@ -63,43 +63,52 @@ export default function Second({ onScreen, setOnScreen }) {
     return (
       <div
         className="flex flex-col text-sm font-bold text-white"
-        style={{
-          background: `linear-gradient(to right, black 20%, rgba(0, 0, 0, 0), black), url(${data.images[indexBestRatioUrl("16_9", data)].url}) no-repeat 50% 30%`,
-        }}
       >
-        <div>
-          <div className="mt-5 ml-5 text-4xl md:text-6xl">
-            {data.name}
-          </div>
+        <div className=" min-h-full ">
+          <div className="mt-5 ml-5 text-4xl md:text-6xl">{data.name}</div>
           <div className="ml-5 text-lg">
-            {data.classifications[0].genre.name}/{data.classifications[0].subGenre.name}
+            {data.classifications[0].genre.name}/
+            {data.classifications[0].subGenre.name}
           </div>
           <div className="m-2 ml-5 text-sm ">
             {data.upcomingEvents._total}{" "}
             {data.upcomingEvents._total > 1 ? "events" : "event"}
           </div>
           <EventList />
-        </div>
-        <div
-          className="flex justify-center pb-1"
-          style={{
-            display: data.externalLinks ? "flex" : "none",
-          }}
-        >
-          <AttractionShowIcons />
+          <div
+            className="flex justify-center pb-1"
+            style={{
+              display: data.externalLinks ? "flex" : "none",
+            }}
+          >
+            <AttractionShowIcons />
+          </div>
         </div>
       </div>
     );
   }
 
+  function Breadcrumbs() {
+    return (
+      <>
+        <div className="text-sm breadcrumbs">
+          <ul>
+            <li>
+              <a onClick={() => navigate("/")}>Home</a>
+            </li>
+            <li>Events Selection</li>
+          </ul>
+        </div>
+      </>
+    );
+  }
+
   function AttractionShowIcons() {
-    return data.externalLinks? (
+    return data.externalLinks ? (
       <>
         <a
           href={
-            data.externalLinks.homepage
-              ? data.externalLinks.homepage
-              : "no url"
+            data.externalLinks.homepage ? data.externalLinks.homepage : "no url"
           }
           style={{ padding: "1%" }}
         >
@@ -112,9 +121,7 @@ export default function Second({ onScreen, setOnScreen }) {
         </a>
         <a
           href={
-            data.externalLinks.homepage
-              ? data.externalLinks.homepage
-              : "no url"
+            data.externalLinks.homepage ? data.externalLinks.homepage : "no url"
           }
           style={{
             padding: "1%",
@@ -130,9 +137,7 @@ export default function Second({ onScreen, setOnScreen }) {
         </a>
         <a
           href={
-            data.externalLinks.facebook
-              ? data.externalLinks.facebook
-              : "no url"
+            data.externalLinks.facebook ? data.externalLinks.facebook : "no url"
           }
           style={{
             padding: "1%",
@@ -148,9 +153,7 @@ export default function Second({ onScreen, setOnScreen }) {
         </a>
         <a
           href={
-            data.externalLinks.instagram
-              ? data.externalLinks.instagram
-              : ""
+            data.externalLinks.instagram ? data.externalLinks.instagram : ""
           }
           style={{
             padding: "1%",
@@ -165,11 +168,7 @@ export default function Second({ onScreen, setOnScreen }) {
           />
         </a>
         <a
-          href={
-            data.externalLinks.twitter
-              ? data.externalLinks.twitter
-              : ""
-          }
+          href={data.externalLinks.twitter ? data.externalLinks.twitter : ""}
           style={{
             padding: "1%",
             display: data.externalLinks.twitter ? "flex" : "none",
@@ -183,11 +182,7 @@ export default function Second({ onScreen, setOnScreen }) {
           />
         </a>
         <a
-          href={
-            data.externalLinks.youtube
-              ? data.externalLinks.youtube
-              : ""
-          }
+          href={data.externalLinks.youtube ? data.externalLinks.youtube : ""}
           style={{
             padding: "1%",
             display: data.externalLinks.youtube ? "flex" : "none",
@@ -208,13 +203,23 @@ export default function Second({ onScreen, setOnScreen }) {
 
   return (
     <>
-      <IoArrowBackCircleSharp
-        className="absolute right-0 top-30 md:top-20 cursor-pointer h-12 w-12"
-        onClick={() => {
-          navigate(-1);
+      <div
+        className="min-h-screen"
+        style={{
+          background: `linear-gradient(to right, black 20%, rgba(0, 0, 0, 0), black), url(${
+            data.images[indexBestRatioUrl("16_9", data)].url
+          }) no-repeat 50% 30%`,
         }}
-      />
-      <AttractionShow />
+      >
+        <Breadcrumbs />
+        <IoArrowBackCircleSharp
+          className="fixed right-0 top-12 md:top-20 cursor-pointer h-12 w-12"
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
+        <AttractionShow />
+      </div>
     </>
   );
 }

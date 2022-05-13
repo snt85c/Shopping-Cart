@@ -2,9 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face{
-font-family: Newake;
-src: url("./Newake.otf")
+@font-face {
+  font-family: Newake;
+  src: url("./Newake.otf");
+}
+
+html{
+  height:100%
 }
 
 body {
@@ -16,8 +20,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: black;
   color: white;
-}
+  heigth: 100%;
 
+}
 
 .image {
   animation: fadein 1s;
@@ -32,8 +37,6 @@ body {
   }
 }
 
-
-
 .cartAnimation {
   animation: slide-in 0.5s both;
 }
@@ -47,9 +50,15 @@ body {
   }
 }
 
+.alert-animation{
+  animation: 500ms ease-out forwards slide-up;
+}
 
-
-
-
-
-
+@keyframes slide-up {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

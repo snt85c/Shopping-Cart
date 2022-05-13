@@ -99,7 +99,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
     <>
       <div className=" top-0 md:sticky flex  flex-col md:flex-row justify-between items-center max-w-full border-b-amber-500 bg-gray-900 border-b-2  font-extrabold text-4xl">
         <div
-          className="flex w-full md:justify-start md:pl-2 font-newake subpixel-antialiased tracking-wider justify-center cursor-pointer text-white"
+          className="flex w-full md:justify-start pt-2 md:pt-0 md:pl-2 font-newake subpixel-antialiased tracking-wider justify-center cursor-pointer text-white"
           onClick={() => (
             //   setOnScreen([]),
             setCart({ ...cart, display: "none" }),
@@ -111,7 +111,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
         </div>
         <div className="flex w-full md:justify-end md:mr-10 justify-center ">
           <HiOutlineShoppingCart
-            className="absolute top-2 md:top-4 right-1 cursor-pointer text-amber-500"
+            className="absolute top-2 md:top-2 right-1 cursor-pointer text-amber-500"
             onClick={() => setCart({ ...cart, display: cartDisplayToggle() })}
           />
           <input

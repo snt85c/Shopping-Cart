@@ -1,12 +1,14 @@
-import {  Routes, Route, HashRouter } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./index.css";
 import Navbar from "./Navbar";
 import Cart from "./Cart";
-import First from "./First";
-import Second from "./Second";
-import Third from "./Third";
+import SuggestionPage from "./SuggestionPage";
+import AttractionPage from "./AttractionPage";
+import EventPage from "./EventPage";
 import NoPath from "./NoPath";
+import Alert from "./AlertComponents/Alert";
+import { AlertContextProvider } from "./AlertComponents/AlertContextProvider";
 
 export default function Main() {
   let [onAttractionScreen, setOnAttractionScreen] = useState([]);
@@ -53,37 +55,44 @@ export default function Main() {
 
   return (
     <>
-      <HashRouter>
-        <Navbar
-          cart={cart}
-          setCart={setCart}
-          setOnScreen={setOnAttractionScreen}
-        />
-        <Cart cart={cart} setCart={setCart} />
-        <Routes>
-          <Route
-            path="/"
-            element={<First setOnScreen={setOnAttractionScreen} />}
+      <AlertContextProvider>
+        <HashRouter>
+          <Alert />
+          <Navbar
+            cart={cart}
+            setCart={setCart}
+            setOnScreen={setOnAttractionScreen}
           />
-          <Route
-            path=":second"
-            element={
-              <Second
-                onScreen={onAttractionScreen}
-                setOnScreen={setOnEventScreen}
-              />
-            }
-          />
-          <Route
-            path=":second/:third"
-            element={
-              <Third onScreen={onEventScreen} cart={cart} setCart={setCart} />
-            }
-          />
+          <Cart cart={cart} setCart={setCart} />
+          <Routes>
+            <Route
+              path="/"
+              element={<SuggestionPage setOnScreen={setOnAttractionScreen} />}
+            />
+            <Route
+              path=":second"
+              element={
+                <AttractionPage
+                  onScreen={onAttractionScreen}
+                  setOnScreen={setOnEventScreen}
+                />
+              }
+            />
+            <Route
+              path=":second/:third"
+              element={
+                <EventPage
+                  onScreen={onEventScreen}
+                  cart={cart}
+                  setCart={setCart}
+                />
+              }
+            />
 
-          <Route path="*" element={<NoPath />} />
-        </Routes>
-      </HashRouter>
+            <Route path="*" element={<NoPath />} />
+          </Routes>
+        </HashRouter>
+      </AlertContextProvider>
     </>
   );
 }

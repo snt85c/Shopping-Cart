@@ -4,17 +4,29 @@ import { convertDate, indexBestRatioUrl } from "./Services";
 import AddToCart from "./AddToCart";
 import { IoArrowBackCircleSharp } from "react-icons/io5";
 
-export default function Third({ onScreen, cart, setCart }) {
+export default function EventPage({ onScreen, cart, setCart }) {
   const navigate = useNavigate();
   if(onScreen.id){
     localStorage.setItem("onScreen", JSON.stringify(onScreen))
   }
   let data = JSON.parse(localStorage.getItem("onScreen"))
 
+  function Breadcrumbs(){
+    return(<>
+    <div className="text-sm breadcrumbs">
+  <ul>
+    <li><a onClick={()=>navigate("/")}>Home</a></li> 
+    <li><a onClick={()=>navigate(-1)}>Events Selection </a></li> 
+    <li>Venue Description</li>
+  </ul>
+</div>
+    </>)
+  }
+
   
   function EventShowBackgroundVideo() {
     return (
-        <div className=" hidden md:flex object-cover justify-center items-center h-full w-full fixed top-0 -z-10">
+        <div className=" hidden md:flex items-center justify-center object-cover w-full h-full fixed top-0 left-0 -z-10">
             <video loop autoPlay muted>
                 <source
                     src={bkgVideo}
@@ -29,7 +41,7 @@ export default function Third({ onScreen, cart, setCart }) {
   function EventInfo() {
     return (
       <>
-        <div className=" flex flex-col items-center text-4xl text-center font-extrabold p-3 m-1 basis-1/3">
+        <div className=" flex flex-col items-center text-4xl text-center font-extrabold p-3 m-1 basis-1/3" >
           {data.name}
           <br />
           <div className="text-lg">
@@ -43,7 +55,7 @@ export default function Third({ onScreen, cart, setCart }) {
 
   function VenueAddress() {
     return (
-      <div className=" flex flex-col justify-center align-center text-left basis-1/3 m-2   p-1">
+      <div className=" flex flex-col justify-center align-center text-left basis-1/3 m-2   p-1" >
         Venue address: {data._embedded.venues[0].name}
         {", "}
         {data._embedded.venues[0].address.line1}
@@ -62,7 +74,7 @@ export default function Third({ onScreen, cart, setCart }) {
   function SeatMap() {
     return (
       <>
-        <div className="flex flex-col justify-center items-center p-1 basis-1/3">
+        <div className="flex flex-col justify-center items-center p-1 basis-1/3" >
           <img
             className="p-2 md:w-full object-contain"
             src={data.seatmap ? data.seatmap.staticUrl : ""}
@@ -80,17 +92,18 @@ export default function Third({ onScreen, cart, setCart }) {
   }
 
   return (
-    <div >
-      <EventShowBackgroundVideo />
+    <div className="mb-2" >
+      {/* <EventShowBackgroundVideo /> */}
       <div >
-      <IoArrowBackCircleSharp className="absolute right-0 top-30 md:top-20 cursor-pointer h-12 w-12"
+        <Breadcrumbs />
+      <IoArrowBackCircleSharp className="fixed right-0 top-12 md:top-20 cursor-pointer h-12 w-12"
         onClick={() => {
           navigate(-1);
         }}
       />
       </div>
       <div
-        className="flex flex-col md:flex-row md:mt-20 h-1/3 md:h-2/4 justify-center "
+       className="flex flex-col md:flex-row h-2/4 mb-4 md:mb-14 md:mt-20 justify-center "
         style={{
           background: `linear-gradient(to right, black, rgba(0, 0, 0, 0.6), black),
                           url(${
