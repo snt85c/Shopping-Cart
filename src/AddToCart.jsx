@@ -33,9 +33,8 @@ export default function AddToCart({ setCart, cart, data }) {
             ? ((data.ticketInCart = counter),
               setCart({
                 ...cart,
-                display: "block",
                 items: [...cart.items, data],
-              }), AlertCtx.displayMsg(`${data.name} is added to cart`, "alert-info")
+              }), AlertCtx.displayMsg(`${data.name} is added to cart`, "alert-success")
               )
             : AlertCtx.displayMsg(`${data.name} has no events available`, "alert-error")
         }

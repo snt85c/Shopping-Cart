@@ -1,6 +1,7 @@
 import CartItems from "./CartItems";
 import { useRef, useEffect, useContext } from "react";
 import AlertContext from "./AlertComponents/AlertContextProvider";
+import emptycart from "./img/empty_cart.webp";
 
 export default function Cart({ cart, setCart }) {
   const AlertCtx = useContext(AlertContext);
@@ -43,7 +44,10 @@ export default function Cart({ cart, setCart }) {
                   "Your purchase has been confirmed! Thank you for trying Tiketmaster",
                   "alert-success"
                 )
-              : AlertCtx.displayMsg("Nothing on the Shopping Cart", "alert-warning");
+              : AlertCtx.displayMsg(
+                  "Nothing on the Shopping Cart",
+                  "alert-warning"
+                );
             setCart({ ...cart, items: [], number: 0 });
           }}
         >
@@ -60,7 +64,16 @@ export default function Cart({ cart, setCart }) {
         className="absolute z-20 top-20 min-h-full md:mt-2 mt-4 md:top-12 right-0 bg-gray-900 w-2/4 md:w-1/3 text-center text-sm border-amber-500 border-l-2 border-b-2 cartAnimation  pt-2"
         style={{ display: cart.display }}
       >
-        {cart.items.length === 0 ? "nothing to display" : "in the cart:"}
+        {cart.items.length === 0 ? (
+          <div className="flex flex-col justify-center items-center">
+            <div className="my-6 font-extrabold">
+              Your cart is empty at the moment
+            </div>
+            <img src={emptycart} className="w-1/2 h-1/2" alt="empty_cart" />
+          </div>
+        ) : (
+          <div className="font-extrabold">in the cart:</div>
+        )}
         <div className="overflow-auto h-64 md:h-80">{items}</div>
         <br />
         <div className="text-center text-sm ">
