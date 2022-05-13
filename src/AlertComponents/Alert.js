@@ -7,7 +7,7 @@ export default function Alert() {
 
   return (
     <>{AlertCtx.isDisplayed && 
-      <div className={`alert ${AlertCtx.type} shadow-lg alert-animation absolute top-20 left-1/3 z-10 w-1/3`}>
+      <div className={`alert ${AlertCtx.type} shadow-lg alert-animation  fixed md:absolute top-32 md:top-20 md:left-1/3 z-50 md:w-1/3`}>
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +22,7 @@ export default function Alert() {
               d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <span>{AlertCtx.msg}</span>
+          <span className="md:text-md text-sm">{AlertCtx.msg}</span>
         </div>
       </div>
     }

@@ -13,7 +13,7 @@ export default function EventPage({ onScreen, cart, setCart }) {
 
   function Breadcrumbs(){
     return(<>
-    <div className="text-sm breadcrumbs">
+    <div className="text-sm breadcrumbs ml-2">
   <ul>
     <li><a onClick={()=>navigate("/")}>Home</a></li> 
     <li><a onClick={()=>navigate(-1)}>Events Selection </a></li> 
@@ -92,7 +92,7 @@ export default function EventPage({ onScreen, cart, setCart }) {
   }
 
   return (
-    <div className="mb-2" >
+    <div className="mb-2 overflow-hidden" >
       {/* <EventShowBackgroundVideo /> */}
       <div >
         <Breadcrumbs />
@@ -103,7 +103,7 @@ export default function EventPage({ onScreen, cart, setCart }) {
       />
       </div>
       <div
-       className="flex flex-col md:flex-row h-2/4 mb-4 md:mb-14 md:mt-20 justify-center "
+       className="flex flex-col md:flex-row h-2/4 mb-4  md:mt-20 justify-center "
         style={{
           background: `linear-gradient(to right, black, rgba(0, 0, 0, 0.6), black),
                           url(${

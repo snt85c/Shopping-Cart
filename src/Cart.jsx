@@ -57,7 +57,7 @@ export default function Cart({ cart, setCart }) {
     <>
       <div
         ref={wrapperRef}
-        className="fixed z-20 top-20 min-h-full md:mt-2 mt-4 md:top-12 right-0 bg-gray-900 w-2/4 md:w-1/3 text-center text-sm border-amber-500 border-l-2 border-b-2 cartAnimation  pt-2"
+        className="absolute z-20 top-20 min-h-full md:mt-2 mt-4 md:top-12 right-0 bg-gray-900 w-2/4 md:w-1/3 text-center text-sm border-amber-500 border-l-2 border-b-2 cartAnimation  pt-2"
         style={{ display: cart.display }}
       >
         {cart.items.length === 0 ? "nothing to display" : "in the cart:"}

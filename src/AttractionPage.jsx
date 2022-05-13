@@ -22,13 +22,28 @@ export default function AttractionPage({ onScreen, setOnScreen }) {
   let data = JSON.parse(localStorage.getItem("onScreen"));
   SearchEvents(data.id, setEventData);
 
+  function Breadcrumbs() {
+    return (
+      <>
+        <div className="text-sm breadcrumbs ml-2">
+          <ul>
+            <li>
+              <a onClick={() => navigate("/")}>Home</a>
+            </li>
+            <li>Events Selection</li>
+          </ul>
+        </div>
+      </>
+    );
+  }
+
   function EventList() {
     const options = eventData.map((item, i) => (
       <EventItem data={item} key={i} />
     ));
 
     return (
-      <div className=" flex flex-col mx-5 h-80 max-h-screen overflow-auto bg-gray-800 bg-opacity-50 cursor-pointer mb-4 ">
+      <div className=" flex flex-col mx-5 h-[19rem]  max-h-screen overflow-auto bg-gray-800 bg-opacity-50 cursor-pointer mb-4 ">
         {options}
       </div>
     );
@@ -88,20 +103,7 @@ export default function AttractionPage({ onScreen, setOnScreen }) {
     );
   }
 
-  function Breadcrumbs() {
-    return (
-      <>
-        <div className="text-sm breadcrumbs">
-          <ul>
-            <li>
-              <a onClick={() => navigate("/")}>Home</a>
-            </li>
-            <li>Events Selection</li>
-          </ul>
-        </div>
-      </>
-    );
-  }
+  
 
   function AttractionShowIcons() {
     return data.externalLinks ? (
@@ -204,7 +206,6 @@ export default function AttractionPage({ onScreen, setOnScreen }) {
   return (
     <>
       <div
-        className="min-h-screen"
         style={{
           background: `linear-gradient(to right, black 20%, rgba(0, 0, 0, 0), black), url(${
             data.images[indexBestRatioUrl("16_9", data)].url
