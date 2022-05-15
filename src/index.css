@@ -68,3 +68,8 @@ body {
     opacity: 0;
   }
 }
+
+.suggestionFullsize{
+  background-size: contain;
+background-position-x:+120px;
+}

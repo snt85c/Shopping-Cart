@@ -18,7 +18,7 @@ export default function SuggestionPage({ setOnScreen}) {
     return (
       <>
         <div
-          className="flex flex-col bg-gray-800 rounded border-gray-700 border-2 hover:border-4 hover:border-amber-500 h-32 md:h-40  md:p-2 cursor-pointer font-bold text-lg md:text-xl mb-2 "
+          className="flex flex-col bg-gray-800 rounded border-gray-700 border-2 hover:border-4 hover:border-amber-500 h-[8rem] md:h-[12rem]  md:p-2 cursor-pointer font-bold text-lg md:text-xl mb-2 "
           style={{
             background: `linear-gradient(to right, black 10%, rgba(0, 0, 0, 0)),url(${
               data.images[indexBestRatioUrl("16_9", data)].url
