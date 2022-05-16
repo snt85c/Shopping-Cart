@@ -95,7 +95,7 @@ export default function EventPage({ onScreen, cart, setCart }) {
   }
 
   return (
-    <div className="mb-2 overflow-hidden h-[90vh]">
+    <div className="mb-2 overflow-hidden md:h-[90vh]">
       {/* <EventShowBackgroundVideo /> */}
       <div>
         <Breadcrumbs />
