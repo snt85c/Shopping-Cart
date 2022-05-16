@@ -6,6 +6,7 @@ import BackArrowOverlay from "./BackArrowOverlay";
 
 export default function EventPage({ onScreen, cart, setCart }) {
   const navigate = useNavigate();
+  //used to keep page on screen when reloading, this could be removed as router has been used
   if (onScreen.id) {
     localStorage.setItem("onScreen", JSON.stringify(onScreen));
   }
@@ -94,7 +95,7 @@ export default function EventPage({ onScreen, cart, setCart }) {
   }
 
   return (
-    <div className="mb-2 overflow-hidden h-full">
+    <div className="mb-2 overflow-hidden h-[90vh]">
       {/* <EventShowBackgroundVideo /> */}
       <div>
         <Breadcrumbs />
