@@ -70,7 +70,7 @@ export default function AttractionPage({ onScreen, setOnScreen }) {
     ));
 
     return (
-      <div className=" flex flex-col mx-5 md:h-[19rem]  md:max-h-screen overflow-auto bg-gray-800 bg-opacity-50 cursor-pointer mb-4 ">
+      <div className=" flex flex-col mx-5 min-h-screen md:h-[19rem]  md:max-h-screen overflow-auto bg-gray-800 bg-opacity-50 cursor-pointer mb-4 ">
         {options}
       </div>
     );
