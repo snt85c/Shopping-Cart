@@ -17,6 +17,7 @@ export default function AttractionPage({ onScreen, setOnScreen }) {
   let params = useParams();
 
   if (onScreen.id) {
+    //used in early version to retain the page when reloaded, TODO: investigate if still needed after adding router
     localStorage.setItem("onScreen", JSON.stringify(onScreen));
   }
   let data = JSON.parse(localStorage.getItem("onScreen"));
@@ -76,9 +77,7 @@ export default function AttractionPage({ onScreen, setOnScreen }) {
 
   function AttractionShow() {
     return (
-      <div
-        className="flex flex-col text-sm font-bold text-white"
-      >
+      <div className="flex flex-col text-sm font-bold text-white">
         <div className=" min-h-full ">
           <div className="mt-5 ml-5 text-4xl md:text-6xl">{data.name}</div>
           <div className="ml-5 text-lg">
@@ -90,116 +89,56 @@ export default function AttractionPage({ onScreen, setOnScreen }) {
             {data.upcomingEvents._total > 1 ? "events" : "event"}
           </div>
           <EventList />
-          <div
-            className="flex justify-center pb-1"
-            style={{
-              display: data.externalLinks ? "flex" : "none",
-            }}
-          >
-            <AttractionShowIcons />
-          </div>
         </div>
       </div>
     );
   }
 
-  
-
   function AttractionShowIcons() {
-    return data.externalLinks ? (
-      <>
-        <a
-          href={
-            data.externalLinks.homepage ? data.externalLinks.homepage : "no url"
-          }
-          style={{ padding: "1%" }}
-        >
-          <AiOutlineHome
-            className="text-white  object-contain w-12 h-12 pl-2 "
-            style={{
-              display: data.externalLinks.homepage ? "flex" : "none",
-            }}
-          />
-        </a>
-        <a
-          href={
-            data.externalLinks.homepage ? data.externalLinks.homepage : "no url"
-          }
-          style={{
-            padding: "1%",
-            display: data.externalLinks.spotify ? "flex" : "none",
-          }}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <BsSpotify
-            className="text-white  object-contain w-12 h-12 pl-2 "
-            style={{}}
-          />
-        </a>
-        <a
-          href={
-            data.externalLinks.facebook ? data.externalLinks.facebook : "no url"
-          }
-          style={{
-            padding: "1%",
-            display: data.externalLinks.facebook ? "flex" : "none",
-          }}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <BsFacebook
-            className="text-white object-contain w-12 h-12 pl-2 "
-            style={{}}
-          />
-        </a>
-        <a
-          href={
-            data.externalLinks.instagram ? data.externalLinks.instagram : ""
-          }
-          style={{
-            padding: "1%",
-            display: data.externalLinks.instagram ? "flex" : "none",
-          }}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <BsInstagram
-            className="text-white object-contain w-12 h-12 pl-2 "
-            style={{}}
-          />
-        </a>
-        <a
-          href={data.externalLinks.twitter ? data.externalLinks.twitter : ""}
-          style={{
-            padding: "1%",
-            display: data.externalLinks.twitter ? "flex" : "none",
-          }}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <BsTwitter
-            className="text-white object-contain w-12 h-12 pl-2 "
-            style={{}}
-          />
-        </a>
-        <a
-          href={data.externalLinks.youtube ? data.externalLinks.youtube : ""}
-          style={{
-            padding: "1%",
-            display: data.externalLinks.youtube ? "flex" : "none",
-          }}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <BsYoutube
-            className="text-white object-contain w-12 h-12 pl-2 "
-            style={{}}
-          />
-        </a>
-      </>
-    ) : (
-      <></>
+    const icons = [
+      AiOutlineHome,
+      BsSpotify,
+      BsInstagram,
+      BsFacebook,
+      BsTwitter,
+      BsYoutube,
+    ];
+    const dataExternaLinksNames = [
+      "homepage",
+      "spotify",
+      "instagram",
+      "facebook",
+      "twitter",
+      "youtube",
+    ];
+
+    const result = dataExternaLinksNames.map((name, i) => {
+      if (data.externalLinks && data.externalLinks[name]) {
+        let IconType = icons[i];
+        return (
+          <>
+            <a
+              href={data.externalLinks[name]}
+              key={i}
+              style={{ padding: "1%" }}
+            >
+              <IconType className="text-white  object-contain w-12 h-12 pl-2 " />
+            </a>
+          </>
+        );
+      }
+    });
+    return <div className="flex justify-center">{result}</div>;
+  }
+
+  function BackArrowOverlay() {
+    return (
+      <IoArrowBackCircleSharp
+        className="fixed right-0 top-12 md:top-20 cursor-pointer h-12 w-12"
+        onClick={() => {
+          navigate(-1);
+        }}
+      />
     );
   }
 
@@ -213,13 +152,9 @@ export default function AttractionPage({ onScreen, setOnScreen }) {
         }}
       >
         <Breadcrumbs />
-        <IoArrowBackCircleSharp
-          className="fixed right-0 top-12 md:top-20 cursor-pointer h-12 w-12"
-          onClick={() => {
-            navigate(-1);
-          }}
-        />
+        <BackArrowOverlay />
         <AttractionShow />
+        <AttractionShowIcons />
       </div>
     </>
   );
