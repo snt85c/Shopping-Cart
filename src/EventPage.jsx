@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import bkgVideo from "./bkgVideo.mp4";
 import { convertDate, indexBestRatioUrl } from "./Services";
 import AddToCart from "./AddToCart";
-import { IoArrowBackCircleSharp } from "react-icons/io5";
+import BackArrowOverlay from "./BackArrowOverlay";
 
 export default function EventPage({ onScreen, cart, setCart }) {
   const navigate = useNavigate();
@@ -94,19 +94,14 @@ export default function EventPage({ onScreen, cart, setCart }) {
   }
 
   return (
-    <div className="mb-2 overflow-hidden">
+    <div className="mb-2 overflow-hidden h-full">
       {/* <EventShowBackgroundVideo /> */}
       <div>
         <Breadcrumbs />
-        <IoArrowBackCircleSharp
-          className="fixed right-0 top-12 md:top-20 cursor-pointer h-12 w-12"
-          onClick={() => {
-            navigate(-1);
-          }}
-        />
+        <BackArrowOverlay />
       </div>
       <div
-        className="flex flex-col md:flex-row h-2/4 mb-4  md:mt-20 justify-center "
+        className="flex flex-col md:flex-row h-2/4 mb-4  md:mt-20 justify-center  "
         style={{
           background: `linear-gradient(to right, black, rgba(0, 0, 0, 0.6), black),
                           url(${
