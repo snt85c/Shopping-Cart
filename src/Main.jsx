@@ -2,7 +2,7 @@ import { Routes, Route, HashRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./index.css";
 import Navbar from "./Navbar";
-import Cart from "./Cart";
+import Cart from "./CartComponents/Cart";
 import SuggestionPage from "./SuggestionPage";
 import AttractionPage from "./AttractionPage";
 import EventPage from "./EventPage";
@@ -63,7 +63,6 @@ export default function Main() {
             setCart={setCart}
             setOnScreen={setOnAttractionScreen}
           />
-          <Cart cart={cart} setCart={setCart} />
           <Routes>
             <Route
               path="/"

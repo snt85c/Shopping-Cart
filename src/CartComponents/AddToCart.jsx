@@ -1,21 +1,18 @@
 import { useContext, useState } from "react";
-import AlertContext from "./AlertComponents/AlertContextProvider";
+import AlertContext from "../AlertComponents/AlertContextProvider";
 export default function AddToCart({ setCart, cart, data }) {
   const [counter, setCounter] = useState(1);
   const AlertCtx = useContext(AlertContext)
 
   function updateCounter(value) {
-    if (counter >= 1) {
+    if (value >= 1) {
       setCounter(value);
-    }
-    if (counter === 0) {
-      setCounter(1);
     }
   }
 
   function IncreaseCounter() {
     return (
-      <div className="m-2 border-2 font-bold text-amber-500 bg-gray-900 border-amber-500 p-1 px-2 cursor-pointer "
+      <div className="flex items-center justify-center  m-2  h-10 w-10 text-center border-2 rounded font-bold text-amber-500 bg-gray-900 border-amber-500 p-1 px-2 cursor-pointer hover:bg-gray-800 ease-in duration-100 hover:text-gray-100 "
         style={{display:data.priceRanges?"block":"none"}}
         onClick={() => (data.priceRanges ? updateCounter(counter + 1) : "")}
       >
@@ -27,12 +24,12 @@ export default function AddToCart({ setCart, cart, data }) {
   function AddToCartButton() {
     return (
       <div className="flex flex-col justify-center items-center">
-      <div className="font-bold  text-center border-2 text-amber-500 bg-gray-900 border-amber-500 p-1 cursor-pointer"
+      <div className="flex items-center justify-center font-bold md:w-80 h-10  border-2 rounded text-amber-500 bg-gray-900 border-amber-500 p-1 cursor-pointer hover:bg-gray-800 ease-in duration-100 hover:text-gray-100 "
         onClick={() =>
           data.priceRanges
             ? ((data.ticketInCart = counter),
               setCart({
-                ...cart,
+                display:"block",
                 items: [...cart.items, data],
               }), AlertCtx.displayMsg(`${data.name} is added to cart`, "alert-success")
               )
@@ -51,7 +48,7 @@ export default function AddToCart({ setCart, cart, data }) {
 
   function DecreaseCounter() {
     return (
-      <div className="m-2 font-bold border-2  text-amber-500 bg-gray-900 border-amber-500 p-1 px-2 cursor-pointer "
+      <div className="m-2 h-10 w-10 font-bold border-2 rounded  text-amber-500 text-center bg-gray-900 border-amber-500 p-1 px-2 cursor-pointer hover:text-gray-100 ease-in duration-100 "
         onClick={() => (data.priceRanges ? updateCounter(counter - 1) : "")}
         style={{display:data.priceRanges?"block":"none"}}
       >

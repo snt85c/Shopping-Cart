@@ -2,6 +2,7 @@ import { HiOutlineShoppingCart } from "react-icons/hi";
 import { indexBestWidthUrl, SearchAttraction } from "./Services";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
+import Cart from "./CartComponents/Cart";
 
 export default function Navbar({ setOnScreen, cart, setCart }) {
   const [search, setSearch] = useState("");
@@ -14,7 +15,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
       function handleClickOutside(event) {
         if (ref.current && !ref.current.contains(event.target)) {
           // ref.current.style.display = "none";
-          setSearchbarDisplay("none")
+          setSearchbarDisplay("none");
         }
       }
       document.addEventListener("mousedown", handleClickOutside);
@@ -97,7 +98,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
 
   return (
     <>
-      <div className=" top-0 flex  flex-col md:flex-row justify-between items-center max-w-full border-b-amber-500 bg-gray-900 border-b-2  font-extrabold text-4xl">
+      <div className=" w-full md:static top-0 flex  flex-col md:flex-row justify-between items-center max-w-full border-b-amber-500 bg-gray-900 border-b-2  font-extrabold text-4xl rounded-t-xl">
         <div
           className="flex w-full md:justify-start pt-2 md:pt-0 md:pl-2 font-newake subpixel-antialiased tracking-wider justify-center cursor-pointer text-white"
           onClick={() => (
@@ -124,6 +125,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
           <CartCounter />
         </div>
       </div>
+      <Cart cart={cart} setCart={setCart} />
     </>
   );
 }

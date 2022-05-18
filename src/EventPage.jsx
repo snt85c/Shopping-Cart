@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import bkgVideo from "./bkgVideo.mp4";
 import { convertDate, indexBestRatioUrl } from "./Services";
-import AddToCart from "./AddToCart";
+import AddToCart from "./CartComponents/AddToCart";
 import BackArrowOverlay from "./BackArrowOverlay";
 
 export default function EventPage({ onScreen, cart, setCart }) {
@@ -32,7 +32,7 @@ export default function EventPage({ onScreen, cart, setCart }) {
 
   function EventShowBackgroundVideo() {
     return (
-      <div className=" hidden md:flex items-center justify-center object-cover w-full h-full fixed top-0 left-0 -z-10">
+      <div className=" hidden md:flex absolute object-fill -z-10">
         <video loop autoPlay muted>
           <source src={bkgVideo} type="video/mp4" />
           Your browser does not support the video tag.
@@ -95,7 +95,7 @@ export default function EventPage({ onScreen, cart, setCart }) {
   }
 
   return (
-    <div className="mb-2 overflow-hidden md:h-[90vh]">
+    <div className="mb-2 overflow-hidden fadeInAnimation ">
       {/* <EventShowBackgroundVideo /> */}
       <div>
         <Breadcrumbs />

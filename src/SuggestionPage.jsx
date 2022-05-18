@@ -1,8 +1,10 @@
-import { Outlet, useNavigate} from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import {indexBestRatioUrl, SearchSuggest} from "./Services"
+import { indexBestRatioUrl, SearchSuggest } from "./Services";
+import { FaGithub} from "react-icons/fa";
 
-export default function SuggestionPage({ setOnScreen}) {
+
+export default function SuggestionPage({ setOnScreen }) {
   const [suggest, setSuggest] = useState([]);
   const navigate = useNavigate();
 
@@ -13,12 +15,20 @@ export default function SuggestionPage({ setOnScreen}) {
     navigate(`/${item.name.replace(/ /g, "_")}`);
   }
 
-  function SuggestItem({ data, handleClick }) {
+  function Footer() {
+    return (
+      <div className="footer flex w-full px-2 justify-between items-center h-7 bg-slate-600 rounded-b-xl">
+        <span className="text-gray-300 ">created by Snt (2022)</span>
+        <a href="https://github.com/snt85c"><FaGithub/></a>
+      </div>
+    );
+  }
 
+  function SuggestItem({ data, handleClick }) {
     return (
       <>
         <div
-          className="flex flex-col bg-gray-800 rounded border-gray-700 border-2 hover:border-4 hover:border-amber-500 h-[8rem] md:h-[12rem]  md:p-2 cursor-pointer font-bold text-lg md:text-xl mb-2 "
+          className="flex flex-col bg-gray-800 rounded border-gray-700 border-2 hover:border-4 hover:border-amber-500 hover: transition-opacity hover:delay-75 h-[8rem] md:h-[12rem]  md:p-2 cursor-pointer font-bold text-lg md:text-xl mb-2"
           style={{
             background: `linear-gradient(to right, black 10%, rgba(0, 0, 0, 0)),url(${
               data.images[indexBestRatioUrl("16_9", data)].url
@@ -47,10 +57,10 @@ export default function SuggestionPage({ setOnScreen}) {
     <SuggestItem data={item} key={item.id} handleClick={handleClick} />
   ));
 
-
   return (
     <>
-      <div>{suggestions}</div>
+      <div className="m-1 fadeInAnimation">{suggestions}</div>
+      <Footer />
       <Outlet />
     </>
   );

@@ -70,7 +70,7 @@ export default function AttractionPage({ onScreen, setOnScreen }) {
     ));
 
     return (
-      <div className=" flex flex-col mx-5 min-h-[60vh] md:h-[19rem]  md:max-h-screen overflow-auto bg-gray-800 bg-opacity-50 cursor-pointer mb-4 ">
+      <div className=" flex flex-col mx-5 md:h-[19rem]  md:max-h-screen overflow-auto bg-gray-800 bg-opacity-50 cursor-pointer mb-4 ">
         {options}
       </div>
     );
@@ -79,7 +79,7 @@ export default function AttractionPage({ onScreen, setOnScreen }) {
   
   function AttractionShow() {
     return (
-      <div className="flex flex-col text-sm font-bold text-white">
+      <div className="flex flex-col text-sm font-bold text-white ">
           <div className="mt-5 ml-5 text-4xl md:text-6xl">{data.name}</div>
           <div className="ml-5 text-lg">
             {data.classifications[0].genre.name}/
@@ -136,9 +136,9 @@ export default function AttractionPage({ onScreen, setOnScreen }) {
   return (
     <>
       <div
-      className="h-full"
+      className="fadeInAnimation"
         style={{
-          background: `linear-gradient(to right, black 20%, rgba(0, 0, 0, 0), black), url(${
+          background: `linear-gradient(to right, black 20%, rgba(0, 0, 0, 0), black),linear-gradient(to bottom, black 5%, rgba(0, 0, 0, 0), black), url(${
             data.images[indexBestRatioUrl("16_9", data)].url
           }) no-repeat 50% 30%`
         }}
