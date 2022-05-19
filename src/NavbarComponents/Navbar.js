@@ -1,8 +1,9 @@
 import { HiOutlineShoppingCart } from "react-icons/hi";
-import { indexBestWidthUrl, SearchAttraction } from "./Services";
+import { indexBestWidthUrl, SearchAttraction } from "../Services";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-import Cart from "./CartComponents/Cart";
+import Cart from "../CartComponents/Cart";
+import DarkMode from "./DarkMode";
 
 export default function Navbar({ setOnScreen, cart, setCart }) {
   const [search, setSearch] = useState("");
@@ -79,52 +80,6 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
     );
   }
 
-  function DarkMode() {
-    useEffect(() => {
-      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-      if (
-        localStorage.theme === "dark" ||
-        (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-      // Whenever the user explicitly chooses light mode
-      // localStorage.theme = "light";
-
-      // // Whenever the user explicitly chooses dark mode
-      // localStorage.theme = "dark";
-
-      // // Whenever the user explicitly chooses to respect the OS preference
-      // localStorage.removeItem("theme");
-    }, [localStorage.theme]);
-
-    const handleToggleDarkMode = () => {
-      if (document.documentElement.classList.contains("dark")) {
-        document.documentElement.classList.remove("dark");
-        document.documentElement.classList.add("light");
-        localStorage.theme = "light";
-      } else {
-        document.documentElement.classList.add("dark");
-        document.documentElement.classList.remove("light");
-        localStorage.theme = "dark";
-      }
-    };
-    return (
-      <>
-        <div className="form-control">
-          <input
-            type="checkbox"
-            className="toggle toggle-xs md:toggle-md "
-            onClick={() => handleToggleDarkMode()}
-          />
-        </div>
-      </>
-    );
-  }
-
   function SearchSuggestions() {
     const searchItemsList = searchItems.map((item) => (
       <SearchbarItems data={item} key={item.id} />
@@ -148,9 +103,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
         <div
           className="flex w-full md:justify-start pt-2 md:pt-0 md:pl-2 font-newake subpixel-antialiased tracking-wider justify-center cursor-pointer dark:text-white text-black "
           onClick={() => (
-            //   setOnScreen([]),
             setCart({ ...cart, display: "none" }),
-            //   setDisplay("none")
             navigate("/")
           )}
         >

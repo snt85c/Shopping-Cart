@@ -3,6 +3,7 @@ import bkgVideo from "./bkgVideo.mp4";
 import { convertDate, indexBestRatioUrl } from "./Services";
 import AddToCart from "./CartComponents/AddToCart";
 import BackArrowOverlay from "./BackArrowOverlay";
+import { Suspense } from "react";
 
 export default function EventPage({ onScreen, cart, setCart }) {
   const navigate = useNavigate();

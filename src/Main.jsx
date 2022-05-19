@@ -1,8 +1,7 @@
 import { Routes, Route, HashRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./index.css";
-import Navbar from "./Navbar";
-import Cart from "./CartComponents/Cart";
+import Navbar from "./NavbarComponents/Navbar";
 import SuggestionPage from "./SuggestionPage";
 import AttractionPage from "./AttractionPage";
 import EventPage from "./EventPage";

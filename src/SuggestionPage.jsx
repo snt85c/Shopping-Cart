@@ -29,9 +29,9 @@ export default function SuggestionPage({ setOnScreen }) {
     return (
       <>
         <div
-          className="flex flex-col bg-gray-800 rounded border-gray-700 border-2 hover:border-4 hover:border-amber-500 hover: transition-opacity hover:delay-75 h-[8rem] md:h-[12rem]  md:p-2 cursor-pointer font-bold text-lg md:text-xl mb-2"
+          className="flex flex-col md:rounded-xl border-gray-700 md:border-2 border-b-2  hover:border-4 hover:border-amber-500 hover: transition-opacity h-[7rem] md:h-[12rem]  md:p-2 cursor-pointer font-bold text-lg md:text-xl md:mb-1"
           style={{
-            background: `linear-gradient(to right, black 10%, rgba(0, 0, 0, 0)),url(${
+            background: `linear-gradient(to right, black 20%, rgba(0, 0, 0, 0) 80%),url(${
               data.images[indexBestRatioUrl("16_9", data)].url
             })no-repeat 50% 30%`,
           }}
@@ -60,8 +60,8 @@ export default function SuggestionPage({ setOnScreen }) {
 
   return (
     <>
-      <div className="flex flex-col justify-between dark:bg-gray-800 bg-gray-400">
-        <div className="m-1 fadeInAnimation">{suggestions}</div>
+      <div className="flex flex-col justify-between dark:bg-gray-800 bg-gray-400 ">
+        <div className="m-1  fadeInAnimation">{suggestions}</div>
         <Footer />
         <Outlet />
       </div>

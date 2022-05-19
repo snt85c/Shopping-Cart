@@ -1,2 +1,3 @@
+darkmode: keep toggle active after changing page
 add login/logout
 add "you need to login" when clicking checkout
