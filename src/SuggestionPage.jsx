@@ -1,8 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { indexBestRatioUrl, SearchSuggest } from "./Services";
-import { FaGithub} from "react-icons/fa";
-
+import { FaGithub } from "react-icons/fa";
 
 export default function SuggestionPage({ setOnScreen }) {
   const [suggest, setSuggest] = useState([]);
@@ -17,9 +16,11 @@ export default function SuggestionPage({ setOnScreen }) {
 
   function Footer() {
     return (
-      <div className="footer flex w-full px-2 justify-between items-center h-7 bg-slate-600 rounded-b-xl">
-        <span className="text-gray-300 ">created by Snt (2022)</span>
-        <a href="https://github.com/snt85c"><FaGithub/></a>
+      <div className="footer flex w-full px-2 justify-between items-center h-7 dark:bg-slate-600 bg-slate-200 rounded-b-xl">
+        <span className="text-black dark:text-gray-300 ">created by Snt (2022)</span>
+        <a href="https://github.com/snt85c" className="text-black dark:text-white">
+          <FaGithub />
+        </a>
       </div>
     );
   }
@@ -59,9 +60,11 @@ export default function SuggestionPage({ setOnScreen }) {
 
   return (
     <>
-      <div className="m-1 fadeInAnimation">{suggestions}</div>
-      <Footer />
-      <Outlet />
+      <div className="flex flex-col justify-between dark:bg-gray-800 bg-gray-400">
+        <div className="m-1 fadeInAnimation">{suggestions}</div>
+        <Footer />
+        <Outlet />
+      </div>
     </>
   );
 }

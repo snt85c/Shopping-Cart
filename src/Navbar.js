@@ -46,7 +46,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
 
   function CartCounter() {
     return (
-      <div className="absolute top-1 md:top-2 right-1 md:rigth-2 w-5 h-5 text-center  text-xs font-bold z-10 rounded-full border-2 border-amber-500 bg-gray-900 text-red-500">
+      <div className="absolute top-1 md:top-2 right-1 md:rigth-2 w-5 h-5 text-center  text-xs font-bold z-10 rounded-full border-2 border-amber-500 dark:bg-gray-900 bg-white text-red-500">
         {cart.items.length}
       </div>
     );
@@ -56,7 +56,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
     return (
       <>
         <div
-          className="flex-row flex p-1 border border-white hover:border-amber-500 bg-black cursor-pointer  hover:bg-gray-800 hover:text-amber-500"
+          className="flex-row flex p-1 border border-white hover:border-amber-500 bg-black  cursor-pointer  hover:bg-gray-800 hover:text-amber-500"
           onClick={() => {
             setOnScreen(data);
             navigate(`/${data.name.replace(/ /g, "_")}`);
@@ -74,6 +74,52 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
             alt=""
             src={data.images[indexBestWidthUrl(data)].url}
           ></img>
+        </div>
+      </>
+    );
+  }
+
+  function DarkMode() {
+    useEffect(() => {
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+      // Whenever the user explicitly chooses light mode
+      // localStorage.theme = "light";
+
+      // // Whenever the user explicitly chooses dark mode
+      // localStorage.theme = "dark";
+
+      // // Whenever the user explicitly chooses to respect the OS preference
+      // localStorage.removeItem("theme");
+    }, [localStorage.theme]);
+
+    const handleToggleDarkMode = () => {
+      if (document.documentElement.classList.contains("dark")) {
+        document.documentElement.classList.remove("dark");
+        document.documentElement.classList.add("light");
+        localStorage.theme = "light";
+      } else {
+        document.documentElement.classList.add("dark");
+        document.documentElement.classList.remove("light");
+        localStorage.theme = "dark";
+      }
+    };
+    return (
+      <>
+        <div className="form-control">
+          <input
+            type="checkbox"
+            className="toggle toggle-xs md:toggle-md "
+            onClick={() => handleToggleDarkMode()}
+          />
         </div>
       </>
     );
@@ -98,9 +144,9 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
 
   return (
     <>
-      <div className=" w-full md:static top-0 flex  flex-col md:flex-row justify-between items-center max-w-full border-b-amber-500 bg-gray-900 border-b-2  font-extrabold text-4xl rounded-t-xl">
+      <div className=" w-full md:static top-0 flex  flex-col md:flex-row justify-between items-center max-w-full border-b-amber-500 dark:bg-gray-900 bg-gray-50 border-b-2  font-extrabold text-4xl rounded-t-xl">
         <div
-          className="flex w-full md:justify-start pt-2 md:pt-0 md:pl-2 font-newake subpixel-antialiased tracking-wider justify-center cursor-pointer text-white"
+          className="flex w-full md:justify-start pt-2 md:pt-0 md:pl-2 font-newake subpixel-antialiased tracking-wider justify-center cursor-pointer dark:text-white text-black "
           onClick={() => (
             //   setOnScreen([]),
             setCart({ ...cart, display: "none" }),
@@ -110,14 +156,16 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
         >
           Ticketmaster
         </div>
-        <div className="flex w-full md:justify-end md:mr-10 justify-center ">
+
+        <div className="flex w-full md:justify-end md:mr-10 justify-center items-center">
+          <DarkMode />
           <HiOutlineShoppingCart
             className="absolute top-2 md:top-2 right-1 cursor-pointer text-amber-500"
             onClick={() => setCart({ ...cart, display: cartDisplayToggle() })}
           />
           <input
             onChange={handleChange}
-            className="flex m-2 top-36 bg-black text-white text-sm p-2 mx-2 w-2-3 rounded-md  border-amber-500 border-2"
+            className="flex m-2 top-36 dark:bg-black bg-white dark:text-white text-black text-sm p-2 mx-2 w-2-3 rounded-md  border-amber-500 border-2"
             placeholder="Search by Artist"
             onClick={() => searchbarDisplayToggle()}
           ></input>

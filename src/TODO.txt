@@ -1,10 +1,2 @@
-taliwindcss hover animation for addToCart
-attractionPage now has no fixed size for mobile version
-fix backArrowOverlay to absolute
-reintriduce fadeInAnimation for each page
-fix addToCart bug which would set the counter down to 0 when pressing decrease counter
-cart component will be rendered inside navbar component
-cart components have been bundled inside folder CartComponents
-cart has a fadeInAnimation when is emptied, the color of the final price is amber-500
-add divider from DaisyUI in cartItems
-reintroduces cart openign on addtocart
+add login/logout
+add "you need to login" when clicking checkout

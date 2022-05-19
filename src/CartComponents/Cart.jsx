@@ -37,13 +37,13 @@ export default function Cart({ cart, setCart }) {
     return (
       <>
         <div
-          className=" border-2 rounded-md font-bold text-base text-gray-800 bg-amber-500 border-amber-900 p-2 m-2 cursor-pointer hover:text-gray-100 hover:border-white duration-300 "
+          className=" border-2 rounded-md font-bold text-base text-gray-800 bg-amber-500 border-amber-900 p-2 m-2 cursor-pointer hover:text-gray-100 shadow-2xl hover:border-white duration-300"
           onClick={() => {
             cart.items.length
               ? AlertCtx.displayMsg(
                   "Your purchase has been confirmed! Thank you for trying Tiketmaster",
                   "alert-success"
-                ) 
+                )
               : AlertCtx.displayMsg(
                   "Nothing on the Shopping Cart",
                   "alert-warning"
@@ -61,7 +61,7 @@ export default function Cart({ cart, setCart }) {
     <>
       <div
         ref={wrapperRef}
-        className="absolute z-20 min-h-full md:mt-2  md:top-12 right-0 bg-gray-900 w-2/4 md:w-1/3 text-center text-sm border-amber-500 border-l-2 border-b-2 pt-2 cartAnimation"
+        className="absolute shadow-lg z-20 min-h-[90%] md:mt-2  md:top-12 right-0 dark:bg-gray-900 bg-white w-2/4 md:w-1/3 text-center text-sm border-amber-500 border-l-2 border-b-2 pt-2 cartAnimation text-black dark:text-white"
         style={{ display: cart.display }}
       >
         {cart.items.length === 0 ? (
@@ -69,20 +69,31 @@ export default function Cart({ cart, setCart }) {
             <div className="my-6 font-extrabold">
               Your cart is empty at the moment
             </div>
-            <img src={emptycart} className="w-1/2 h-1/2 invert opacity-50" alt="empty_cart" />
+            <img
+              src={emptycart}
+              className="w-1/2 h-1/2 dark:invert opacity-50"
+              alt="empty_cart"
+            />
           </div>
         ) : (
-          <div className="font-extrabold">in the cart:</div>
+          <>
+            <div className="font-extrabold">in the cart:</div>
+            <div className="overflow-auto h-64 md:min-h-2">{items}</div>
+            <br />
+            <div className="text-center text-sm ">
+              <div>
+                TOTAL:{" "}
+                <span className="text-amber-500 font-extrabold text-xl">
+                  {total}£
+                </span>
+              </div>
+              <br />
+              <div>
+                <Checkout />
+              </div>
+            </div>
+          </>
         )}
-        <div className="overflow-auto h-64 md:h-80">{items}</div>
-        <br />
-        <div className="text-center text-sm ">
-          <div>TOTAL: <span className="text-amber-500 font-extrabold text-xl">{total}£</span></div>
-          <br />
-          <div>
-            <Checkout />
-          </div>
-        </div>
       </div>
     </>
   );

@@ -143,6 +143,7 @@ export default function AttractionPage({ onScreen, setOnScreen }) {
           }) no-repeat 50% 30%`
         }}
       >
+        <div></div>
         <Breadcrumbs />
         <BackArrowOverlay />
         <AttractionShow />

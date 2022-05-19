@@ -50,8 +50,8 @@ export default function CartItems({ item, cart, setCart }) {
     return (
       <>
         <div className="divider-horizontal" />
-        <div className="divider m-0">price</div>
-        <div className="text-white">
+        <div className="divider m-0 ">price</div>
+        <div className="text-black dark:text-white">
           {item.ticketInCart * item.priceRanges[0].max}{" "}
           {item.priceRanges[0].currency}
         </div>
@@ -64,7 +64,7 @@ export default function CartItems({ item, cart, setCart }) {
       <div className="flex">
         {" "}
         price single ticket:{" "}
-        <div className="text-white">
+        <div className="text-black dark:text-white">
           {item.priceRanges[0].max}
           {item.priceRanges[0].currency}
         </div>
@@ -99,12 +99,12 @@ export default function CartItems({ item, cart, setCart }) {
   function CartItem(){
     return(
       <>
-       <div className="text-left border rounded-md border-gray-500 p-3 m-2 text-gray-400">
-        <div className="text-white font-extrabold">{item.name}</div>
+       <div className="text-left border rounded-md border-gray-500 p-3 m-2  text-black dark:text-white shadow-lg">
+        <div className="text-black dark:text-white font-extrabold">{item.name}</div>
         <Price />
         <div className="flex">
           tickets:{" "}
-          <div className="flex text-white">
+          <div className="flex text-black dark:text-white">
             {" "}
             <ReduceTickets />
             {item.ticketInCart}

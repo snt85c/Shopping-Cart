@@ -1,4 +1,5 @@
 module.exports = {
+  darkMode: 'class',
   plugins: [require("daisyui")],
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
