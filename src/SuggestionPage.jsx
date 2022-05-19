@@ -60,7 +60,7 @@ export default function SuggestionPage({ setOnScreen }) {
 
   return (
     <>
-      <div className="flex flex-col justify-between dark:bg-gray-800 bg-gray-400 ">
+      <div className="flex flex-col justify-between dark:bg-gray-800 bg-gray-400 duration-[1000ms] ">
         <div className="m-1  fadeInAnimation">{suggestions}</div>
         <Footer />
         <Outlet />

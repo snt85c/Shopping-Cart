@@ -96,7 +96,7 @@ export default function EventPage({ onScreen, cart, setCart }) {
   }
 
   return (
-    <div className="mb-2 overflow-hidden fadeInAnimation dark:bg-gray-800 bg-gray-400">
+    <div className="mb-2 overflow-hidden fadeInAnimation dark:bg-gray-800 bg-gray-400 duration-[1000ms]">
       {/* <EventShowBackgroundVideo /> */}
       <div>
         <Breadcrumbs />

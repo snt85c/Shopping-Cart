@@ -47,7 +47,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
 
   function CartCounter() {
     return (
-      <div className="absolute top-1 md:top-2 right-1 md:rigth-2 w-5 h-5 text-center  text-xs font-bold z-10 rounded-full border-2 border-amber-500 dark:bg-gray-900 bg-white text-red-500">
+      <div className="absolute top-1 md:top-2 right-1 md:rigth-2 w-5 h-5 text-center  text-xs font-bold z-10 rounded-full border-2 border-amber-500 dark:bg-gray-900 duration-[1000ms] bg-white text-red-500">
         {cart.items.length}
       </div>
     );
@@ -99,9 +99,9 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
 
   return (
     <>
-      <div className=" w-full md:static top-0 flex  flex-col md:flex-row justify-between items-center max-w-full border-b-amber-500 dark:bg-gray-900 bg-gray-50 border-b-2  font-extrabold text-4xl rounded-t-xl">
+      <div className=" w-full md:static top-0 flex  flex-col md:flex-row justify-between items-center max-w-full border-b-amber-500 dark:bg-gray-900 bg-gray-50 border-b-2  duration-[1000ms] font-extrabold text-4xl rounded-t-xl ">
         <div
-          className="flex w-full md:justify-start pt-2 md:pt-0 md:pl-2 font-newake subpixel-antialiased tracking-wider justify-center cursor-pointer dark:text-white text-black "
+          className="flex w-full md:justify-start pt-2 md:pt-0 md:pl-2 font-newake subpixel-antialiased tracking-wider justify-center cursor-pointer dark:text-white duration-[300ms] text-black "
           onClick={() => (
             setCart({ ...cart, display: "none" }),
             navigate("/")
@@ -118,7 +118,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
           />
           <input
             onChange={handleChange}
-            className="flex m-2 top-36 dark:bg-black bg-white dark:text-white text-black text-sm p-2 mx-2 w-2-3 rounded-md  border-amber-500 border-2"
+            className="flex m-2 top-36 dark:bg-black bg-white dark:text-white duration-[1000ms] text-black text-sm p-2 mx-2 w-2-3 rounded-md  border-amber-500 border-2"
             placeholder="Search by Artist"
             onClick={() => searchbarDisplayToggle()}
           ></input>
