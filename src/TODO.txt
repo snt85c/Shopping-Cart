@@ -1,3 +1,13 @@
+TODO:
 darkmode: keep toggle active after changing page
-add login/logout
-add "you need to login" when clicking checkout
+sign in page
+add Sign-in page
+
+
+this commit:
+
+add login/logout, this is done in the folder LoginComponent. userAuth.jsx handle the auth and setting the user on googleLogIn and logout. userAuth also has some other functions to handle possible multiple log in mode, maybe to be done in a dropdown menu, maybe not
+
+Cart.jsx has now two functions who handle the functions passed by userAuth, both can send Alert on screen after try/catch any issue
+ checkout is replaced by google log in if there is no user logged in
+alert: message is centered

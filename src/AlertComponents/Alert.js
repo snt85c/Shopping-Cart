@@ -7,7 +7,7 @@ export default function Alert() {
 
   return (
     <>{AlertCtx.isDisplayed && 
-      <div className={`alert ${AlertCtx.type} shadow-lg alert-animation  fixed md:absolute top-32 md:top-20 md:left-1/3 z-50 md:w-1/3`}>
+      <div className={`alert ${AlertCtx.type} shadow-lg alert-animation  fixed md:absolute top-32 md:top-20 md:left-1/3 z-50 md:w-1/3 flex justify-center items-center`}>
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"

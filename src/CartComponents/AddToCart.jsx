@@ -23,7 +23,7 @@ export default function AddToCart({ setCart, cart, data }) {
 
   function AddToCartButton() {
     return (
-      <div className="flex flex-col justify-center items-center">
+      <div className="addToCart flex flex-col justify-center items-center">
       <div className="flex items-center justify-center shadow-2xl font-bold md:w-80 h-10  border-2 rounded text-amber-500 bg-gray-900 border-amber-500 p-1 cursor-pointer hover:bg-gray-800 ease-in duration-100 hover:text-gray-100 "
         onClick={() =>
           data.priceRanges
@@ -48,7 +48,7 @@ export default function AddToCart({ setCart, cart, data }) {
 
   function DecreaseCounter() {
     return (
-      <div className="m-2 h-10 w-10 font-bold border-2 rounded shadow-2xl text-amber-500 text-center bg-gray-900 border-amber-500 p-1 px-2 cursor-pointer hover:text-gray-100 ease-in duration-100 "
+      <div className=" m-2 h-10 w-10 font-bold border-2 rounded shadow-2xl text-amber-500 text-center bg-gray-900 border-amber-500 p-1 px-2 cursor-pointer hover:text-gray-100 ease-in duration-100 "
         onClick={() => (data.priceRanges ? updateCounter(counter - 1) : "")}
         style={{display:data.priceRanges?"block":"none"}}
       >

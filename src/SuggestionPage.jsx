@@ -37,7 +37,7 @@ export default function SuggestionPage({ setOnScreen }) {
           }}
           onClick={() => handleClick(data)}
         >
-          <div className=" text-4xl md:text-5xl font-extrabold ">
+          <div className=" text-5xl md:text-7xl font-extrabold ">
             {data.name}
           </div>
           <div className="text-xs text-gray-400">
