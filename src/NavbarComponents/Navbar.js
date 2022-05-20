@@ -47,7 +47,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
 
   function CartCounter() {
     return (
-      <div className="absolute top-1 md:top-2 right-1 md:rigth-2 w-5 h-5 text-center  text-xs font-bold z-10 rounded-full border-2 border-amber-500 dark:bg-gray-900 duration-1000 bg-white text-red-500">
+      <div className="absolute top-1 md:top-2 right-1 md:rigth-2 w-5 h-5 text-center  text-xs font-bold z-10 rounded-full border-2 border-amber-500 dark:bg-gray-900  bg-white text-red-500">
         {cart.items.length}
       </div>
     );

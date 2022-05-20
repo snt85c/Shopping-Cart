@@ -4,7 +4,7 @@ export default function BackArrowOverlay() {
     const navigate = useNavigate()
     return (
       <IoArrowBackCircleSharp
-        className="absolute right-0 top-12 md:top-20 cursor-pointer h-12 w-12"
+        className="absolute right-0 top-12 md:top-14 cursor-pointer h-10 w-10"
         onClick={() => {
           navigate(-1);
         }}

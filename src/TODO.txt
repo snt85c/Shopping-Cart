@@ -1,13 +1,19 @@
 TODO:
-darkmode: keep toggle active after changing page
 sign in page
 add Sign-in page
 
 
 this commit:
 
-add login/logout, this is done in the folder LoginComponent. userAuth.jsx handle the auth and setting the user on googleLogIn and logout. userAuth also has some other functions to handle possible multiple log in mode, maybe to be done in a dropdown menu, maybe not
+AttractionPage.js has been renamed to ArtistPage to keep a better tab on what's happening and where, sicne i was having confusion on where to look when changing elements. 
 
-Cart.jsx has now two functions who handle the functions passed by userAuth, both can send Alert on screen after try/catch any issue
- checkout is replaced by google log in if there is no user logged in
-alert: message is centered
+ArtistPage and EventPage window height have been restructured to make sure that they are always 100vh with no empty spaces
+
+Cart now allows for the AddToCart button to be pressed without closing itself automatically
+AddToCart button restyled for darkmode. 
+
+AttractionSocialLinksPage has hover added for amber-500 color
+
+components GoogleLogin and Logout have been separated in their own file in LoginCompoent
+
+suggestionPage now has a video in the background and the items are split over half the page, devicons and a flair text has been added

@@ -1,21 +1,24 @@
 import CartItems from "./CartItems";
 import { useRef, useEffect, useContext } from "react";
 import AlertContext from "../AlertComponents/AlertContextProvider";
-import GoogleButton from "react-google-button";
 import { LoginComponent } from "../LoginComponent/UserAuth";
+import Logout from "../LoginComponent/Logout";
+import GoogleLogin from "../LoginComponent/GoogleLogin";
 import emptycart from "../img/empty_cart.webp";
 
 export default function Cart({ cart, setCart }) {
   const AlertCtx = useContext(AlertContext);
-  const { googleSignIn, logout, user } = LoginComponent();
+  const {  user } = LoginComponent();
   function useOutsideAlerter(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
         const toggle = document.getElementsByClassName("toggle");
+        const addToCart = document.getElementsByClassName("addToCart");
         if (
           ref.current &&
           !ref.current.contains(event.target) &&
-          !event.target.contains(toggle[0])
+          !event.target.contains(toggle[0]) &&
+          !event.target.contains(addToCart[0])
         ) {
           ref.current.style.display = "none";
           // setCart({...cart,display:"none"})
@@ -64,61 +67,6 @@ export default function Cart({ cart, setCart }) {
     );
   }
 
-  function GoogleLogin() {
-    async function handleGoogleLogin(e) {
-      e.preventDefault();
-      try {
-        await googleSignIn().then((user)=>{
-          AlertCtx.displayMsg(
-            `Logged in as ${user._tokenResponse.displayName}`,
-            "alert-success"
-          );
-        });
-      } catch (err) {
-        AlertCtx.displayMsg(
-          `Unable to Login - ${err.message} - please try later`,
-          "alert-error"
-        );
-      }
-    }
-    return (
-      <>
-        <div className="flex flex-col justify-center items-center">
-          <GoogleButton
-            className=" max-w-[120px] md:min-w-[95%] mx-2 "
-            onClick={(e) => handleGoogleLogin(e)}
-            label="Sign in"
-          />
-          <div>you need to log in to continue</div>
-        </div>
-      </>
-    );
-  }
-
-
-  function Logout() {
-    async function handleLogout(e) {
-      try {
-        await logout();
-        AlertCtx.displayMsg("logged out", "alert-warning");
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    return (
-      <>
-        <div
-          className="btn"
-          onClick={(e) => {
-            handleLogout(e);
-          }}
-        >
-          logout
-        </div>
-      </>
-    );
-  }
-
   return (
     <>
       <div
@@ -140,7 +88,7 @@ export default function Cart({ cart, setCart }) {
         ) : (
           <>
             <div className="font-extrabold">in the cart{user && user.displayName? ` for ${user.displayName.split(" ")[0]}`:""}:</div>
-            <div className="overflow-auto m-1 h-64 md:min-h-2 dark:bg-gray-700 bg-gray-200 duration-1000 rounded-xl">
+            <div className="overflow-auto m-1 h-[55vh]  dark:bg-gray-700 bg-gray-200  duration-1000 rounded-xl">
               {items}
             </div>
             <br />

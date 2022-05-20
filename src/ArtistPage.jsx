@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { convertDate, SearchEvents, indexBestRatioUrl } from "./Services";
-import BackArrowOverlay from "./BackArrowOverlay";
+import BackArrowOverlay from "./NavbarComponents/BackArrowOverlay";
 import {
   BsSpotify,
   BsFacebook,
@@ -11,7 +11,7 @@ import {
 } from "react-icons/bs";
 import { AiOutlineHome } from "react-icons/ai";
 
-export default function AttractionPage({ onScreen, setOnScreen }) {
+export default function ArtistPage({ onScreen, setOnScreen }) {
   const [eventData, setEventData] = useState([]);
   const navigate = useNavigate();
   let params = useParams();
@@ -26,10 +26,10 @@ export default function AttractionPage({ onScreen, setOnScreen }) {
   function Breadcrumbs() {
     return (
       <>
-        <div className="text-sm breadcrumbs ml-2">
+        <div className="text-sm breadcrumbs pl-2 dark:bg-gray-800 bg-gray-400 duration-300">
           <ul>
             <li>
-              <a onClick={() => navigate("/")}>Home</a>
+              <a onClick={() => navigate("/")}>Attraction Selection</a>
             </li>
             <li>Events Selection</li>
           </ul>
@@ -39,11 +39,10 @@ export default function AttractionPage({ onScreen, setOnScreen }) {
   }
 
   function EventList() {
-
     function EventItem({ data }) {
       return (
         <div
-          className="border-2 rounded border-gray-600 mb-1 pl-1 py-2 hover:border-amber-500"
+          className="border-2 rounded border-gray-600 mb-1 pl-1 py-2 hover:border-amber-500 duration-200"
           onClick={() => (
             navigate(`/${params.second}/${data.id}`), setOnScreen(data)
           )}
@@ -63,34 +62,34 @@ export default function AttractionPage({ onScreen, setOnScreen }) {
           </div>
         </div>
       );
-    }  
+    }
 
     const options = eventData.map((item, i) => (
       <EventItem data={item} key={i} />
     ));
 
     return (
-      <div className=" flex flex-col mx-5 md:h-[19rem]  md:max-h-screen overflow-auto bg-gray-800 bg-opacity-50 cursor-pointer mb-4 ">
+      <div className="md:h-[300px] flex flex-col mx-5 md:w-[35%] md:overflow-auto bg-gray-800 bg-opacity-50 cursor-pointer ">
         {options}
       </div>
     );
   }
 
-  
   function AttractionShow() {
     return (
-      <div className="flex flex-col text-sm font-bold text-white ">
-          <div className="mt-5 ml-5 text-4xl md:text-6xl">{data.name}</div>
-          <div className="ml-5 text-lg">
-            {data.classifications[0].genre.name}/
-            {data.classifications[0].subGenre.name}
-          </div>
-          <div className="m-2 ml-5 text-sm ">
-            {data.upcomingEvents._total}{" "}
-            {data.upcomingEvents._total > 1 ? "events" : "event"}
-          </div>
-          <EventList />
+      <div className="flex flex-col h-100 text-sm font-bold  text-white ">
+        <div className=" ml-5 mt-2 text-4xl md:text-6xl">{data.name}</div>
+        <div className="ml-5 text-lg">
+          {data.classifications[0].genre.name}/
+          {data.classifications[0].subGenre.name}
         </div>
+        <div className="m-2 ml-5 text-sm ">
+          {data.upcomingEvents._total}{" "}
+          {data.upcomingEvents._total > 1 ? "events" : "event"}
+        </div>
+        <EventList />
+        <AttractionShowSocialsIcons />
+      </div>
     );
   }
 
@@ -116,38 +115,37 @@ export default function AttractionPage({ onScreen, setOnScreen }) {
       if (data.externalLinks && data.externalLinks[name]) {
         let IconType = icons[i];
         return (
-          <>
-            <a
-              href={data.externalLinks[name][0].url}
-              key={i}
-              style={{ padding: "1%" }}
-            >
-              <IconType className="text-white  object-contain w-12 h-12 pl-2 " />
+          <div key={i} className="h-0">
+            <a href={data.externalLinks[name][0].url} style={{ padding: "1%" }}>
+              <IconType className="text-white h-12 w-12 object-contain pl-2 hover:text-amber-500 duration-100 " />
             </a>
-          </>
+          </div>
         );
       }
     });
-    return <div className="flex justify-center h-20">{result}</div>;
+    return (
+      <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-row pt-2 ">
+        {result}
+        </div>
+        <div>external links</div>
+      </div>
+    );
   }
-
-
 
   return (
     <>
+        <Breadcrumbs />
       <div
-      className="fadeInAnimation"
+        className="fadeInAnimation h-[85vh] "
         style={{
           background: `linear-gradient(to right, black 20%, rgba(0, 0, 0, 0), black),linear-gradient(to bottom, black 5%, rgba(0, 0, 0, 0), black), url(${
             data.images[indexBestRatioUrl("16_9", data)].url
-          }) no-repeat 50% 30%`
+          }) no-repeat 50% 30%`,
         }}
       >
-        <div></div>
-        <Breadcrumbs />
         <BackArrowOverlay />
         <AttractionShow />
-        <AttractionShowSocialsIcons />
       </div>
     </>
   );

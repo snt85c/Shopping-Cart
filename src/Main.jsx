@@ -1,16 +1,16 @@
-import { Routes, Route, HashRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
-import "./index.css";
+import { Routes, Route, HashRouter } from "react-router-dom";
+import { AlertContextProvider } from "./AlertComponents/AlertContextProvider";
 import Navbar from "./NavbarComponents/Navbar";
 import SuggestionPage from "./SuggestionPage";
-import AttractionPage from "./AttractionPage";
+import ArtistPage from "./ArtistPage";
 import EventPage from "./EventPage";
-import NoPath from "./NoPath";
 import Alert from "./AlertComponents/Alert";
-import { AlertContextProvider } from "./AlertComponents/AlertContextProvider";
+import NoPath from "./NoPath";
+import "./index.css";
 
 export default function Main() {
-  let [onAttractionScreen, setOnAttractionScreen] = useState([]);
+  let [onArtistScreen, setOnArtistScreen] = useState([]);
   let [onEventScreen, setOnEventScreen] = useState([]);
   let [cart, setCart] = useState({
     display: "none",
@@ -25,7 +25,7 @@ export default function Main() {
 
   useEffect(() => {
     if (localStorage.getItem("onAttractionScreen")) {
-      setOnAttractionScreen(
+      setOnArtistScreen(
         JSON.parse(localStorage.getItem("onAttractionScreen"))
       );
     }
@@ -44,9 +44,9 @@ export default function Main() {
   useEffect(() => {
     localStorage.setItem(
       "onAttractionScreen",
-      JSON.stringify(onAttractionScreen)
+      JSON.stringify(onArtistScreen)
     );
-  }, [onAttractionScreen]);
+  }, [onArtistScreen]);
 
   useEffect(() => {
     localStorage.setItem("onEventScreen", JSON.stringify(onEventScreen));
@@ -60,18 +60,18 @@ export default function Main() {
           <Navbar
             cart={cart}
             setCart={setCart}
-            setOnScreen={setOnAttractionScreen}
+            setOnScreen={setOnArtistScreen}
           />
           <Routes>
             <Route
               path="/"
-              element={<SuggestionPage setOnScreen={setOnAttractionScreen} />}
+              element={<SuggestionPage setOnScreen={setOnArtistScreen} />}
             />
             <Route
               path=":second"
               element={
-                <AttractionPage
-                  onScreen={onAttractionScreen}
+                <ArtistPage
+                  onScreen={onArtistScreen}
                   setOnScreen={setOnEventScreen}
                 />
               }

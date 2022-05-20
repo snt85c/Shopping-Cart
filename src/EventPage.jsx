@@ -1,9 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import bkgVideo from "./bkgVideo.mp4";
 import { convertDate, indexBestRatioUrl } from "./Services";
 import AddToCart from "./CartComponents/AddToCart";
-import BackArrowOverlay from "./BackArrowOverlay";
-import { Suspense } from "react";
+import BackArrowOverlay from "./NavbarComponents/BackArrowOverlay";
 
 export default function EventPage({ onScreen, cart, setCart }) {
   const navigate = useNavigate();
@@ -19,7 +17,7 @@ export default function EventPage({ onScreen, cart, setCart }) {
         <div className="text-sm breadcrumbs ml-2">
           <ul>
             <li>
-              <a onClick={() => navigate("/")}>Home</a>
+              <a onClick={() => navigate("/")}>Attraction Selection</a>
             </li>
             <li>
               <a onClick={() => navigate(-1)}>Events Selection </a>
@@ -28,17 +26,6 @@ export default function EventPage({ onScreen, cart, setCart }) {
           </ul>
         </div>
       </>
-    );
-  }
-
-  function EventShowBackgroundVideo() {
-    return (
-      <div className=" hidden md:flex absolute object-fill -z-10">
-        <video loop autoPlay muted>
-          <source src={bkgVideo} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
     );
   }
 
@@ -96,14 +83,13 @@ export default function EventPage({ onScreen, cart, setCart }) {
   }
 
   return (
-    <div className="mb-2 overflow-hidden fadeInAnimation dark:bg-gray-800 bg-gray-400 duration-[1000ms]">
-      {/* <EventShowBackgroundVideo /> */}
+    <div className="flex flex-col h-[90.5vh] md:overflow-hidden fadeInAnimation dark:bg-gray-800 bg-gray-400 duration-300">
       <div>
         <Breadcrumbs />
         <BackArrowOverlay />
       </div>
       <div
-        className="flex flex-col md:flex-row h-2/4 mb-4  md:mt-20 justify-center  "
+        className="flex flex-col md:flex-row md:h-3/4  justify-center  "
         style={{
           background: `linear-gradient(to right, black, rgba(0, 0, 0, 0.6), black),
                           url(${
@@ -114,8 +100,8 @@ export default function EventPage({ onScreen, cart, setCart }) {
         <EventInfo />
         <VenueAddress />
         <SeatMap />
-      </div>
-      <AddToCart data={onScreen} cart={cart} setCart={setCart} />
+      </div> 
+       <AddToCart data={onScreen} cart={cart} setCart={setCart} />
     </div>
   );
 }
