@@ -90,7 +90,6 @@ export default function CartItems({ item, cart, setCart }) {
         `all tickets for ${item.name} have been removed from the  Shopping Cart`,
         "alert-info"
       );
-      console.log(cart)
     }
     return (
       <div

@@ -181,19 +181,21 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
   }
 
   return (
-    <>
+    <div>
+      <div className="flex justify-between dark:bg-gray-800 bg-gray-400">
       <Breadcrumbs />
+      <BackArrowOverlay />
+      </div>
       <div
-        className="fadeInAnimation h-[85vh] "
+        className="fadeInAnimation h-[85vh]"
         style={{
           background: `linear-gradient(to right, black 20%, rgba(0, 0, 0, 0), black),linear-gradient(to bottom, black 5%, rgba(0, 0, 0, 0), black), url(${
             data.images[indexBestRatioUrl("16_9", data)].url
           }) no-repeat 50% 30%`,
         }}
       >
-        <BackArrowOverlay />
         <AttractionShow />
       </div>
-    </>
+    </div>
   );
 }

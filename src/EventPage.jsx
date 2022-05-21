@@ -94,7 +94,7 @@ export default function EventPage({ onScreen, cart, setCart }) {
 
   return (
     <div className="flex flex-col h-[90.5vh] md:overflow-hidden fadeInAnimation dark:bg-gray-800 bg-gray-400 duration-300">
-      <div>
+      <div className="flex justify-between dark:bg-gray-800 bg-gray-400">
         <Breadcrumbs />
         <BackArrowOverlay />
       </div>

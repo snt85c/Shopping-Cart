@@ -66,14 +66,14 @@ export default function SuggestionPage({ setOnScreen }) {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row-reverse">
+      <div className="flex flex-col md:flex-row-reverse ">
         <SuggestionsShowBackgroundVideo />
         <div className="flex flex-col md:w-1/2 justify-between duration-1000 ">
           <div className="m-1  fadeInAnimation">{suggestions}</div>
           <Outlet />
         </div>
       </div>
-          <Footer />
+      <Footer />
     </>
   );
 }
