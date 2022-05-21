@@ -31,8 +31,6 @@ export default function SuggestionPage({ setOnScreen }) {
     );
   }
 
-  
-
   function SuggestItem({ data, handleClick }) {
     return (
       <>
@@ -68,12 +66,14 @@ export default function SuggestionPage({ setOnScreen }) {
 
   return (
     <>
-      <SuggestionsShowBackgroundVideo />
-      <div className="flex flex-col justify-between duration-1000 ">
-        <div className="m-1  fadeInAnimation md:w-[50%]">{suggestions}</div>
-        <Footer />
-        <Outlet />
+      <div className="flex flex-col md:flex-row-reverse">
+        <SuggestionsShowBackgroundVideo />
+        <div className="flex flex-col md:w-1/2 justify-between duration-1000 ">
+          <div className="m-1  fadeInAnimation">{suggestions}</div>
+          <Outlet />
+        </div>
       </div>
+          <Footer />
     </>
   );
 }

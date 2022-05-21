@@ -12,7 +12,8 @@ export default function CartItems({ item, cart, setCart }) {
   function ReduceTickets() {
     return (
       <div
-        className="flex  w-4 h-4 m-1 pb-1 justify-center items-center cursor-pointer hover:scale-110 duration-100"
+        className="flex tooltip w-4 h-4 m-1 pb-1 justify-center items-center cursor-pointer hover:scale-110 duration-100"
+        data-tip="reduce tickets"
         onClick={() => (
           item.ticketInCart > 1 ? (item.ticketInCart -= 1) : "",
           (setCart({ ...cart, items: [...cart.items] }),
@@ -29,7 +30,8 @@ export default function CartItems({ item, cart, setCart }) {
   function IncreaseTickets() {
     return (
       <div
-        className="flex w-4 h-4  m-1 pb-1  justify-center items-center cursor-pointer hover:scale-110 duration-100"
+        className="flex tooltip w-4 h-4  m-1 pb-1  justify-center items-center cursor-pointer hover:scale-110 duration-100"
+        data-tip="increase tickets"
         onClick={() => (
           (item.ticketInCart += 1),
           setCart(
@@ -51,7 +53,7 @@ export default function CartItems({ item, cart, setCart }) {
       <>
         <div className="divider-horizontal" />
         <div className="divider m-0 ">price</div>
-        <div className="text-black dark:text-white">
+        <div className="text-gray-800 dark:text-amber-500 flex justify-center font-bold items-center duration-300">
           {item.ticketInCart * item.priceRanges[0].max}{" "}
           {item.priceRanges[0].currency}
         </div>
@@ -75,7 +77,8 @@ export default function CartItems({ item, cart, setCart }) {
   function RemoveItem() {
     return (
       <div
-        className="flex text-red-700 pb-1 m-1 -700 w-4 h-4 justify-center items-center cursor-pointer hover:scale-110 duration-100"
+        className="flex tooltip text-red-700 pb-1 m-1 -700 w-4 h-4 justify-center items-center cursor-pointer hover:scale-110 duration-100"
+        data-tip="remove from cart"
         onClick={() => {
           setCart({
             ...cart,

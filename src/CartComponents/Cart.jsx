@@ -95,7 +95,7 @@ export default function Cart({ cart, setCart }) {
             <div className="text-center text-sm ">
               <div className="divider-horizontal" />
               <div className="divider m-0 ">final price</div>
-              <span className="text-amber-500 font-extrabold text-xl">
+              <span className="text-amber-500 dark:text-gray-800 duration-300 font-extrabold text-xl">
                 {total}£
               </span>
             </div>
