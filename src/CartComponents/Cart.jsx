@@ -1,14 +1,15 @@
 import CartItems from "./CartItems";
-import { useRef, useEffect, useContext } from "react";
+import { useRef, useEffect, useContext, useState } from "react";
 import AlertContext from "../AlertComponents/AlertContextProvider";
 import { LoginComponent } from "../LoginComponent/UserAuth";
 import Logout from "../LoginComponent/Logout";
 import GoogleLogin from "../LoginComponent/GoogleLogin";
 import emptycart from "../img/empty_cart.webp";
+import happycart from "../img/happy_cart.webp";
 
 export default function Cart({ cart, setCart }) {
   const AlertCtx = useContext(AlertContext);
-  const {  user } = LoginComponent();
+  const { user } = LoginComponent();
   function useOutsideAlerter(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
@@ -49,16 +50,12 @@ export default function Cart({ cart, setCart }) {
         <div
           className=" border-2 rounded-md font-bold text-base text-gray-800 bg-amber-500 border-amber-900 p-2 m-2 cursor-pointer hover:text-gray-100 shadow-2xl hover:border-white duration-300"
           onClick={() => {
-            cart.items.length
-              ? AlertCtx.displayMsg(
-                  "Your purchase has been confirmed! Thank you for trying Tiketmaster",
-                  "alert-success"
-                )
-              : AlertCtx.displayMsg(
-                  "Nothing on the Shopping Cart",
-                  "alert-warning"
-                );
-            setCart({ ...cart, items: [], number: 0 });
+            cart.items.length &&
+              AlertCtx.displayMsg(
+                "Your purchase has been confirmed! Thank you for trying Tiketmaster",
+                "alert-success"
+              );
+            setCart({ ...cart, items: [], number: 0, isCheckoutClicked:true });
           }}
         >
           CHECKOUT
@@ -76,18 +73,41 @@ export default function Cart({ cart, setCart }) {
       >
         {cart.items.length === 0 ? (
           <div className="flex flex-col justify-center items-center fadeInAnimation">
-            <div className="my-6 font-extrabold">
-              Your cart is empty at the moment
-            </div>
-            <img
-              src={emptycart}
-              className="w-1/2 h-1/2 dark:invert opacity-50 duration-[1000ms]"
-              alt="empty_cart"
-            />
+            {cart.isCheckoutClicked ? (
+              <>
+                {" "}
+                <div className="my-6 font-extrabold">
+                  Thanks for Shopping with us!
+                </div>
+                <img
+                  src={happycart}
+                  className="w-1/2 h-1/2 dark:invert opacity-50 duration-1000"
+                  alt="happy_cart"
+                />
+              </>
+            ) : (
+              <>
+                {" "}
+                <div className="my-6 font-extrabold">
+                  Your cart is empty at the moment
+                </div>
+                <img
+                  src={emptycart}
+                  className="w-1/2 h-1/2 dark:invert opacity-50 duration-1000"
+                  alt="empty_cart"
+                />
+              </>
+            )}
           </div>
         ) : (
           <>
-            <div className="font-extrabold">in the cart{user && user.displayName? ` for ${user.displayName.split(" ")[0]}`:""}:</div>
+            <div className="font-extrabold">
+              in the cart
+              {user && user.displayName
+                ? ` for ${user.displayName.split(" ")[0]}`
+                : ""}
+              :
+            </div>
             <div className="overflow-auto m-1 h-[55vh]  dark:bg-gray-700 bg-gray-200  duration-1000 rounded-xl">
               {items}
             </div>

@@ -15,6 +15,7 @@ export default function Main() {
   let [cart, setCart] = useState({
     display: "none",
     items: [],
+    isCheckoutClicked: false
   });
 
   useEffect(() => {

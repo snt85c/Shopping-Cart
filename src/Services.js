@@ -28,7 +28,6 @@ export function FetchTopTracksfromLastFM(data, setTopTracks){
           const result = await response.json(data);
           try {
             setTopTracks(result);
-            console.log(result)
           } catch (err) {
             console.log(err);
           }
@@ -53,7 +52,9 @@ export function SearchAttraction(search, setData) {
             }
           });
           setData(attractions);
-        } catch (e) {}
+        } catch (e) {
+          console.log(e)
+        }
       }
     }
     getData();
@@ -74,7 +75,9 @@ export function SearchEvents(data, setEventData) {
             events.push(item);
           });
           setEventData(events);
-        } catch (e) {}
+        } catch (e) {
+          console.log(e)
+        }
       }
     }
     getData();
@@ -93,7 +96,7 @@ export function SearchSuggest(setSuggest) {
           suggest.push(item);
         });
         setSuggest(suggest);
-      } catch (e) {}
+      } catch (e) {console.log(e)}
     }
     getData();
   }, []);

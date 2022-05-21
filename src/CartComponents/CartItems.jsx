@@ -75,24 +75,28 @@ export default function CartItems({ item, cart, setCart }) {
   }
 
   function RemoveItem() {
+
+    function handleRemoveItemFromCart(){
+      setCart({
+        ...cart,
+        items: [
+          ...cart.items.filter((element) => {
+            return element !== item;
+          }),
+        ],
+        isCheckoutClicked:false 
+      });
+      AlertCtx.displayMsg(
+        `all tickets for ${item.name} have been removed from the  Shopping Cart`,
+        "alert-info"
+      );
+      console.log(cart)
+    }
     return (
       <div
         className="flex tooltip text-red-700 pb-1 m-1 -700 w-4 h-4 justify-center items-center cursor-pointer hover:scale-110 duration-100"
         data-tip="remove from cart"
-        onClick={() => {
-          setCart({
-            ...cart,
-            items: [
-              ...cart.items.filter((element) => {
-                return element !== item;
-              }),
-            ],
-          });
-          AlertCtx.displayMsg(
-            `all tickets for ${item.name} have been removed from the  Shopping Cart`,
-            "alert-info"
-          );
-        }}
+        onClick={handleRemoveItemFromCart}
       >
         <AiFillCloseCircle />
       </div>
