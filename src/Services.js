@@ -6,7 +6,7 @@ const lastfmAPIKEY = "3513bd88ba9816db88a7b53f1090c00a";
 
 export function FetchArtistMetadataFromLastFM(data, setMetadata) {
   useEffect(() => {
-    const url = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${data.name}&api_key=${lastfmAPIKEY}&format=json`;
+    const url = `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${data.name}&api_key=${lastfmAPIKEY}&format=json`;
     async function getData() {
       const response = await fetch(url, { mode: "cors" });
       const result = await response.json();
@@ -22,7 +22,7 @@ export function FetchArtistMetadataFromLastFM(data, setMetadata) {
 
 export function FetchTopTracksfromLastFM(data, setTopTracks){
     useEffect(() => {
-        const url = `http://ws.audioscrobbler.com/2.0/?method=artist.getTopTracks&artist=${data.name}&api_key=${lastfmAPIKEY}&format=json`;
+        const url = `https://ws.audioscrobbler.com/2.0/?method=artist.getTopTracks&artist=${data.name}&api_key=${lastfmAPIKEY}&format=json`;
         async function getData() {
           const response = await fetch(url, { mode: "cors" });
           const result = await response.json(data);
