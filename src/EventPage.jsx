@@ -17,12 +17,22 @@ export default function EventPage({ onScreen, cart, setCart }) {
         <div className="text-sm breadcrumbs ml-2">
           <ul>
             <li>
-              <a onClick={() => navigate("/")}>Attraction Selection</a>
+              <a
+                className="select-none cursor-pointer"
+                onClick={() => navigate("/")}
+              >
+                Attraction Selection
+              </a>
             </li>
             <li>
-              <a onClick={() => navigate(-1)}>Events Selection </a>
+              <a
+                className="select-none cursor-pointer"
+                onClick={() => navigate(-1)}
+              >
+                Events Selection{" "}
+              </a>
             </li>
-            <li>Venue Description</li>
+            <li className="select-none">Venue Description</li>
           </ul>
         </div>
       </>
@@ -100,8 +110,8 @@ export default function EventPage({ onScreen, cart, setCart }) {
         <EventInfo />
         <VenueAddress />
         <SeatMap />
-      </div> 
-       <AddToCart data={onScreen} cart={cart} setCart={setCart} />
+      </div>
+      <AddToCart data={onScreen} cart={cart} setCart={setCart} />
     </div>
   );
 }

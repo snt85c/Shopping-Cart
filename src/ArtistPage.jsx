@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { convertDate, SearchEvents, indexBestRatioUrl } from "./Services";
+import {
+  convertDate,
+  SearchEvents,
+  indexBestRatioUrl,
+  FetchArtistMetadataFromLastFM,
+  FetchTopTracksfromLastFM,
+} from "./Services";
 import BackArrowOverlay from "./NavbarComponents/BackArrowOverlay";
 import {
   BsSpotify,
@@ -13,6 +19,8 @@ import { AiOutlineHome } from "react-icons/ai";
 
 export default function ArtistPage({ onScreen, setOnScreen }) {
   const [eventData, setEventData] = useState([]);
+  const [metadata, setMetadata] = useState("");
+  const [topTracks, setTopTracks] = useState("");
   const navigate = useNavigate();
   let params = useParams();
 
@@ -22,6 +30,8 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
   }
   let data = JSON.parse(localStorage.getItem("onScreen"));
   SearchEvents(data.id, setEventData);
+  FetchArtistMetadataFromLastFM(onScreen, setMetadata);
+  FetchTopTracksfromLastFM(onScreen, setTopTracks);
 
   function Breadcrumbs() {
     return (
@@ -29,9 +39,14 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
         <div className="text-sm breadcrumbs pl-2 dark:bg-gray-800 bg-gray-400 duration-300">
           <ul>
             <li>
-              <a onClick={() => navigate("/")}>Attraction Selection</a>
+              <a
+                className="select-none cursor-pointer"
+                onClick={() => navigate("/")}
+              >
+                Attraction Selection
+              </a>
             </li>
-            <li>Events Selection</li>
+            <li className="select-none ">Events Selection</li>
           </ul>
         </div>
       </>
@@ -42,7 +57,7 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
     function EventItem({ data }) {
       return (
         <div
-          className="border-2 rounded border-gray-600 mb-1 pl-1 py-2 hover:border-amber-500 duration-200"
+          className="border-2 rounded border-gray-600 mb-1 pl-1 py-2 hover:border-amber-500 duration-200 "
           onClick={() => (
             navigate(`/${params.second}/${data.id}`), setOnScreen(data)
           )}
@@ -69,12 +84,43 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
     ));
 
     return (
-      <div className="md:h-[300px] flex flex-col mx-5 md:w-[35%] md:overflow-auto bg-gray-800 bg-opacity-50 cursor-pointer ">
+      <div className="md:h-[300px] flex flex-col mx-5 md:w-1/2 md:overflow-auto bg-gray-800 bg-opacity-50 cursor-pointer ">
         {options}
       </div>
     );
   }
 
+  function ShowArtistMetadata() {
+    let result = "";
+    if (topTracks) {
+      result = topTracks.toptracks.track.map((track, i) => {
+        if (i < 5)
+          return (
+            <div>
+              {i + 1}
+              {"# "}
+              {track.name}
+            </div>
+          );
+      });
+    }
+    return (
+      <>
+        <div className="mx-4 md:w-1/2 flex flex-col font-normal ">
+          <div>
+            {metadata &&
+              metadata.artist.bio.summary
+                .replace(/(<([^>]+)>)/gi, "")
+                .replace("Read more on Last.fm", "")}
+          </div>
+          <div className="my-2 md:my-0 text-amber-500 font-extrabold">
+            top tracks on LastFM:
+            <div className="mx-4 text-white">{result}</div>
+          </div>
+        </div>
+      </>
+    );
+  }
   function AttractionShow() {
     return (
       <div className="flex flex-col h-100 text-sm font-bold  text-white ">
@@ -87,7 +133,10 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
           {data.upcomingEvents._total}{" "}
           {data.upcomingEvents._total > 1 ? "events" : "event"}
         </div>
-        <EventList />
+        <div className="flex flex-col md:flex-row-reverse ">
+          <ShowArtistMetadata />
+          <EventList />
+        </div>
         <AttractionShowSocialsIcons />
       </div>
     );
@@ -125,9 +174,7 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
     });
     return (
       <div className="flex flex-col justify-center items-center">
-        <div className="flex flex-row pt-2 ">
-        {result}
-        </div>
+        <div className="flex flex-row pt-2 ">{result}</div>
         <div>external links</div>
       </div>
     );
@@ -135,7 +182,7 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
 
   return (
     <>
-        <Breadcrumbs />
+      <Breadcrumbs />
       <div
         className="fadeInAnimation h-[85vh] "
         style={{
