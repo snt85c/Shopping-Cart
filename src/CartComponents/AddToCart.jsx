@@ -1,8 +1,60 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import AlertContext from "../AlertComponents/AlertContextProvider";
 export default function AddToCart({ setCart, cart, data }) {
+  const AlertCtx = useContext(AlertContext);
   const [counter, setCounter] = useState(1);
-  const AlertCtx = useContext(AlertContext)
+  const [buttonStatus, setButtonStatus] = useState({
+    message: "ADD TO CART",
+    isInCart: false,
+    isAvailable: true,
+  });
+
+  useEffect(() => {
+    if (cart && cart.items.length !== 0) {
+      if (cart.items.some((item) => item.id === data.id)) {
+        setButtonStatus({
+          ...buttonStatus,
+          message: "ALREADY IN THE CART",
+          isInCart: true,
+        });
+      }
+    } else {
+      setButtonStatus({
+        ...buttonStatus,
+        message: "ADD TO CART",
+        isInCart: false,
+        isAvailable: true,
+      });
+    }
+    if (!data.priceRanges) {
+      setButtonStatus({
+        ...buttonStatus,
+        message: "NO TICKETS AVAILABLE",
+        isAvailable: false,
+      });
+    }
+  }, [cart]);
+
+  function handleAddToCart() {
+    if (buttonStatus.isAvailable && !buttonStatus.isInCart) {
+      data.ticketInCart = counter;
+      setCart({
+        display: "block",
+        items: [...cart.items, data],
+      });
+      AlertCtx.displayMsg(`${data.name} is added to cart`, "alert-success");
+    } else if (buttonStatus.isAvailable && buttonStatus.isInCart) {
+      AlertCtx.displayMsg(
+        `${data.name} is already in the basket`,
+        "alert-warning"
+      );
+    } else {
+      AlertCtx.displayMsg(
+        `${data.name} has no events available`,
+        "alert-error"
+      );
+    }
+  }
 
   function updateCounter(value) {
     if (value >= 1) {
@@ -12,60 +64,68 @@ export default function AddToCart({ setCart, cart, data }) {
 
   function IncreaseCounter() {
     return (
-      <div className="flex items-center justify-center shadow-2xl m-2  h-10 w-10 text-center border-2 rounded font-bold p-1 px-2 cursor-pointer
+      <div
+        className="flex items-center justify-center shadow-2xl my-2  h-10 w-10 text-center border-2 rounded font-bold p-1 px-2 cursor-pointer
        dark:text-amber-500 text-gray-900 dark:bg-gray-900 bg-amber-500 border-amber-500 hover:text-gray-100 dark:hover:text-white duration-300 "
-        style={{display:data.priceRanges?"block":"none"}}
+        style={{
+          display:
+            data.priceRanges &&
+            buttonStatus.isAvailable &&
+            !buttonStatus.isInCart
+              ? "block"
+              : "none",
+        }}
         onClick={() => (data.priceRanges ? updateCounter(counter + 1) : "")}
       >
         +
       </div>
     );
-  }
-
-  function AddToCartButton() {
-    return (
-      <div className="flex flex-col justify-center items-center">
-      <div className="addToCart flex items-center justify-center shadow-2xl font-bold md:w-80 h-10  border-2 rounded cursor-pointer p-1
-      dark:text-amber-500 text-gray-900 dark:bg-gray-900 bg-amber-500 border-amber-500 hover:text-gray-100 dark:hover:text-white duration-300 "
-        onClick={() =>
-          data.priceRanges
-            ? ((data.ticketInCart = counter),
-              setCart({
-                display:"block",
-                items: [...cart.items, data],
-              }), AlertCtx.displayMsg(`${data.name} is added to cart`, "alert-success")
-              )
-            : AlertCtx.displayMsg(`${data.name} has no events available`, "alert-error")
-        }
-      >
-        {data.priceRanges ? "ADD TO CART" : "NO TICKETS"}
-        {" "} (
-        {data.priceRanges ? counter : 0} {counter > 1 ? "items" : "item"})
-      </div>
-      <div className="text-sm mt-2 items-center justify-center text-center" 
-      style={{display:data.priceRanges?"none":"block"}}>there are no tickets available for this event at this moment . Please select another venue or date</div>
-      </div>
-    );
-  }
-
+  }  
+  
   function DecreaseCounter() {
     return (
-      <div className=" m-2 h-10 w-10 font-bold border-2 rounded shadow-2xl text-center p-1 px-2 cursor-pointer
+      <div
+        className=" my-2 h-10 w-10 font-bold border-2 rounded shadow-2xl text-center p-1 px-2 cursor-pointer
       dark:text-amber-500 text-gray-900 dark:bg-gray-900 bg-amber-500 border-amber-500 hover:text-gray-100 dark:hover:text-white duration-300"
         onClick={() => (data.priceRanges ? updateCounter(counter - 1) : "")}
-        style={{display:data.priceRanges?"block":"none"}}
+        style={{
+          display:
+            data.priceRanges &&
+            buttonStatus.isAvailable &&
+            !buttonStatus.isInCart
+              ? "block"
+              : "none",
+        }}
       >
         -
       </div>
     );
   }
 
+
+
+  function AddToCartButton() {
+    return (
+      <div className="flex flex-col justify-center items-center">
+        <div
+          className="addToCart m-2 flex items-center justify-center shadow-2xl font-bold md:w-80 h-10  border-2 rounded cursor-pointer p-1
+      dark:text-amber-500 text-gray-900 dark:bg-gray-900 bg-amber-500 border-amber-500 hover:text-gray-100 dark:hover:text-white duration-300 "
+          onClick={handleAddToCart}
+        >
+          {buttonStatus.message} ({data.priceRanges ? counter : 0}{" "}
+          {counter > 1 ? "items" : "item"})
+        </div>
+      </div>
+    );
+  }
+
+
   return (
     <>
-    <div className="flex justify-center items-center my-4">
-        <IncreaseCounter />
-        <AddToCartButton />
+      <div className="flex justify-center items-center m-4">
         <DecreaseCounter />
+        <AddToCartButton />
+        <IncreaseCounter />
       </div>
     </>
   );
