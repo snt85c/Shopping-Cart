@@ -44,7 +44,7 @@ export default function Cart({ cart, setCart }) {
     0
   );
 
-  function Checkout() {
+  function CheckoutButton() {
     return (
       <>
         <div
@@ -55,7 +55,7 @@ export default function Cart({ cart, setCart }) {
                 "Your purchase has been confirmed! Thank you for trying Tiketmaster",
                 "alert-success"
               );
-            setCart({ ...cart, items: [], number: 0, isCheckoutClicked:true });
+            setCart({ ...cart, items: [], number: 0, isCheckoutClicked: true });
           }}
         >
           CHECKOUT
@@ -68,7 +68,11 @@ export default function Cart({ cart, setCart }) {
     <>
       <div
         ref={wrapperRef}
-        className="absolute shadow-lg z-20 min-h-[90vh] top-[19.1vh] md:top-[7.5vh] md:mt-2 right-0 dark:bg-gradient-to-t from-amber-500 to-gray-900 duration-1000 bg-white w-2/4 md:w-1/3 text-center text-sm border-amber-500 border-l-2 border-b-2 pt-2 cartAnimation text-black dark:text-white "
+        className="absolute shadow-lg z-20 min-h-[90vh] top-[104px] md:top-[56px] right-0 
+        dark:bg-gradient-to-t from-amber-500 to-gray-900 duration-1000 bg-white text-black dark:text-white
+        w-2/4 md:w-1/3 
+        text-center text-sm border-amber-500 border-l-2 border-b-2 pt-2 
+        cartAnimation"
         style={{ display: cart.display }}
       >
         {cart.items.length === 0 ? (
@@ -123,7 +127,7 @@ export default function Cart({ cart, setCart }) {
             <div>
               {user ? (
                 <div>
-                  <Checkout />
+                  <CheckoutButton />
                   <Logout />
                 </div>
               ) : (

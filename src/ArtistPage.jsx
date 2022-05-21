@@ -96,7 +96,7 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
       result = topTracks.toptracks.track.map((track, i) => {
         if (i < 5)
           return (
-            <div>
+            <div key={i}>
               {i + 1}
               {"# "}
               {track.name}

@@ -9,8 +9,8 @@ export default function SuggestionsShowBackgroundVideo() {
       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain-wordmark.svg",
     ];
 
-    const devIcons = deviconsScrPath.map((iconSrcPath) => {
-      return <img width="40px" height="40px" src={iconSrcPath} />;
+    const devIcons = deviconsScrPath.map((iconSrcPath, i) => {
+      return <img key={i} width="40px" height="40px" src={iconSrcPath} />;
     });
 
     return (
@@ -19,7 +19,7 @@ export default function SuggestionsShowBackgroundVideo() {
           <source src={bgVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <div className="flex md:fixed flex-col justify-center items-center text-4xl md:text-5xl lg:text-6xl xl:text-7xl duration-300 text-white font-extrabold text-center select-none">
+        <div className="flex md:fixed flex-col justify-center items-center text-4xl md:text-5xl lg:text-6xl xl:text-7xl duration-300 text-white font-extrabold text-center select-none px-3">
           <span>
             {" "}
             Choose between thousand of events all over the world with
