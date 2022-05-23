@@ -2,7 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { convertDate, indexBestRatioUrl } from "../Services";
 import AddToCart from "../CartComponents/AddToCart";
 import BackArrowOverlay from "../NavbarComponents/BackArrowOverlay";
-import { lazy, Suspense } from "react";
+import EventSeatMap from "./EventSeatMap";
+
+// import { lazy, Suspense } from "react";
 
 export default function EventPage({ onScreen, cart, setCart }) {
   const navigate = useNavigate();
@@ -10,8 +12,9 @@ export default function EventPage({ onScreen, cart, setCart }) {
   if (onScreen.id) {
     localStorage.setItem("onScreen", JSON.stringify(onScreen));
   }
+
   let data = JSON.parse(localStorage.getItem("onScreen"));
-  const EventSeatMap = lazy(() => import("./EventSeatMap"));
+  // const EventSeatMap = lazy(() => import("./EventSeatMap"));
 
   function Breadcrumbs() {
     return (
@@ -91,15 +94,15 @@ export default function EventPage({ onScreen, cart, setCart }) {
       >
         <EventInfo />
         <VenueAddress />
-        <Suspense
+        {/* <Suspense
           fallback={
             <div className="fadeInAnimation flex justify-center items-center">
               loading
             </div>
           }
-        >
+        > */}
           <EventSeatMap data={data} />
-        </Suspense>
+        {/* </Suspense> */}
       </div>
       <AddToCart data={onScreen} cart={cart} setCart={setCart} />
     </div>

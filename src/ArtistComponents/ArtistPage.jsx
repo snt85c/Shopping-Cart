@@ -61,9 +61,9 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
       return (
         <div
           className="border-2 rounded border-gray-600 mb-1 pl-1 py-2 hover:border-amber-500 duration-200 "
-          onClick={() => (
-            navigate(`/${params.second}/${data.id}`), setOnScreen(data)
-          )}
+          onClick={() => {
+            navigate(`/${params.second}/${data.id}`); setOnScreen(data);
+          }}
         >
           <div className="flex flex-col text-sm flex-wrap my-0.5">
             <div className="text-white">

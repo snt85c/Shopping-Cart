@@ -33,7 +33,7 @@ export default function AddToCart({ setCart, cart, data }) {
         isAvailable: false,
       });
     }
-  }, [cart]);
+  }, [cart.items]);
 
   function handleAddToCart() {
     if (buttonStatus.isAvailable && !buttonStatus.isInCart) {

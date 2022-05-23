@@ -1,4 +1,4 @@
-export default function SeatMap({data}) {
+export default function EventSeatMap({data}) {
     return (
       <>
         <div className="fadeInAnimation flex flex-col justify-center items-center p-1 basis-1/3">
