@@ -18,7 +18,7 @@ export function FetchArtistMetadataFromLastFM(data, setMetadata) {
       }
     }
     getData();
-    return () => (isSubscribed = false);
+    return () => (isSubscribed = false, setMetadata(""));
   }, []);
 }
 
@@ -36,7 +36,7 @@ export function FetchTopTracksFromLastFM(data, setTopTracks) {
       }
     }
     getData();
-    return () => (isSubscribed = false);
+    return () => (isSubscribed = false, setTopTracks(""));
   }, []);
 }
 
