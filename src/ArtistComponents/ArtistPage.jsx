@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import ShowArtistMetadata from "./ShowArtistMetadata";
 import {
   convertDate,
-  SearchEvents,
+  FetchEventsInTicketmasterAPI,
   indexBestRatioUrl,
-  FetchArtistMetadataFromLastFM,
-  FetchTopTracksfromLastFM,
-} from "./Services";
-import BackArrowOverlay from "./NavbarComponents/BackArrowOverlay";
+} from "../Services";
+import BackArrowOverlay from "../NavbarComponents/BackArrowOverlay";
 import {
   BsSpotify,
   BsFacebook,
@@ -19,19 +18,15 @@ import { AiOutlineHome } from "react-icons/ai";
 
 export default function ArtistPage({ onScreen, setOnScreen }) {
   const [eventData, setEventData] = useState([]);
-  const [metadata, setMetadata] = useState("");
-  const [topTracks, setTopTracks] = useState("");
+
   const navigate = useNavigate();
   let params = useParams();
 
   if (onScreen.id) {
-    //used in early version to retain the page when reloaded, TODO: investigate if still needed after adding router
     localStorage.setItem("onScreen", JSON.stringify(onScreen));
   }
   let data = JSON.parse(localStorage.getItem("onScreen"));
-  SearchEvents(data.id, setEventData);
-  FetchArtistMetadataFromLastFM(onScreen, setMetadata);
-  FetchTopTracksfromLastFM(onScreen, setTopTracks);
+  FetchEventsInTicketmasterAPI(data.id, setEventData);
 
   function Breadcrumbs() {
     return (
@@ -90,37 +85,6 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
     );
   }
 
-  function ShowArtistMetadata() {
-    let result = "";
-    if (topTracks) {
-      result = topTracks.toptracks.track.map((track, i) => {
-        if (i < 5)
-          return (
-            <div key={i}>
-              {i + 1}
-              {"# "}
-              {track.name}
-            </div>
-          );
-      });
-    }
-    return (
-      <>
-        <div className="mx-4 md:w-1/2 flex flex-col font-normal ">
-          <div>
-            {metadata &&
-              metadata.artist.bio.summary
-                .replace(/(<([^>]+)>)/gi, "")
-                .replace("Read more on Last.fm", "")}
-          </div>
-          <div className="my-2 md:my-0 text-amber-500 font-extrabold">
-            top tracks on LastFM:
-            <div className="mx-4 text-white">{result}</div>
-          </div>
-        </div>
-      </>
-    );
-  }
   function AttractionShow() {
     return (
       <div className="flex flex-col h-100 text-sm font-bold  text-white ">
@@ -134,7 +98,7 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
           {data.upcomingEvents._total > 1 ? "events" : "event"}
         </div>
         <div className="flex flex-col md:flex-row-reverse ">
-          <ShowArtistMetadata />
+          <ShowArtistMetadata onScreen={onScreen} />
           <EventList />
         </div>
         <AttractionShowSocialsIcons />
@@ -175,7 +139,7 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
     return (
       <div className="flex flex-col justify-center items-center">
         <div className="flex flex-row pt-2 ">{result}</div>
-        <div>external links</div>
+        <span>external links</span>
       </div>
     );
   }
@@ -183,8 +147,8 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
   return (
     <div>
       <div className="flex justify-between dark:bg-gray-800 bg-gray-400">
-      <Breadcrumbs />
-      <BackArrowOverlay />
+        <Breadcrumbs />
+        <BackArrowOverlay />
       </div>
       <div
         className="fadeInAnimation h-[85vh]"

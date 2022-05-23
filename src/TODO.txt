@@ -5,15 +5,8 @@ add Sign-in page
 
 this commit:
 
-AttractionPage.js has been renamed to ArtistPage to keep a better tab on what's happening and where, sicne i was having confusion on where to look when changing elements. 
+refactor majority of file into folders
 
-ArtistPage and EventPage window height have been restructured to make sure that they are always 100vh with no empty spaces
+introduce Supsense and lazy loading to SuggestionList, EventMap and ArtistMetadata. in Suggestion it replaces the list with same size boxes with a pulse animation as a placeholder while the data is being fetch
 
-Cart now allows for the AddToCart button to be pressed without closing itself automatically
-AddToCart button restyled for darkmode. 
-
-AttractionSocialLinksPage has hover added for amber-500 color
-
-components GoogleLogin and Logout have been separated in their own file in LoginCompoent
-
-suggestionPage now has a video in the background and the items are split over half the page, devicons and a flair text has been added
+useEffect in Service.js has now unmount

@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { convertDate, indexBestRatioUrl } from "./Services";
-import AddToCart from "./CartComponents/AddToCart";
-import BackArrowOverlay from "./NavbarComponents/BackArrowOverlay";
+import { convertDate, indexBestRatioUrl } from "../Services";
+import AddToCart from "../CartComponents/AddToCart";
+import BackArrowOverlay from "../NavbarComponents/BackArrowOverlay";
+import { lazy, Suspense } from "react";
 
 export default function EventPage({ onScreen, cart, setCart }) {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ export default function EventPage({ onScreen, cart, setCart }) {
     localStorage.setItem("onScreen", JSON.stringify(onScreen));
   }
   let data = JSON.parse(localStorage.getItem("onScreen"));
+  const EventSeatMap = lazy(() => import("./EventSeatMap"));
 
   function Breadcrumbs() {
     return (
@@ -72,26 +74,6 @@ export default function EventPage({ onScreen, cart, setCart }) {
     );
   }
 
-  function SeatMap() {
-    return (
-      <>
-        <div className="flex flex-col justify-center items-center p-1 basis-1/3">
-          <img
-            className="p-2 md:w-full object-contain"
-            src={data.seatmap ? data.seatmap.staticUrl : ""}
-            alt="#"
-            style={{
-              display: data.seatmap ? "flex" : "none",
-            }}
-          ></img>
-          <div>
-            {data.seatmap ? "site map" : "no site map available for this venue"}
-          </div>
-        </div>
-      </>
-    );
-  }
-
   return (
     <div className="flex flex-col h-[90.5vh] md:overflow-hidden fadeInAnimation dark:bg-gray-800 bg-gray-400 duration-300">
       <div className="flex justify-between dark:bg-gray-800 bg-gray-400">
@@ -109,7 +91,15 @@ export default function EventPage({ onScreen, cart, setCart }) {
       >
         <EventInfo />
         <VenueAddress />
-        <SeatMap />
+        <Suspense
+          fallback={
+            <div className="fadeInAnimation flex justify-center items-center">
+              loading
+            </div>
+          }
+        >
+          <EventSeatMap data={data} />
+        </Suspense>
       </div>
       <AddToCart data={onScreen} cart={cart} setCart={setCart} />
     </div>

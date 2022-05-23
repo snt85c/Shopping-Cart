@@ -1,6 +1,6 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 
-const APIKEY = "cD2XNWSCGooPNOAAgXStTr5H6ks3ZfmD";
+const TiketmasterAPIKEY = "cD2XNWSCGooPNOAAgXStTr5H6ks3ZfmD";
 
 const lastfmAPIKEY = "3513bd88ba9816db88a7b53f1090c00a";
 
@@ -16,33 +16,35 @@ export function FetchArtistMetadataFromLastFM(data, setMetadata) {
         console.log(err);
       }
     }
-    getData()
-  },[data])
+    getData();
+    return(()=>getData())
+  }, []);
 }
 
-export function FetchTopTracksfromLastFM(data, setTopTracks){
-    useEffect(() => {
-        const url = `https://ws.audioscrobbler.com/2.0/?method=artist.getTopTracks&artist=${data.name}&api_key=${lastfmAPIKEY}&format=json`;
-        async function getData() {
-          const response = await fetch(url, { mode: "cors" });
-          const result = await response.json(data);
-          try {
-            setTopTracks(result);
-          } catch (err) {
-            console.log(err);
-          }
-        }
-        getData()
-      },[data])
+export function FetchTopTracksFromLastFM(data, setTopTracks) {
+  useEffect(() => {
+    const url = `https://ws.audioscrobbler.com/2.0/?method=artist.getTopTracks&artist=${data.name}&api_key=${lastfmAPIKEY}&format=json`;
+    async function getData() {
+      const response = await fetch(url, { mode: "cors" });
+      const result = await response.json(data);
+      try {
+        setTopTracks(result);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getData();
+    return(()=>getData())
+  }, []);
 }
 
 //search by Artist(attraction)
-export function SearchAttraction(search, setData) {
+export function FetchAttractionToSearchFromTicktmasterAPI(search, setData) {
   useEffect(() => {
     async function getData() {
       if (search !== "") {
         let attractions = [];
-        const url = `https://app.ticketmaster.com/discovery/v2/attractions.json?keyword=${search}&countryCode=UK&apikey=${APIKEY}`;
+        const url = `https://app.ticketmaster.com/discovery/v2/attractions.json?keyword=${search}&countryCode=UK&apikey=${TiketmasterAPIKEY}`;
         const response = await fetch(url, { mode: "cors" });
         const result = await response.json();
         try {
@@ -53,7 +55,7 @@ export function SearchAttraction(search, setData) {
           });
           setData(attractions);
         } catch (e) {
-          console.log(e)
+          console.log(e);
         }
       }
     }
@@ -62,12 +64,12 @@ export function SearchAttraction(search, setData) {
 }
 
 //search all the events available for attraction(Artist) id
-export function SearchEvents(data, setEventData) {
+export function FetchEventsInTicketmasterAPI(data, setEventData) {
   useEffect(() => {
     async function getData() {
       if (data !== undefined) {
         let events = [];
-        const url = `https://app.ticketmaster.com/discovery/v2/events.json?attractionId=${data}&apikey=${APIKEY}`;
+        const url = `https://app.ticketmaster.com/discovery/v2/events.json?attractionId=${data}&apikey=${TiketmasterAPIKEY}`;
         const response = await fetch(url, { mode: "cors" });
         const result = await response.json();
         try {
@@ -76,19 +78,20 @@ export function SearchEvents(data, setEventData) {
           });
           setEventData(events);
         } catch (e) {
-          console.log(e)
+          console.log(e);
         }
       }
     }
     getData();
+    return(()=>getData())
   }, [data]);
 }
 
-export function SearchSuggest(setSuggest) {
+export function FetchSuggestFromTicketmasterAPI(setSuggest) {
   useEffect(() => {
     async function getData() {
       let suggest = [];
-      const url = `https://app.ticketmaster.com/discovery/v2/suggest?&countryCode=UK&apikey=${APIKEY}`;
+      const url = `https://app.ticketmaster.com/discovery/v2/suggest?&countryCode=UK&apikey=${TiketmasterAPIKEY}`;
       const response = await fetch(url, { mode: "cors" });
       const result = await response.json();
       try {
@@ -96,9 +99,12 @@ export function SearchSuggest(setSuggest) {
           suggest.push(item);
         });
         setSuggest(suggest);
-      } catch (e) {console.log(e)}
+      } catch (e) {
+        console.log(e);
+      }
     }
     getData();
+    return(()=>getData())
   }, []);
 }
 

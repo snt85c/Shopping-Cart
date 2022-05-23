@@ -1,5 +1,5 @@
 import { HiOutlineShoppingCart } from "react-icons/hi";
-import { indexBestWidthUrl, SearchAttraction } from "../Services";
+import { indexBestWidthUrl, FetchAttractionToSearchFromTicktmasterAPI } from "../Services";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import Cart from "../CartComponents/Cart";
@@ -29,7 +29,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
 
-  SearchAttraction(search, setSearchItems);
+  FetchAttractionToSearchFromTicktmasterAPI(search, setSearchItems);
 
   function cartDisplayToggle() {
     return cart.display === "block" ? "none" : "block";
