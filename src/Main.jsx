@@ -15,32 +15,33 @@ export default function Main() {
   let [cart, setCart] = useState({
     display: "none",
     items: [],
-    isCheckoutClicked: false
+    isCheckoutClicked: false,
   });
+
+  // useEffect(() => {
+  //   if (localStorage.getItem("cart")) {
+  //     setCart(JSON.parse(localStorage.getItem("cart")));
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (localStorage.getItem("onAttractionScreen")) {
-      setOnArtistScreen(
-        JSON.parse(localStorage.getItem("onAttractionScreen"))
-      );
-    }
-    if (localStorage.getItem("onEventScreen")) {
-      setOnEventScreen(JSON.parse(localStorage.getItem("onEventScreen")));
-    }
-    if (localStorage.getItem("cart")) {
-      setCart(JSON.parse(localStorage.getItem("cart")));
+      setOnArtistScreen(JSON.parse(localStorage.getItem("onAttractionScreen")));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
+    if (localStorage.getItem("onEventScreen")) {
+      setOnEventScreen(JSON.parse(localStorage.getItem("onEventScreen")));
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem("cart", JSON.stringify(cart));
+  // }, [cart]);
 
   useEffect(() => {
-    localStorage.setItem(
-      "onAttractionScreen",
-      JSON.stringify(onArtistScreen)
-    );
+    localStorage.setItem("onAttractionScreen", JSON.stringify(onArtistScreen));
   }, [onArtistScreen]);
 
   useEffect(() => {
@@ -51,12 +52,8 @@ export default function Main() {
     <>
       <AlertContextProvider>
         <HashRouter>
-          <Alert />
-          <Navbar
-            cart={cart}
-            setCart={setCart}
-            setOnScreen={setOnArtistScreen}
-          />
+        <Alert />
+        <Navbar cart={cart} setCart={setCart} setOnScreen={setOnArtistScreen} />
           <Routes>
             <Route
               path="/"

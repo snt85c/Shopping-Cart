@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import ShowArtistMetadata from "./ShowArtistMetadata";
+
 import {
   convertDate,
   indexBestRatioUrl,
   FetchEventsInTicketmasterAPI,
   FetchArtistMetadataFromLastFM,
   FetchTopTracksFromLastFM,
+  Spinner,
 } from "../Services";
 import BackArrowOverlay from "../NavbarComponents/BackArrowOverlay";
 import {
@@ -22,11 +23,12 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
   const [eventData, setEventData] = useState([]);
   const [metadata, setMetadata] = useState("");
   const [topTracks, setTopTracks] = useState("");
-  
-  
+
+  const ShowArtistMetadata = lazy(() => import("./ShowArtistMetadata"));
+
   const navigate = useNavigate();
   let params = useParams();
-  
+
   if (onScreen.id) {
     localStorage.setItem("onScreen", JSON.stringify(onScreen));
   }
@@ -46,10 +48,10 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
                 className="select-none cursor-pointer"
                 onClick={() => navigate("/")}
               >
-                Attraction Selection
+                Attractions
               </a>
             </li>
-            <li className="select-none ">Events Selection</li>
+            <li className="select-none ">Events</li>
           </ul>
         </div>
       </>
@@ -62,7 +64,8 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
         <div
           className="border-2 rounded border-gray-600 mb-1 pl-1 py-2 hover:border-amber-500 duration-200 "
           onClick={() => {
-            navigate(`/${params.second}/${data.id}`); setOnScreen(data);
+            navigate(`/${params.second}/${data.id}`);
+            setOnScreen(data);
           }}
         >
           <div className="flex flex-col text-sm flex-wrap my-0.5">
@@ -106,7 +109,15 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
           {data.upcomingEvents._total > 1 ? "events" : "event"}
         </div>
         <div className="flex flex-col md:flex-row-reverse ">
-          <ShowArtistMetadata metadata={metadata} topTracks={topTracks} />
+          <Suspense
+            fallback={
+              <div className="mx-4 md:w-1/2 flex flex-col justify-center items-center font-normal">
+                <Spinner />
+              </div>
+            }
+          >
+            <ShowArtistMetadata metadata={metadata} topTracks={topTracks} />
+          </Suspense>
           <EventList />
         </div>
         <AttractionShowSocialsIcons />

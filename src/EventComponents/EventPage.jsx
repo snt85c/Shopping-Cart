@@ -2,19 +2,19 @@ import { useNavigate } from "react-router-dom";
 import { convertDate, indexBestRatioUrl } from "../Services";
 import AddToCart from "../CartComponents/AddToCart";
 import BackArrowOverlay from "../NavbarComponents/BackArrowOverlay";
-import EventSeatMap from "./EventSeatMap";
+import { Spinner } from "../Services";
 
-// import { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 
 export default function EventPage({ onScreen, cart, setCart }) {
   const navigate = useNavigate();
-  //used to keep page on screen when reloading, this could be removed as router has been used
+  //used to keep page on screen when reloading
   if (onScreen.id) {
     localStorage.setItem("onScreen", JSON.stringify(onScreen));
   }
 
   let data = JSON.parse(localStorage.getItem("onScreen"));
-  // const EventSeatMap = lazy(() => import("./EventSeatMap"));
+  const EventSeatMap = lazy(() => import("./EventSeatMap"));
 
   function Breadcrumbs() {
     return (
@@ -26,7 +26,7 @@ export default function EventPage({ onScreen, cart, setCart }) {
                 className="select-none cursor-pointer"
                 onClick={() => navigate("/")}
               >
-                Attraction Selection
+                Attractions
               </a>
             </li>
             <li>
@@ -34,10 +34,10 @@ export default function EventPage({ onScreen, cart, setCart }) {
                 className="select-none cursor-pointer"
                 onClick={() => navigate(-1)}
               >
-                Events Selection{" "}
+                Events {" "}
               </a>
             </li>
-            <li className="select-none">Venue Description</li>
+            <li className="select-none">Venue</li>
           </ul>
         </div>
       </>
@@ -94,15 +94,15 @@ export default function EventPage({ onScreen, cart, setCart }) {
       >
         <EventInfo />
         <VenueAddress />
-        {/* <Suspense
+        <Suspense
           fallback={
             <div className="fadeInAnimation flex justify-center items-center">
-              loading
+             <Spinner/>
             </div>
           }
-        > */}
+        >
           <EventSeatMap data={data} />
-        {/* </Suspense> */}
+        </Suspense>
       </div>
       <AddToCart data={onScreen} cart={cart} setCart={setCart} />
     </div>

@@ -1,5 +1,8 @@
 import { HiOutlineShoppingCart } from "react-icons/hi";
-import { indexBestWidthUrl, FetchAttractionToSearchFromTicktmasterAPI } from "../Services";
+import {
+  indexBestWidthUrl,
+  FetchAttractionToSearchFromTicktmasterAPI,
+} from "../Services";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import Cart from "../CartComponents/Cart";
@@ -80,6 +83,21 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
     );
   }
 
+  function CartIcon() {
+    return (
+      <>
+        <div
+          className="absolute top-2 right-3 cursor-pointer text-amber-500"
+          onClick={() =>
+            setCart({ ...cart, display: cartDisplayToggle() })
+          }
+        >
+          <HiOutlineShoppingCart />
+        </div>
+      </>
+    );
+  }
+
   function SearchSuggestions() {
     const searchItemsList = searchItems.map((item) => (
       <SearchbarItems data={item} key={item.id} />
@@ -109,12 +127,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
 
         <div className="flex w-full md:justify-end md:mr-10 justify-center items-center">
           <DarkMode />
-          <div
-            className="absolute top-2 right-3 cursor-pointer text-amber-500"
-            onClick={() => setCart({ ...cart, display: cartDisplayToggle() })}
-          >
-            <HiOutlineShoppingCart />
-          </div>
+          <CartIcon />
 
           <input
             onChange={handleChange}
@@ -125,7 +138,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
           <SearchSuggestions />
           <CartCounter />
         </div>
-      <Cart cart={cart} setCart={setCart} />
+        <Cart cart={cart} setCart={setCart} />
       </div>
     </>
   );
