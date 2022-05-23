@@ -12,7 +12,7 @@ export default function SuggestItem({data, handleClick}) {
           }}
           onClick={() => handleClick(data)}
         >
-          <div className=" text-4xl md:text-5xl font-extrabold ">
+          <div className=" text-3xl md:text-5xl font-extrabold ">
             {data.name}
           </div>
           <div className="text-xs text-gray-400">

@@ -90,7 +90,7 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
     ));
 
     return (
-      <div className="md:h-[300px] flex flex-col mx-5 md:w-1/2 md:overflow-auto bg-gray-800 bg-opacity-50 cursor-pointer ">
+      <div className="md:h-[300px] flex flex-col px-5 md:w-1/2 md:overflow-auto bg-black md:bg-opacity-0 cursor-pointer ">
         {options}
       </div>
     );

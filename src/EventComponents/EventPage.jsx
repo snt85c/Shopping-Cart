@@ -47,7 +47,7 @@ export default function EventPage({ onScreen, cart, setCart }) {
   function EventInfo() {
     return (
       <>
-        <div className=" flex flex-col items-center text-4xl text-center font-extrabold p-3 m-1 basis-1/3">
+        <div className=" flex flex-col justify-center items-center text-4xl text-center font-extrabold p-3 m-1 basis-1/3">
           {data.name}
           <br />
           <div className="text-lg">
@@ -70,7 +70,7 @@ export default function EventPage({ onScreen, cart, setCart }) {
         {" ("}
         {data._embedded.venues[0].country.countryCode}
         {")"}
-        <div className="flex border-t-2 border-white md:h-60 h-auto pt-2 overflow-auto text-xs text-justify overflow-ellipsis">
+        <div className="flex border-t-2 border-white h-auto pt-2 overflow-auto text-xs text-justify overflow-ellipsis">
           {data.info ? data.info : "no info to display for this event"}
         </div>
       </div>
@@ -84,7 +84,7 @@ export default function EventPage({ onScreen, cart, setCart }) {
         <BackArrowOverlay />
       </div>
       <div
-        className="flex flex-col md:flex-row md:h-3/4  justify-center  "
+        className="flex flex-col md:flex-row md:h-3/4  justify-center "
         style={{
           background: `linear-gradient(to right, black, rgba(0, 0, 0, 0.6), black),
                           url(${
