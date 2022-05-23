@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkrouter_tutorial=self.webpackChunkrouter_tutorial||[]).push([[853],{853:function(e,t,a){a.r(t),a.d(t,{default:function(){return r}});var s=a(184);function r(e){var t=e.data;return(0,s.jsx)(s.Fragment,{children:(0,s.jsx)("div",{className:" flex flex-col justify-center items-center p-1 basis-1/3",children:(0,s.jsx)("img",{className:"p-2 md:w-full object-contain",src:t.seatmap?t.seatmap.staticUrl:"",alt:"",style:{display:t.seatmap?"flex":"none"}})})})}}}]);
-//# sourceMappingURL=853.262a2967.chunk.js.map
