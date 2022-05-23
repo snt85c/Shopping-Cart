@@ -6,41 +6,44 @@ const lastfmAPIKEY = "3513bd88ba9816db88a7b53f1090c00a";
 
 export function FetchArtistMetadataFromLastFM(data, setMetadata) {
   useEffect(() => {
+    let isSubscribed = true;
     const url = `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${data.name}&api_key=${lastfmAPIKEY}&format=json`;
     async function getData() {
       const response = await fetch(url, { mode: "cors" });
       const result = await response.json();
       try {
-        setMetadata(result);
+        if (isSubscribed) setMetadata(result);
       } catch (err) {
         console.log(err);
       }
     }
     getData();
-    return(()=>getData())
+    return () => (isSubscribed = false);
   }, []);
 }
 
 export function FetchTopTracksFromLastFM(data, setTopTracks) {
   useEffect(() => {
+    let isSubscribed = true;
     const url = `https://ws.audioscrobbler.com/2.0/?method=artist.getTopTracks&artist=${data.name}&api_key=${lastfmAPIKEY}&format=json`;
     async function getData() {
       const response = await fetch(url, { mode: "cors" });
       const result = await response.json(data);
       try {
-        setTopTracks(result);
+        if (isSubscribed) setTopTracks(result);
       } catch (err) {
         console.log(err);
       }
     }
     getData();
-    return(()=>getData())
+    return () => (isSubscribed = false);
   }, []);
 }
 
 //search by Artist(attraction)
 export function FetchAttractionToSearchFromTicktmasterAPI(search, setData) {
   useEffect(() => {
+    let isSubscribed = true;
     async function getData() {
       if (search !== "") {
         let attractions = [];
@@ -53,19 +56,21 @@ export function FetchAttractionToSearchFromTicktmasterAPI(search, setData) {
               attractions.push(item);
             }
           });
-          setData(attractions);
+          if (isSubscribed) setData(attractions);
         } catch (e) {
           console.log(e);
         }
       }
     }
     getData();
+    return () => (isSubscribed = false);
   }, [search]);
 }
 
 //search all the events available for attraction(Artist) id
 export function FetchEventsInTicketmasterAPI(data, setEventData) {
   useEffect(() => {
+    let isSubscribed = true;
     async function getData() {
       if (data !== undefined) {
         let events = [];
@@ -76,19 +81,20 @@ export function FetchEventsInTicketmasterAPI(data, setEventData) {
           result._embedded.events.forEach((item) => {
             events.push(item);
           });
-          setEventData(events);
+          if (isSubscribed) setEventData(events);
         } catch (e) {
           console.log(e);
         }
       }
     }
     getData();
-    return(()=>getData())
-  }, [data]);
+    return () => (isSubscribed = false);
+  }, []);
 }
 
 export function FetchSuggestFromTicketmasterAPI(setSuggest) {
   useEffect(() => {
+    let isSubscribed = true;
     async function getData() {
       let suggest = [];
       const url = `https://app.ticketmaster.com/discovery/v2/suggest?&countryCode=UK&apikey=${TiketmasterAPIKEY}`;
@@ -98,13 +104,13 @@ export function FetchSuggestFromTicketmasterAPI(setSuggest) {
         result._embedded.attractions.forEach((item) => {
           suggest.push(item);
         });
-        setSuggest(suggest);
+        if (isSubscribed) setSuggest(suggest);
       } catch (e) {
         console.log(e);
       }
     }
     getData();
-    return(()=>getData())
+    return () => (isSubscribed = false);
   }, []);
 }
 

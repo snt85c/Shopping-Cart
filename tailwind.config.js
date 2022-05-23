@@ -1,6 +1,6 @@
 module.exports = {
   darkMode: 'class',
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"), require('flowbite/plugin')],
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
@@ -9,5 +9,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"),require('flowbite/plugin')],
 };

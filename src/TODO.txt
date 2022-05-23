@@ -7,6 +7,6 @@ this commit:
 
 refactor majority of file into folders
 
-introduce Supsense and lazy loading to SuggestionList, EventMap and ArtistMetadata. in Suggestion it replaces the list with same size boxes with a pulse animation as a placeholder while the data is being fetch
+introduce Supsense and lazy loading to SuggestionList, EventMap. in Suggestion it replaces the list with same size boxes with a pulse animation as a placeholder while the data is being fetch
 
 useEffect in Service.js has now unmount

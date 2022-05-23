@@ -19,22 +19,16 @@ export default function Main() {
   });
 
   useEffect(() => {
-    if (localStorage.getItem("cart")) {
-      setCart(JSON.parse(localStorage.getItem("cart")));
-    }
-  }, []);
-
-  useEffect(() => {
     if (localStorage.getItem("onAttractionScreen")) {
       setOnArtistScreen(
         JSON.parse(localStorage.getItem("onAttractionScreen"))
       );
     }
-  }, []);
-
-  useEffect(() => {
     if (localStorage.getItem("onEventScreen")) {
       setOnEventScreen(JSON.parse(localStorage.getItem("onEventScreen")));
+    }
+    if (localStorage.getItem("cart")) {
+      setCart(JSON.parse(localStorage.getItem("cart")));
     }
   }, []);
 

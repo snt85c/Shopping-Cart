@@ -1,16 +1,4 @@
-import {
-  FetchArtistMetadataFromLastFM,
-  FetchTopTracksFromLastFM,
-} from "../Services";
-import {useState } from "react";
-export default function ShowArtistMetadata({ onScreen }) {
-  const [metadata, setMetadata] = useState("");
-  const [topTracks, setTopTracks] = useState("");
-
-  FetchArtistMetadataFromLastFM(onScreen, setMetadata);
-  FetchTopTracksFromLastFM(onScreen, setTopTracks);
-
-  // if (topTracks.topTracks !== undefined) {
+export default function ShowArtistMetadata({ metadata, topTracks }) {
   let result =
     topTracks.toptracks &&
     topTracks.toptracks.track.map((track, i) => {
@@ -23,7 +11,6 @@ export default function ShowArtistMetadata({ onScreen }) {
           </div>
         );
     });
-  // }
   return (
     <>
       <div className="mx-4 md:w-1/2 flex flex-col font-normal">

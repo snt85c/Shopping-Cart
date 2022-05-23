@@ -3,8 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import ShowArtistMetadata from "./ShowArtistMetadata";
 import {
   convertDate,
-  FetchEventsInTicketmasterAPI,
   indexBestRatioUrl,
+  FetchEventsInTicketmasterAPI,
+  FetchArtistMetadataFromLastFM,
+  FetchTopTracksFromLastFM,
 } from "../Services";
 import BackArrowOverlay from "../NavbarComponents/BackArrowOverlay";
 import {
@@ -18,15 +20,21 @@ import { AiOutlineHome } from "react-icons/ai";
 
 export default function ArtistPage({ onScreen, setOnScreen }) {
   const [eventData, setEventData] = useState([]);
-
+  const [metadata, setMetadata] = useState("");
+  const [topTracks, setTopTracks] = useState("");
+  
+  
   const navigate = useNavigate();
   let params = useParams();
-
+  
   if (onScreen.id) {
     localStorage.setItem("onScreen", JSON.stringify(onScreen));
   }
   let data = JSON.parse(localStorage.getItem("onScreen"));
+
   FetchEventsInTicketmasterAPI(data.id, setEventData);
+  FetchArtistMetadataFromLastFM(data, setMetadata);
+  FetchTopTracksFromLastFM(data, setTopTracks);
 
   function Breadcrumbs() {
     return (
@@ -98,7 +106,7 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
           {data.upcomingEvents._total > 1 ? "events" : "event"}
         </div>
         <div className="flex flex-col md:flex-row-reverse ">
-          <ShowArtistMetadata onScreen={onScreen} />
+          <ShowArtistMetadata metadata={metadata} topTracks={topTracks} />
           <EventList />
         </div>
         <AttractionShowSocialsIcons />
