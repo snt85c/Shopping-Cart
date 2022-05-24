@@ -1,3 +1,4 @@
+
 import CartItems from "./CartItems";
 import { useRef, useEffect, useContext, useState } from "react";
 import AlertContext from "../AlertComponents/AlertContextProvider";
@@ -140,3 +141,4 @@ export default function Cart({ cart, setCart, display }) {
     </>
   );
 }
+

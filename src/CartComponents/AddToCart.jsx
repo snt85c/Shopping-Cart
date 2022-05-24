@@ -36,6 +36,7 @@ export default function AddToCart({ setCart, cart, data }) {
   }, [cart.items]);
 
   function handleAddToCart() {
+    console.log(cart.display)
     if (buttonStatus.isAvailable && !buttonStatus.isInCart) {
       data.ticketInCart = counter;
       setCart({

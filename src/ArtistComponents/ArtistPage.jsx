@@ -40,7 +40,7 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
   function Breadcrumbs() {
     return (
       <>
-        <div className="text-sm breadcrumbs pl-2 dark:bg-gray-800 bg-gray-400 duration-300">
+        <div className="text-sm breadcrumbs pl-2  ">
           <ul>
             <li>
               <a
