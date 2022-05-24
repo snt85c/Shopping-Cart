@@ -18,11 +18,13 @@ export default function Main() {
     isCheckoutClicked: false,
   });
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("cart")) {
-  //     setCart(JSON.parse(localStorage.getItem("cart")));
-  //   }
-  // }, []);
+  //the below useEffect are used to keep the screen states as well as the cart element if the screen is refreshed,
+  // expecially on mobile when scrolling down can trigger an involutnary refresh of the page
+  useEffect(() => {
+    if (localStorage.getItem("cart")) {
+      setCart(JSON.parse(localStorage.getItem("cart")));
+    }
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem("onAttractionScreen")) {
@@ -36,10 +38,6 @@ export default function Main() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   localStorage.setItem("cart", JSON.stringify(cart));
-  // }, [cart]);
-
   useEffect(() => {
     localStorage.setItem("onAttractionScreen", JSON.stringify(onArtistScreen));
   }, [onArtistScreen]);
@@ -52,8 +50,12 @@ export default function Main() {
     <>
       <AlertContextProvider>
         <HashRouter>
-        <Alert />
-        <Navbar cart={cart} setCart={setCart} setOnScreen={setOnArtistScreen} />
+          <Alert />
+          <Navbar
+            cart={cart}
+            setCart={setCart}
+            setOnScreen={setOnArtistScreen}
+          />
           <Routes>
             <Route
               path="/"

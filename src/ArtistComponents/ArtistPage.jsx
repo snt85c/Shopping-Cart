@@ -1,13 +1,12 @@
 import { useState, lazy, Suspense } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+import ShowArtistMetadata from "./ShowArtistMetadata";
 import {
   convertDate,
   indexBestRatioUrl,
   FetchEventsInTicketmasterAPI,
   FetchArtistMetadataFromLastFM,
   FetchTopTracksFromLastFM,
-  Spinner,
 } from "../Services";
 import BackArrowOverlay from "../NavbarComponents/BackArrowOverlay";
 import {
@@ -23,8 +22,6 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
   const [eventData, setEventData] = useState([]);
   const [metadata, setMetadata] = useState("");
   const [topTracks, setTopTracks] = useState("");
-
-  const ShowArtistMetadata = lazy(() => import("./ShowArtistMetadata"));
 
   const navigate = useNavigate();
   let params = useParams();
@@ -109,15 +106,7 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
           {data.upcomingEvents._total > 1 ? "events" : "event"}
         </div>
         <div className="flex flex-col md:flex-row-reverse ">
-          <Suspense
-            fallback={
-              <div className="mx-4 md:w-1/2 flex flex-col justify-center items-center font-normal">
-                <Spinner />
-              </div>
-            }
-          >
             <ShowArtistMetadata metadata={metadata} topTracks={topTracks} />
-          </Suspense>
           <EventList />
         </div>
         <AttractionShowSocialsIcons />

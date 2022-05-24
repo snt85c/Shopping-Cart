@@ -34,10 +34,6 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
 
   FetchAttractionToSearchFromTicktmasterAPI(search, setSearchItems);
 
-  function cartDisplayToggle() {
-    return cart.display === "block" ? "none" : "block";
-  }
-
   function searchbarDisplayToggle() {
     searchbarDisplay === "flex"
       ? setSearchbarDisplay("none")
@@ -46,6 +42,10 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
 
   function handleChange(event) {
     setSearch(event.target.value);
+  }
+
+  function HandleClickOnCartIcon(){
+    setCart({ ...cart, display: cart.display === "block" ? "none" : "block" })
   }
 
   function CartCounter() {
@@ -88,8 +88,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
       <>
         <div
           className="absolute top-2 right-3 cursor-pointer text-amber-500"
-          onClick={() =>
-            setCart({ ...cart, display: cartDisplayToggle() })
+          onClick={()=>HandleClickOnCartIcon()
           }
         >
           <HiOutlineShoppingCart />

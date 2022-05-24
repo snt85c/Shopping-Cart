@@ -13,7 +13,7 @@ export default function ShowArtistMetadata({ metadata, topTracks }) {
     });
   return (
     <>
-      <div className="mx-4 md:w-1/2 flex flex-col font-normal fadeInAnimation">
+      <div className="mx-4 md:w-1/2 flex flex-col font-normal">
         <div>
           {metadata &&
             metadata.artist &&
