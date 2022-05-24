@@ -8,6 +8,7 @@ export default function AddToCart({ setCart, cart, data }) {
     isInCart: false,
     isAvailable: true,
   });
+  const cartDOMElement = document.getElementsByClassName("cartOverlay")
 
   useEffect(() => {
     if (cart && cart.items.length !== 0) {
@@ -36,11 +37,12 @@ export default function AddToCart({ setCart, cart, data }) {
   }, [cart.items]);
 
   function handleAddToCart() {
-    console.log(cart.display)
     if (buttonStatus.isAvailable && !buttonStatus.isInCart) {
       data.ticketInCart = counter;
+      //manipulates directly the DOM to circumvent passing state, some components with Suspense were affected
+      cartDOMElement[0].style.display = "block"
+      //sets the cart with new element
       setCart({
-        display: "block",
         items: [...cart.items, data],
       });
       AlertCtx.displayMsg(`${data.name} is added to cart`, "alert-success");
