@@ -19,14 +19,14 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
   const ShowArtistMetadata = lazy(() => import("./ShowArtistMetadata"));
   let params = useParams();
 
-  let currentData = JSON.parse(localStorage.getItem("onScreen"));
   if (onScreen.id) {
     localStorage.setItem("onScreen", JSON.stringify(onScreen));
   }
+  let data = JSON.parse(localStorage.getItem("onScreen"));
 
-  FetchEventsInTicketmasterAPI(currentData.id, setEventDataFetched);
-  FetchArtistMetadataFromLastFM(currentData, setMetadataLastFM);
-  FetchTopTracksFromLastFM(currentData, setTopTracksLastFM);
+  FetchEventsInTicketmasterAPI(data.id, setEventDataFetched);
+  FetchArtistMetadataFromLastFM(data, setMetadataLastFM);
+  FetchTopTracksFromLastFM(data, setTopTracksLastFM);
 
   function ArtistShow() {
     return (
@@ -34,19 +34,19 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
         className="h-[85vh]"
         style={{
           background: `linear-gradient(to right, black 20%, rgba(0, 0, 0, 0), black),linear-gradient(to bottom, black 5%, rgba(0, 0, 0, 0), black), url(${
-            currentData.images[indexBestRatioUrl("16_9", currentData)].url
+            data.images[indexBestRatioUrl("16_9", data)].url
           }) no-repeat 50% 30%`,
         }}
       >
         <div className="flex flex-col h-100 text-sm font-bold  text-white ">
-          <div className=" ml-5 mt-2 text-4xl md:text-6xl">{currentData.name}</div>
+          <div className=" ml-5 mt-2 text-4xl md:text-6xl">{data.name}</div>
           <div className="ml-5 text-lg">
-            {currentData.classifications[0].genre.name}/
-            {currentData.classifications[0].subGenre.name}
+            {data.classifications[0].genre.name}/
+            {data.classifications[0].subGenre.name}
           </div>
           <div className="m-2 ml-5 text-sm ">
-            {currentData.upcomingEvents._total}{" "}
-            {currentData.upcomingEvents._total > 1 ? "events" : "event"}
+            {data.upcomingEvents._total}{" "}
+            {data.upcomingEvents._total > 1 ? "events" : "event"}
           </div>
           <div className="flex flex-col md:flex-row-reverse ">
             <Suspense
@@ -64,7 +64,7 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
               eventData={eventDataFetched}
             />
           </div>
-          <ArtistShowSocialsIcons data={currentData} />
+          <ArtistShowSocialsIcons data={data} />
         </div>
       </div>
     );
