@@ -7,7 +7,7 @@ import GoogleLogin from "../LoginComponent/GoogleLogin";
 import emptycart from "../img/empty_cart.webp";
 import happycart from "../img/happy_cart.webp";
 
-export default function Cart({ cart, setCart }) {
+export default function Cart({ cart, setCart, display }) {
   const AlertCtx = useContext(AlertContext);
   const { user } = LoginComponent();
   function useOutsideAlerter(ref) {
@@ -73,7 +73,7 @@ export default function Cart({ cart, setCart }) {
         w-2/4 md:w-1/3 
         text-center text-sm border-amber-500 border-l-2 border-b-2 pt-2 
         cartAnimation"
-        style={{ display: cart.display }}
+        style={{ display:display }}
       >
         {cart.items.length === 0 ? (
           <div className="flex flex-col justify-center items-center fadeInAnimation">

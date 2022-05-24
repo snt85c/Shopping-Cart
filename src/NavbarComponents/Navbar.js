@@ -12,6 +12,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
   const [search, setSearch] = useState("");
   const [searchItems, setSearchItems] = useState([]);
   const [searchbarDisplay, setSearchbarDisplay] = useState("none");
+  const [cartIconDisplay, setCartIconDisplay] = useState("none")
   const navigate = useNavigate();
 
   function useOutsideAlerter(ref) {
@@ -44,8 +45,8 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
     setSearch(event.target.value);
   }
 
-  function HandleClickOnCartIcon(){
-    setCart({ ...cart, display: cart.display === "block" ? "none" : "block" })
+  function handleCartDisplay(){
+    setCartIconDisplay(cartIconDisplay === "block"?"none":"block")
   }
 
   function CartCounter() {
@@ -88,8 +89,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
       <>
         <div
           className="absolute top-2 right-3 cursor-pointer text-amber-500"
-          onClick={()=>HandleClickOnCartIcon()
-          }
+          onClick={()=>handleCartDisplay()}          
         >
           <HiOutlineShoppingCart />
         </div>
@@ -137,7 +137,7 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
           <SearchSuggestions />
           <CartCounter />
         </div>
-        <Cart cart={cart} setCart={setCart} />
+        <Cart cart={cart} setCart={setCart} display={cartIconDisplay} />
       </div>
     </>
   );
