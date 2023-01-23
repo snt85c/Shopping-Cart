@@ -1,6 +1,9 @@
 import { useContext, useState, useEffect } from "react";
 import AlertContext from "../AlertComponents/AlertContextProvider";
-export default function AddToCart({ setCart, cart, data }) {
+import { useDispatch } from "react-redux";
+import { setCart } from "../redux/slice";
+
+export default function AddToCart({ cart, data }) {
   const AlertCtx = useContext(AlertContext);
   const [counter, setCounter] = useState(1);
   const [buttonStatus, setButtonStatus] = useState({
@@ -8,7 +11,8 @@ export default function AddToCart({ setCart, cart, data }) {
     isInCart: false,
     isAvailable: true,
   });
-  const cartDOMElement = document.getElementsByClassName("cartOverlay")
+  const cartDOMElement = document.getElementsByClassName("cartOverlay");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (cart && cart.items.length !== 0) {
@@ -38,14 +42,12 @@ export default function AddToCart({ setCart, cart, data }) {
 
   function handleAddToCart() {
     if (buttonStatus.isAvailable && !buttonStatus.isInCart) {
-      data.ticketInCart = counter;
+      const newItem = { ...data, ticketInCart: counter };
       //manipulates directly the DOM to circumvent passing state, some components with Suspense were affected
-      cartDOMElement[0].style.display = "block"
-      //sets the cart with new element
-      setCart({
-        items: [...cart.items, data],
-      });
+      cartDOMElement[0].style.display = "block";
+      //sets the cart with new
       AlertCtx.displayMsg(`${data.name} is added to cart`, "alert-success");
+      dispatch(setCart({ type: "ADD_TO_CART", payload: newItem }));
     } else if (buttonStatus.isAvailable && buttonStatus.isInCart) {
       AlertCtx.displayMsg(
         `${data.name} is already in the basket`,
@@ -83,8 +85,8 @@ export default function AddToCart({ setCart, cart, data }) {
         +
       </div>
     );
-  }  
-  
+  }
+
   function DecreaseCounter() {
     return (
       <div
@@ -105,8 +107,6 @@ export default function AddToCart({ setCart, cart, data }) {
     );
   }
 
-
-
   function AddToCartButton() {
     return (
       <div className="flex flex-col justify-center items-center">
@@ -121,7 +121,6 @@ export default function AddToCart({ setCart, cart, data }) {
       </div>
     );
   }
-
 
   return (
     <>

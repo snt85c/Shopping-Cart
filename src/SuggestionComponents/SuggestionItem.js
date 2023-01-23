@@ -4,7 +4,7 @@ export default function SuggestItem({data, handleClick}) {
     return (
       <>
         <div
-          className="flex flex-col md:rounded-xl border-gray-700 md:border-2 border-b-2  hover:border-4 hover:border-amber-500 duration-100 h-[7rem] md:h-[12rem]  md:p-2 cursor-pointer font-bold text-lg md:text-5xl md:mb-1"
+          className="flex flex-col md:rounded-xl border-gray-700 md:border-2 border-b-2  hover:border-4 hover:border-amber-500 duration-100 h-[7rem] md:h-[12rem]  md:p-2 cursor-pointer font-bold text-lg md:text-5xl md:mb-1 p-1"
           style={{
             background: `linear-gradient(to right, black 20%, rgba(0, 0, 0, 0) 80%),url(${
               data.images[indexBestRatioUrl("16_9", data)].url

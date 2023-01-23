@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from "react";
+import {  lazy, Suspense } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 // import ShowArtistMetadata from "./ShowArtistMetadata";
 import {
@@ -9,6 +9,8 @@ import {
   FetchTopTracksFromLastFM,
   Spinner,
 } from "../Services";
+import { setVenue } from "../redux/slice";
+import { useDispatch } from "react-redux";
 import BackArrowOverlay from "../NavbarComponents/BackArrowOverlay";
 import {
   BsSpotify,
@@ -18,12 +20,14 @@ import {
   BsYoutube,
 } from "react-icons/bs";
 import { AiOutlineHome } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 export default function ArtistPage({ onScreen, setOnScreen }) {
-  const [eventData, setEventData] = useState([]);
-  const [metadata, setMetadata] = useState("");
-  const [topTracks, setTopTracks] = useState("");
+  const eventData = useSelector((state) => state.reducer.events);
+  const metadata = useSelector((state) => state.reducer.artistMetadata);
+  const topTracks = useSelector((state) => state.reducer.artistTopTracks);
   const ShowArtistMetadata = lazy(() => import("./ShowArtistMetadata"));
+  document.body.scrollTop = document.documentElement.scrollTop = 0;
 
   const navigate = useNavigate();
   let params = useParams();
@@ -33,9 +37,9 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
   }
   let data = JSON.parse(localStorage.getItem("onScreen"));
 
-  FetchEventsInTicketmasterAPI(data.id, setEventData);
-  FetchArtistMetadataFromLastFM(data, setMetadata);
-  FetchTopTracksFromLastFM(data, setTopTracks);
+  FetchEventsInTicketmasterAPI(data.id);
+  FetchArtistMetadataFromLastFM(data);
+  FetchTopTracksFromLastFM(data);
 
   function Breadcrumbs() {
     return (
@@ -59,12 +63,13 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
 
   function EventList() {
     function EventItem({ data }) {
+      const dispatch = useDispatch()
       return (
         <div
           className="border-2 rounded border-gray-600 mb-1 pl-1 py-2 hover:border-amber-500 duration-200 "
           onClick={() => {
             navigate(`/${params.second}/${data.id}`);
-            setOnScreen(data);
+            dispatch(setVenue(data));
           }}
         >
           <div className="flex flex-col text-sm flex-wrap my-0.5">
@@ -181,4 +186,3 @@ export default function ArtistPage({ onScreen, setOnScreen }) {
     </div>
   );
 }
-

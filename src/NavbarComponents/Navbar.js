@@ -1,5 +1,6 @@
 
 import { HiOutlineShoppingCart } from "react-icons/hi";
+import { useSelector } from "react-redux";
 import {
   indexBestWidthUrl,
   FetchAttractionToSearchFromTicktmasterAPI,
@@ -8,8 +9,11 @@ import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import Cart from "../CartComponents/Cart";
 import DarkMode from "./DarkMode";
+import { useDispatch } from "react-redux";
+import { setArtist } from "../redux/slice";
 
-export default function Navbar({ setOnScreen, cart, setCart }) {
+export default function Navbar({ setCart }) {
+  const cart = useSelector((state) => state.reducer.cart);
   const [search, setSearch] = useState("");
   const [searchItems, setSearchItems] = useState([]);
   const [searchbarDisplay, setSearchbarDisplay] = useState("none");
@@ -59,12 +63,13 @@ export default function Navbar({ setOnScreen, cart, setCart }) {
   }
 
   function SearchbarItems({ data }) {
+    const dispatch = useDispatch()
     return (
       <>
         <div
           className="flex-row flex p-1 border border-white hover:border-amber-500 bg-black  cursor-pointer  hover:bg-gray-800 hover:text-amber-500"
           onClick={() => {
-            setOnScreen(data);
+            dispatch(setArtist(data))
             navigate(`/${data.name.replace(/ /g, "_")}`);
             setSearchbarDisplay("none");
           }}

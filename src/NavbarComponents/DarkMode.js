@@ -1,5 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsDarkMode } from "../redux/slice";
 export default function DarkMode() {
+  const isDarkMode = useSelector((state) => state.reducer.isDarkMode);
+  const dispatch = useDispatch()
+
   useEffect(() => {
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
     if (
@@ -17,20 +23,21 @@ export default function DarkMode() {
     if (document.documentElement.classList.contains("dark")) {
       document.documentElement.classList.remove("dark");
       document.documentElement.classList.add("light");
-      localStorage.theme = "light";
+      dispatch(setIsDarkMode(false))
     } else {
       document.documentElement.classList.add("dark");
       document.documentElement.classList.remove("light");
-      localStorage.theme = "dark";
+      dispatch(setIsDarkMode(true))
     }
   };
   return (
     <>
       <div className="form-control">
-        <input
-          type="checkbox"
-          className="toggle toggle-xs md:toggle-md "
-          onClick={() => handleToggleDarkMode()}
+        <DarkModeSwitch
+          className="m-1"
+          checked={isDarkMode}
+          onChange={handleToggleDarkMode}
+          size={25}
         />
       </div>
     </>

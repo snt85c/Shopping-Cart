@@ -1,10 +1,13 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setSuggestions, setEvents,setArtistMetadata,setArtistTopTracks } from "./redux/slice";
 
 const TiketmasterAPIKEY = "cD2XNWSCGooPNOAAgXStTr5H6ks3ZfmD";
 
 const lastfmAPIKEY = "3513bd88ba9816db88a7b53f1090c00a";
 
 export function FetchArtistMetadataFromLastFM(data, setMetadata) {
+  const dispatch = useDispatch()
   useEffect(() => {
     let isSubscribed = true;
     const url = `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${data.name}&api_key=${lastfmAPIKEY}&format=json`;
@@ -12,7 +15,9 @@ export function FetchArtistMetadataFromLastFM(data, setMetadata) {
       const response = await fetch(url, { mode: "cors" });
       const result = await response.json();
       try {
-        if (isSubscribed) setMetadata(result);
+        if (isSubscribed){
+          dispatch(setArtistMetadata(result))
+        }
       } catch (err) {
         console.log(err);
       }
@@ -23,6 +28,7 @@ export function FetchArtistMetadataFromLastFM(data, setMetadata) {
 }
 
 export function FetchTopTracksFromLastFM(data, setTopTracks) {
+  const dispatch = useDispatch()
   useEffect(() => {
     let isSubscribed = true;
     const url = `https://ws.audioscrobbler.com/2.0/?method=artist.getTopTracks&artist=${data.name}&api_key=${lastfmAPIKEY}&format=json`;
@@ -30,7 +36,9 @@ export function FetchTopTracksFromLastFM(data, setTopTracks) {
       const response = await fetch(url, { mode: "cors" });
       const result = await response.json(data);
       try {
-        if (isSubscribed) setTopTracks(result);
+        if (isSubscribed){
+          dispatch(setArtistTopTracks(result))
+        } 
       } catch (err) {
         console.log(err);
       }
@@ -42,6 +50,7 @@ export function FetchTopTracksFromLastFM(data, setTopTracks) {
 
 //search by Artist(attraction)
 export function FetchAttractionToSearchFromTicktmasterAPI(search, setData) {
+
   useEffect(() => {
     let isSubscribed = true;
     async function getData() {
@@ -56,7 +65,9 @@ export function FetchAttractionToSearchFromTicktmasterAPI(search, setData) {
               attractions.push(item);
             }
           });
-          if (isSubscribed) setData(attractions);
+          if (isSubscribed){
+            setData(attractions);
+          } 
         } catch (e) {
           console.log(e);
         }
@@ -69,6 +80,7 @@ export function FetchAttractionToSearchFromTicktmasterAPI(search, setData) {
 
 //search all the events available for attraction(Artist) id
 export function FetchEventsInTicketmasterAPI(data, setEventData) {
+  const dispatch = useDispatch()
   useEffect(() => {
     let isSubscribed = true;
     async function getData() {
@@ -81,7 +93,9 @@ export function FetchEventsInTicketmasterAPI(data, setEventData) {
           result._embedded.events.forEach((item) => {
             events.push(item);
           });
-          if (isSubscribed) setEventData(events);
+          if (isSubscribed) {
+            dispatch(setEvents(events))
+          }
         } catch (e) {
           console.log(e);
         }
@@ -92,7 +106,9 @@ export function FetchEventsInTicketmasterAPI(data, setEventData) {
   }, []);
 }
 
-export function FetchSuggestFromTicketmasterAPI(setSuggest) {
+export function FetchSuggestFromTicketmasterAPI() {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     let isSubscribed = true;
     async function getData() {
@@ -104,7 +120,9 @@ export function FetchSuggestFromTicketmasterAPI(setSuggest) {
         result._embedded.attractions.forEach((item) => {
           suggest.push(item);
         });
-        if (isSubscribed) setSuggest(suggest);
+        if (isSubscribed) {
+          dispatch(setSuggestions(suggest));
+        }
       } catch (e) {
         console.log(e);
       }

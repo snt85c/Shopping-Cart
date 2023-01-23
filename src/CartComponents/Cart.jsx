@@ -1,16 +1,20 @@
-
 import CartItems from "./CartItems";
-import { useRef, useEffect, useContext, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useRef, useEffect, useContext } from "react";
 import AlertContext from "../AlertComponents/AlertContextProvider";
 import { LoginComponent } from "../LoginComponent/UserAuth";
 import Logout from "../LoginComponent/Logout";
 import GoogleLogin from "../LoginComponent/GoogleLogin";
 import emptycart from "../img/empty_cart.webp";
 import happycart from "../img/happy_cart.webp";
+import { setCart } from "../redux/slice";
 
-export default function Cart({ cart, setCart, display }) {
+export default function Cart({ display }) {
   const AlertCtx = useContext(AlertContext);
   const { user } = LoginComponent();
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.reducer.cart);
+
   function useOutsideAlerter(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
@@ -23,7 +27,6 @@ export default function Cart({ cart, setCart, display }) {
           !event.target.contains(addToCart[0])
         ) {
           ref.current.style.display = "none";
-          // setCart({...cart,display:"none"})
         }
       }
       document.addEventListener("mousedown", handleClickOutside);
@@ -37,7 +40,7 @@ export default function Cart({ cart, setCart, display }) {
   useOutsideAlerter(wrapperRef);
 
   const items = cart.items.map((item, i) => (
-    <CartItems item={item} cart={cart} key={i} id={i} setCart={setCart} />
+    <CartItems item={item} cart={cart} key={i} index={i} setCart={setCart} />
   ));
 
   const total = cart.items.reduce(
@@ -56,7 +59,7 @@ export default function Cart({ cart, setCart, display }) {
                 "Your purchase has been confirmed! Thank you for trying Tiketmaster",
                 "alert-success"
               );
-            setCart({ ...cart, items: [], number: 0, isCheckoutClicked: true });
+            dispatch(setCart({type:"CHECKOUT_CART"}));
           }}
         >
           CHECKOUT
@@ -74,7 +77,7 @@ export default function Cart({ cart, setCart, display }) {
         w-2/4 md:w-1/3 
         text-center text-sm border-amber-500 border-l-2 border-b-2 pt-2 
         cartAnimation"
-        style={{ display:display }}
+        style={{ display: display }}
       >
         {cart.items.length === 0 ? (
           <div className="flex flex-col justify-center items-center fadeInAnimation">
@@ -121,11 +124,11 @@ export default function Cart({ cart, setCart, display }) {
               <div className="divider-horizontal" />
               <div className="divider m-0 ">final price</div>
               <span className="text-amber-500 dark:text-gray-800 duration-300 font-extrabold text-xl">
-                {total}£
+                {total.toFixed(2)}£
               </span>
             </div>
             <br />
-            <div>
+            <div className="pb-5">
               {user ? (
                 <div>
                   <CheckoutButton />
@@ -141,4 +144,3 @@ export default function Cart({ cart, setCart, display }) {
     </>
   );
 }
-

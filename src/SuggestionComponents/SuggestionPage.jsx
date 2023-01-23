@@ -1,19 +1,19 @@
-import { Outlet, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FetchSuggestFromTicketmasterAPI } from "../Services";
 import SuggestionList from "./SuggestionList";
+import { useDispatch } from "react-redux";
 import SuggestionsShowBackgroundVideo from "./SuggestionVideoComponent";
+import { setArtist } from "../redux/slice";
 
-export default function SuggestionPage({ setOnScreen }) {
-
-  const [suggest, setSuggest] = useState([]);
+export default function SuggestionPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
-    FetchSuggestFromTicketmasterAPI(setSuggest);
+  FetchSuggestFromTicketmasterAPI();
 
-  function handleClick(item) {
-    setOnScreen(item);
-    navigate(`/${item.name.replace(/ /g, "_")}`);
+  function handleClick(artist) {
+    dispatch(setArtist(artist))
+    navigate(`/${artist.name.replace(/ /g, "_")}`);
   }
 
   return (
@@ -22,9 +22,8 @@ export default function SuggestionPage({ setOnScreen }) {
         <SuggestionsShowBackgroundVideo />
         <div className="flex flex-col md:w-1/2 justify-between duration-1000 ">
           <div className="m-1  fadeInAnimation">
-            <SuggestionList data={suggest} handleClick={handleClick} />
+            <SuggestionList handleClick={handleClick} />
           </div>
-          <Outlet />
         </div>
       </div>
     </>

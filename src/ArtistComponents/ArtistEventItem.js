@@ -1,10 +1,14 @@
 import { convertDate } from "../Services";
-import { useNavigate, useParams } from "react-router-dom";
+import { setVenue } from "../redux/slice";
+import { useNavigate} from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function ArtistEventItem({ data, setOnScreen, params }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const setNextScreen = () => {
     navigate(`/${params.second}/${data.id}`);
+    dispatch(setVenue({payload:data}))
     setOnScreen(data);
   };
   return (

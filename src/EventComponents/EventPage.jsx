@@ -3,17 +3,11 @@ import { convertDate, indexBestRatioUrl, Spinner } from "../Services";
 import AddToCart from "../CartComponents/AddToCart";
 import BackArrowOverlay from "../NavbarComponents/BackArrowOverlay";
 import EventSeatMap from "./EventSeatMap";
-// import { lazy, Suspense } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-export default function EventPage({ onScreen, cart, setCart }) {
+export default function EventPage({  cart }) {
   const navigate = useNavigate();
-  //used to keep page on screen when reloading
-  if (onScreen.id) {
-    localStorage.setItem("onScreen", JSON.stringify(onScreen));
-  }
-
-  let data = JSON.parse(localStorage.getItem("onScreen"));
-  // const EventSeatMap = lazy(()=>import("./EventSeatMap"))
+  const data = useSelector((state) => state.reducer.venue)
 
   function Breadcrumbs() {
     return (
@@ -97,7 +91,7 @@ export default function EventPage({ onScreen, cart, setCart }) {
           <EventSeatMap data={data} />
           {/* </Suspense> */}
       </div>
-      <AddToCart data={onScreen} cart={cart} setCart={setCart} />
+      <AddToCart data={data} cart={cart} />
     </div>
   );
 }

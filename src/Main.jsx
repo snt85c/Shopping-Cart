@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, HashRouter } from "react-router-dom";
 import { AlertContextProvider } from "./AlertComponents/AlertContextProvider";
+import telegramAlert from "./LoginComponent/TelegramAlerter";
 import Navbar from "./NavbarComponents/Navbar";
 import SuggestionPage from "./SuggestionComponents/SuggestionPage";
 import ArtistPage from "./ArtistComponents/ArtistPage";
@@ -8,23 +9,19 @@ import EventPage from "./EventComponents/EventPage";
 import Alert from "./AlertComponents/Alert";
 import NoPath from "./NoPath";
 import "./index.css";
+import { useSelector } from "react-redux";
 
 export default function Main() {
-  let [onArtistScreen, setOnArtistScreen] = useState([]);
-  let [onEventScreen, setOnEventScreen] = useState([]);
-  let [cart, setCart] = useState({
-    display: "none",
-    items: [],
-    isCheckoutClicked: false,
-  });
+  const artist = useSelector((state) => state.reducer.artist);
+  const cart = useSelector((state) => state.reducer.cart);
+
+  useEffect(() => {
+    telegramAlert();
+  }, []);
 
   //the below useEffect are used to keep the screen states as well as the cart element if the screen is refreshed,
   // expecially on mobile when scrolling down can trigger an involutnary refresh of the page
-  useEffect(() => {
-    if (localStorage.getItem("cart")) {
-      setCart(JSON.parse(localStorage.getItem("cart")));
-    }
-  }, []);
+ /*
 
   useEffect(() => {
     if (localStorage.getItem("onAttractionScreen")) {
@@ -39,52 +36,48 @@ export default function Main() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("onAttractionScreen", JSON.stringify(onArtistScreen));
-  }, [onArtistScreen]);
+    localStorage.setItem("onAttractionScreen", JSON.stringify(artist));
+  }, [artist]);
 
   useEffect(() => {
-    localStorage.setItem("onEventScreen", JSON.stringify(onEventScreen));
-  }, [onEventScreen]);
-
+    localStorage.setItem("onEventScreen", JSON.stringify(event));
+  }, [event]);
+*/
   return (
     <>
-      <AlertContextProvider>
-        <HashRouter>
-          <Alert />
-          <Navbar
-            cart={cart}
-            setCart={setCart}
-            setOnScreen={setOnArtistScreen}
-          />
-          <Routes>
-            <Route
-              path="/"
-              element={<SuggestionPage setOnScreen={setOnArtistScreen} />}
+      
+        <AlertContextProvider>
+          <HashRouter>
+            <Alert />
+            <Navbar
+              cart={cart}
             />
-            <Route
-              path=":second"
-              element={
-                <ArtistPage
-                  onScreen={onArtistScreen}
-                  setOnScreen={setOnEventScreen}
-                />
-              }
-            />
-            <Route
-              path=":second/:third"
-              element={
-                <EventPage
-                  onScreen={onEventScreen}
-                  cart={cart}
-                  setCart={setCart}
-                />
-              }
-            />
+            <Routes>
+              <Route
+                path="/"
+                element={<SuggestionPage  />}
+              />
+              <Route
+                path=":second"
+                element={
+                  <ArtistPage
+                    onScreen={artist}
+                  />
+                }
+              />
+              <Route
+                path=":second/:third"
+                element={
+                  <EventPage
+                    cart={cart}
+                  />
+                }
+              />
 
-            <Route path="*" element={<NoPath />} />
-          </Routes>
-        </HashRouter>
-      </AlertContextProvider>
+              <Route path="*" element={<NoPath />} />
+            </Routes>
+          </HashRouter>
+        </AlertContextProvider>
     </>
   );
 }

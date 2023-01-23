@@ -1,12 +1,1 @@
-TODO:
-sign in page
-add Sign-in page
-
-
-this commit:
-
-refactor majority of file into folders
-
-introduce Supsense and lazy loading to SuggestionList, EventMap. in Suggestion it replaces the list with same size boxes with a pulse animation as a placeholder while the data is being fetch
-
-useEffect in Service.js has now unmount
+2023 update: add react-toggle-dark-mode icon to DarkMode.js, add TelegramAlerter
