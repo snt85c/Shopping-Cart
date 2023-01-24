@@ -3,12 +3,18 @@ import { convertDate, indexBestRatioUrl, Spinner } from "../Services";
 import AddToCart from "../CartComponents/AddToCart";
 import BackArrowOverlay from "../NavbarComponents/BackArrowOverlay";
 import EventSeatMap from "./EventSeatMap";
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector } from "react-redux";
 
-export default function EventPage({  cart }) {
+export default function EventPage({ onScreen, cart }) {
   const navigate = useNavigate();
-  const data = useSelector((state) => state.reducer.venue)
+  // let data = useSelector((state) => state.reducer.venue);
 
+
+  if (onScreen.id) {
+    localStorage.setItem("onScreen", JSON.stringify(onScreen));
+  }
+  let data = JSON.parse(localStorage.getItem("onScreen"));
+  
   function Breadcrumbs() {
     return (
       <>
@@ -27,7 +33,7 @@ export default function EventPage({  cart }) {
                 className="select-none cursor-pointer"
                 onClick={() => navigate(-1)}
               >
-                Events {" "}
+                Events{" "}
               </a>
             </li>
             <li className="select-none">Venue</li>
@@ -81,15 +87,15 @@ export default function EventPage({  cart }) {
         style={{
           background: `linear-gradient(to right, black, rgba(0, 0, 0, 0.6), black),
                           url(${
-                            data.images[indexBestRatioUrl("16_9", data)].url
+                            data?.images[indexBestRatioUrl("16_9", data)].url
                           }) no-repeat 50% 30%`,
         }}
       >
         <EventInfo />
         <VenueAddress />
         {/* <Suspense fallback={<div><Spinner/></div>}> */}
-          <EventSeatMap data={data} />
-          {/* </Suspense> */}
+        <EventSeatMap data={data} />
+        {/* </Suspense> */}
       </div>
       <AddToCart data={data} cart={cart} />
     </div>

@@ -1,18 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { FetchSuggestFromTicketmasterAPI } from "../Services";
 import SuggestionList from "./SuggestionList";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SuggestionsShowBackgroundVideo from "./SuggestionVideoComponent";
 import { setArtist } from "../redux/slice";
 
 export default function SuggestionPage() {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   FetchSuggestFromTicketmasterAPI();
 
   function handleClick(artist) {
-    dispatch(setArtist(artist))
+    dispatch(setArtist(artist));
     navigate(`/${artist.name.replace(/ /g, "_")}`);
   }
 
