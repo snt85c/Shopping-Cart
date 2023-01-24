@@ -36,6 +36,7 @@ export default function ArtistPage({ onScreen }) {
   let params = useParams();
   let data = onScreen;
 
+  //this bit allows for the Artist page to be rendered in case of hot reload, as it will save it on localStorage everytime i come here, and will extract it if onScreen is missing (a.k.a there is no global state for it)
   if (onScreen.id) {
     localStorage.setItem("ArtistPage", JSON.stringify(onScreen));
     console.log(JSON.parse(localStorage.getItem("ArtistPage")));

@@ -16,10 +16,10 @@ export default function SuggestionsShowBackgroundVideo() {
 
   return (
     <div className="  video p-5 h-1/2 md:w-1/2">
-      {/* <video loop autoPlay muted>
+      <video loop autoPlay muted>
           <source src={bgVideo} type="video/mp4" />
           Your browser does not support the video tag.
-        </video> */}
+        </video>
       <div className="flex md:fixed flex-col justify-center items-center text-4xl md:text-5xl lg:text-6xl xl:text-7xl duration-300 text-white font-extrabold text-center select-none px-3">
         <span>
           {" "}
