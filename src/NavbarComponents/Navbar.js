@@ -122,7 +122,7 @@ export default function Navbar({ setCart }) {
 
   return (
     <>
-      <div className=" w-full relative top-0 flex  flex-col md:flex-row justify-between items-center max-w-full border-b-amber-500 dark:bg-gray-900 bg-white border-b-2 font-extrabold text-4xl  ">
+      <div className=" w-full relative top-0 flex  flex-col md:flex-row justify-between items-center max-w-full border-b-amber-500 dark:bg-gray-900 bg-white border-b-2 font-extrabold text-4xl  h-[12vh]md:h-[6vh]  ">
         <div
           className="flex w-full md:justify-start pt-2 md:pt-0 md:pl-2 font-newake subpixel-antialiased tracking-wider justify-center cursor-pointer dark:text-white duration-1000 text-black "
           onClick={() => /*(setCart({ ...cart, display: "none" }),*/ navigate("/")}

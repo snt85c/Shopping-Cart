@@ -4,6 +4,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Description
+Welcome to the Shopping Cart Demo! This project uses the Ticketmaster API to display event information and allows users to add events to their cart. Built with React, Redux, TailwindCSS, DaisyUI, and Firebase, this demo showcases a sleek and responsive design. The project is fully tested and includes continuous integration and deployment. Try it out and experience the convenience of a seamless online shopping experience! 
+
 ## Available Scripts
 
 In the project directory, you can run:

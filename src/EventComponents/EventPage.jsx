@@ -9,12 +9,11 @@ export default function EventPage({ onScreen, cart }) {
   const navigate = useNavigate();
   // let data = useSelector((state) => state.reducer.venue);
 
-
   if (onScreen.id) {
     localStorage.setItem("onScreen", JSON.stringify(onScreen));
   }
   let data = JSON.parse(localStorage.getItem("onScreen"));
-  
+
   function Breadcrumbs() {
     return (
       <>
@@ -77,13 +76,13 @@ export default function EventPage({ onScreen, cart }) {
   }
 
   return (
-    <div className="flex flex-col md:h-[33.3rem] md:overflow-hidden fadeInAnimation dark:bg-gray-800 bg-gray-400 duration-300">
-      <div className="flex justify-between dark:bg-gray-800 bg-gray-400">
+    <div className="flex flex-col min-h-[89vh] md:overflow-hidden fadeInAnimation dark:bg-gray-800 bg-gray-400 duration-300">
+      <div className="flex justify-between  dark:bg-gray-800 bg-gray-400">
         <Breadcrumbs />
         <BackArrowOverlay />
       </div>
       <div
-        className="flex flex-col md:flex-row md:h-3/4  justify-center "
+        className="flex flex-col min-h-[60vh] md:flex-row justify-center "
         style={{
           background: `linear-gradient(to right, black, rgba(0, 0, 0, 0.6), black),
                           url(${

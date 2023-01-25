@@ -55,7 +55,7 @@ export default function ArtistPage({ onScreen }) {
           <ul>
             <li>
               <button
-              href="#"
+                href="#"
                 className="select-none cursor-pointer"
                 onClick={() => navigate("/")}
               >
@@ -84,14 +84,16 @@ export default function ArtistPage({ onScreen }) {
               {convertDate(data.dates.start.localDate)}
             </div>
 
-            {data._embedded.venues &&<div className="flex flex-row pt-1 text-xs text-gray-400">
-              {data._embedded.venues[0].name} {" - "}
-              <div className="text-white ">
-                {data._embedded.venues[0].city.name}
+            {data._embedded.venues && (
+              <div className="flex flex-row pt-1 text-xs text-gray-400">
+                {data._embedded.venues[0].name} {" - "}
+                <div className="text-white ">
+                  {data._embedded.venues[0].city.name}
+                </div>
+                {" - "}
+                {data._embedded.venues[0].country.countryCode}
               </div>
-              {" - "}
-              {data._embedded.venues[0].country.countryCode}
-            </div>}
+            )}
           </div>
         </div>
       );
@@ -110,27 +112,29 @@ export default function ArtistPage({ onScreen }) {
 
   function AttractionShow() {
     return (
-      <div className="flex flex-col md:h-[30.8rem] text-sm font-bold  text-white  p-1 ">
-        <div className=" ml-5 mt-2 text-4xl md:text-6xl">{data.name}</div>
-        <div className="ml-5 text-lg">
-          {data.classifications[0].genre.name}/
-          {data.classifications[0].subGenre.name}
-        </div>
-        <div className="m-2 ml-5 text-sm ">
-          {data.upcomingEvents._total}{" "}
-          {data.upcomingEvents._total > 1 ? "events" : "event"}
-        </div>
-        <div className="flex flex-col md:flex-row-reverse ">
-          <Suspense
-            fallback={
-              <div className="flex flex-col justify-center items-center md:w-1/2">
-                <Spinner />
-              </div>
-            }
-          >
-            <ShowArtistMetadata metadata={metadata} topTracks={topTracks} />
-          </Suspense>
+      <div className="flex flex-col min-h-[89vh] text-sm font-bold text-white  p-1 select-none ">
+        <div>
+          <div className=" ml-5 mt-2 text-4xl md:text-6xl">{data.name}</div>
+          <div className="ml-5 text-lg">
+            {data.classifications[0].genre.name}/
+            {data.classifications[0].subGenre.name}
+          </div>
+          <div className="m-2 ml-5 text-sm ">
+            {data.upcomingEvents._total}{" "}
+            {data.upcomingEvents._total > 1 ? "events" : "event"}
+          </div>
+          <div className="flex flex-col md:flex-row-reverse ">
+            <Suspense
+              fallback={
+                <div className="flex flex-col justify-center items-center md:w-1/2">
+                  <Spinner />
+                </div>
+              }
+            >
+              <ShowArtistMetadata metadata={metadata} topTracks={topTracks} />
+            </Suspense>
             <EventList />
+          </div>
         </div>
         <AttractionShowSocialsIcons />
       </div>
@@ -168,7 +172,7 @@ export default function ArtistPage({ onScreen }) {
       }
     });
     return (
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center mb-8">
         <div className="flex flex-row">{result}</div>
       </div>
     );
@@ -176,7 +180,7 @@ export default function ArtistPage({ onScreen }) {
 
   return (
     <div>
-      <div className="flex justify-between dark:bg-gray-800 bg-gray-400">
+      <div className="flex justify-between min-h-full dark:bg-gray-800 bg-gray-400 select-none">
         <Breadcrumbs />
         <BackArrowOverlay />
       </div>

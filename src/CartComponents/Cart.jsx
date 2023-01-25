@@ -72,7 +72,7 @@ export default function Cart({ display }) {
     <>
       <div
         ref={wrapperRef}
-        className="cartOverlay absolute shadow-lg z-20 min-h-[90vh] top-[104px] md:top-[56px] right-0 
+        className="cartOverlay absolute shadow-lg z-20 min-h-[92vh] top-[104px] md:top-[56px] right-0 
         dark:bg-gradient-to-t from-amber-500 to-gray-900 duration-1000 bg-white text-black dark:text-white
         w-2/4 md:w-1/3 
         text-center text-sm border-amber-500 border-l-2 border-b-2 pt-2 

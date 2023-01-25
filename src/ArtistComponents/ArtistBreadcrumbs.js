@@ -5,7 +5,7 @@ export default function ArtistBreadcrumbs() {
     const navigate = useNavigate()
     return (
       <>
-        <div className="text-sm breadcrumbs pl-2  ">
+        <div className="text-sm breadcrumbs pl-2 h-[5vh]  ">
           <ul>
             <li>
               <a
