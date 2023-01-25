@@ -124,7 +124,7 @@ export default function AddToCart({ cart, data }) {
 
   return (
     <>
-      <div className="flex justify-center items-center m-4">
+      <div className="flex justify-center items-center mx-4">
         <DecreaseCounter />
         <AddToCartButton />
         <IncreaseCounter />

@@ -11,7 +11,7 @@ export default function SuggestionsShowBackgroundVideo() {
   ];
 
   const devIcons = deviconsScrPath.map((iconSrcPath, i) => {
-    return <img key={i} width="40px" height="40px" src={iconSrcPath} />;
+    return <img key={i} width="40px" height="40px" alt="icon" src={iconSrcPath} />;
   });
 
   return (

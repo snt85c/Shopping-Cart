@@ -25,7 +25,7 @@ export const reducers = {
   setCart: (state, actions) => {
     switch (actions.payload.type) {
       case "SET_CART":
-        return {...state, cart:actions.payload.payload}
+        return { ...state, cart: actions.payload.payload };
       case "ADD_TO_CART":
         return {
           ...state,
@@ -54,6 +54,8 @@ export const reducers = {
         state.cart.items = [];
         state.cart.isCheckoutClicked = true;
         break;
+      default:
+        return;
     }
   },
 };

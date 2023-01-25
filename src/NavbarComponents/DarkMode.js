@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsDarkMode } from "../redux/slice";

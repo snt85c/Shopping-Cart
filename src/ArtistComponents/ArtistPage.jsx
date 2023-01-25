@@ -22,7 +22,6 @@ import {
 import { AiOutlineHome } from "react-icons/ai";
 import { setArtist } from "../redux/slice";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
 export default function ArtistPage({ onScreen }) {
   const dispatch = useDispatch();
@@ -55,12 +54,13 @@ export default function ArtistPage({ onScreen }) {
         <div className="text-sm breadcrumbs pl-2  ">
           <ul>
             <li>
-              <a
+              <button
+              href="#"
                 className="select-none cursor-pointer"
                 onClick={() => navigate("/")}
               >
                 Attractions
-              </a>
+              </button>
             </li>
             <li className="select-none ">Events</li>
           </ul>
@@ -83,14 +83,15 @@ export default function ArtistPage({ onScreen }) {
             <div className="text-white">
               {convertDate(data.dates.start.localDate)}
             </div>
-            <div className="flex flex-row pt-1 text-xs text-gray-400">
+
+            {data._embedded.venues &&<div className="flex flex-row pt-1 text-xs text-gray-400">
               {data._embedded.venues[0].name} {" - "}
               <div className="text-white ">
                 {data._embedded.venues[0].city.name}
               </div>
               {" - "}
               {data._embedded.venues[0].country.countryCode}
-            </div>
+            </div>}
           </div>
         </div>
       );
@@ -101,7 +102,7 @@ export default function ArtistPage({ onScreen }) {
     ));
 
     return (
-      <div className="md:h-[300px] flex flex-col px-5 md:w-1/2 md:overflow-auto bg-black md:bg-opacity-0 cursor-pointer ">
+      <div className="md:h-[265px] flex flex-col px-5 md:w-1/2 md:overflow-auto bg-black md:bg-opacity-0 cursor-pointer ">
         {options}
       </div>
     );
@@ -109,7 +110,7 @@ export default function ArtistPage({ onScreen }) {
 
   function AttractionShow() {
     return (
-      <div className="flex flex-col h-100 text-sm font-bold  text-white ">
+      <div className="flex flex-col md:h-[30.8rem] text-sm font-bold  text-white  p-1 ">
         <div className=" ml-5 mt-2 text-4xl md:text-6xl">{data.name}</div>
         <div className="ml-5 text-lg">
           {data.classifications[0].genre.name}/
@@ -129,15 +130,7 @@ export default function ArtistPage({ onScreen }) {
           >
             <ShowArtistMetadata metadata={metadata} topTracks={topTracks} />
           </Suspense>
-          {data._embedded ? (
             <EventList />
-          ) : (
-            <div className=" mx-4 m-2">
-              {" "}
-              an error occurred within ticketmaster API provider, no events could be
-              loaded
-            </div>
-          )}
         </div>
         <AttractionShowSocialsIcons />
       </div>
@@ -166,7 +159,7 @@ export default function ArtistPage({ onScreen }) {
       if (data.externalLinks && data.externalLinks[name]) {
         let IconType = icons[i];
         return (
-          <div key={i} className="h-0">
+          <div key={i} className="">
             <a href={data.externalLinks[name][0].url} style={{ padding: "1%" }}>
               <IconType className="text-white h-12 w-12 object-contain pl-2 hover:text-amber-500 duration-100 " />
             </a>
@@ -176,8 +169,7 @@ export default function ArtistPage({ onScreen }) {
     });
     return (
       <div className="flex flex-col justify-center items-center">
-        <div className="flex flex-row pt-2 ">{result}</div>
-        <span>external links</span>
+        <div className="flex flex-row">{result}</div>
       </div>
     );
   }
@@ -189,7 +181,7 @@ export default function ArtistPage({ onScreen }) {
         <BackArrowOverlay />
       </div>
       <div
-        className="fadeInAnimation h-[85vh]"
+        className="fadeInAnimation "
         style={{
           background: `linear-gradient(to right, black 20%, rgba(0, 0, 0, 0), black),linear-gradient(to bottom, black 5%, rgba(0, 0, 0, 0), black), url(${
             data.images[indexBestRatioUrl("16_9", data)].url

@@ -77,7 +77,7 @@ export default function EventPage({ onScreen, cart }) {
   }
 
   return (
-    <div className="flex flex-col h-[90.5vh] md:overflow-hidden fadeInAnimation dark:bg-gray-800 bg-gray-400 duration-300">
+    <div className="flex flex-col md:h-[33.3rem] md:overflow-hidden fadeInAnimation dark:bg-gray-800 bg-gray-400 duration-300">
       <div className="flex justify-between dark:bg-gray-800 bg-gray-400">
         <Breadcrumbs />
         <BackArrowOverlay />
@@ -93,9 +93,7 @@ export default function EventPage({ onScreen, cart }) {
       >
         <EventInfo />
         {data._embedded.venues && <VenueAddress />}
-        {/* <Suspense fallback={<div><Spinner/></div>}> */}
         <EventSeatMap data={data} />
-        {/* </Suspense> */}
       </div>
       <AddToCart data={data} cart={cart} />
     </div>

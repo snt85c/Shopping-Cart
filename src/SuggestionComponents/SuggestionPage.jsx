@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { FetchSuggestFromTicketmasterAPI } from "../Services";
 import SuggestionList from "./SuggestionList";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import SuggestionsShowBackgroundVideo from "./SuggestionVideoComponent";
 import { setArtist } from "../redux/slice";
 
