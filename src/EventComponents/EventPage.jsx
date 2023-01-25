@@ -92,7 +92,7 @@ export default function EventPage({ onScreen, cart }) {
         }}
       >
         <EventInfo />
-        <VenueAddress />
+        {data._embedded.venues && <VenueAddress />}
         {/* <Suspense fallback={<div><Spinner/></div>}> */}
         <EventSeatMap data={data} />
         {/* </Suspense> */}

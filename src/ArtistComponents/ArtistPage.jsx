@@ -129,7 +129,15 @@ export default function ArtistPage({ onScreen }) {
           >
             <ShowArtistMetadata metadata={metadata} topTracks={topTracks} />
           </Suspense>
-          <EventList />
+          {data._embedded ? (
+            <EventList />
+          ) : (
+            <div className=" mx-4 m-2">
+              {" "}
+              an error occurred within ticketmaster API provider, no events could be
+              loaded
+            </div>
+          )}
         </div>
         <AttractionShowSocialsIcons />
       </div>

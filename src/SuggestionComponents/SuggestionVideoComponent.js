@@ -1,4 +1,4 @@
-import bgVideo from "./bkgVideo.mp4";
+import bgVideo from "./bkgVideo.webm";
 export default function SuggestionsShowBackgroundVideo() {
   const deviconsScrPath = [
     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-plain-wordmark.svg",
@@ -17,7 +17,7 @@ export default function SuggestionsShowBackgroundVideo() {
   return (
     <div className="  video p-5 h-1/2 md:w-1/2">
       <video loop autoPlay muted>
-          <source src={bgVideo} type="video/mp4" />
+          <source src={bgVideo} type="video/webm" />
           Your browser does not support the video tag.
         </video>
       <div className="flex md:fixed flex-col justify-center items-center text-4xl md:text-5xl lg:text-6xl xl:text-7xl duration-300 text-white font-extrabold text-center select-none px-3">

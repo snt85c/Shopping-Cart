@@ -11,6 +11,7 @@ import NoPath from "./NoPath";
 import "./index.css";
 import { setCart } from "./redux/slice";
 import { useSelector, useDispatch } from "react-redux";
+import Footer from "./Footer";
 
 export default function Main() {
   const artist = useSelector((state) => state.reducer.artist);
@@ -49,6 +50,7 @@ export default function Main() {
             <Route path="*" element={<NoPath />} />
           </Routes>
         </HashRouter>
+          <Footer />
       </AlertContextProvider>
     </>
   );

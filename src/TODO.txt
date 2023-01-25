@@ -1,1 +1,5 @@
-2023 update: add react-toggle-dark-mode icon to DarkMode.js, add TelegramAlerter
+2023 update: general fixes
+
+fix the backgrund video from mp4 to webm for better performance
+add footer
+fix bug from ticketmaster api that would show an artist without any events

@@ -6,7 +6,7 @@ const TiketmasterAPIKEY = "cD2XNWSCGooPNOAAgXStTr5H6ks3ZfmD";
 
 const lastfmAPIKEY = "3513bd88ba9816db88a7b53f1090c00a";
 
-export function FetchArtistMetadataFromLastFM(data, setMetadata) {
+export function FetchArtistMetadataFromLastFM(data) {
   const dispatch = useDispatch()
   useEffect(() => {
     let isSubscribed = true;
@@ -27,7 +27,7 @@ export function FetchArtistMetadataFromLastFM(data, setMetadata) {
   }, []);
 }
 
-export function FetchTopTracksFromLastFM(data, setTopTracks) {
+export function FetchTopTracksFromLastFM(data) {
   const dispatch = useDispatch()
   useEffect(() => {
     let isSubscribed = true;
