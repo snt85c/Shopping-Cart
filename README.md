@@ -20,8 +20,6 @@ Welcome to the Shopping Cart Demo! This project uses the Ticketmaster API to dis
 
 ![Alt text](./src/img/readme3.png "Optional title")
 
-
-
 ## Available Scripts
 
 In the project directory, you can run:
