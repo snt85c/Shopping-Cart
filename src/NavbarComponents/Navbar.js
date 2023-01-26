@@ -10,7 +10,6 @@ import Cart from "../CartComponents/Cart";
 import DarkMode from "./DarkMode";
 import { useDispatch } from "react-redux";
 import { setArtist } from "../redux/slice";
-import { FetchArtistMetadataFromLastFM, FetchEventsInTicketmasterAPI, FetchTopTracksFromLastFM } from "../Services";
 
 export default function Navbar({ setCart }) {
   const cart = useSelector((state) => state.reducer.cart);
@@ -70,6 +69,7 @@ export default function Navbar({ setCart }) {
           className="flex-row flex p-1 border border-white hover:border-amber-500 bg-black  cursor-pointer  hover:bg-gray-800 hover:text-amber-500"
           onClick={() => {
             dispatch(setArtist(data));
+
             navigate(`/${data.name.replace(/ /g, "_")}`);
             setSearchbarDisplay("none");
           }}
@@ -93,6 +93,9 @@ export default function Navbar({ setCart }) {
   function CartIcon() {
     return (
       <>
+        <div className="md:hidden block -ml-7">
+          <DarkMode />
+        </div>
         <div
           className="absolute top-2 right-3 cursor-pointer text-amber-500"
           onClick={() => handleCartDisplay()}
@@ -128,11 +131,13 @@ export default function Navbar({ setCart }) {
           onClick={() => navigate("/")}
         >
           Ticketmaster
-          <DarkMode />
         </div>
 
         <div className="flex w-full md:justify-end md:mr-10 justify-center items-center">
           <CartIcon />
+          <div className="hidden md:block">
+            <DarkMode />
+          </div>
 
           <input
             onChange={handleChange}

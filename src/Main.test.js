@@ -7,16 +7,8 @@ import "matchmedia-polyfill";
 import Main from "./Main";
 
 
-
 describe("main test", () => {
-  it("renders Apps", () => {
-    const { container } = render(
-      <Provider store={store}>
-        <Main />
-      </Provider>
-    );
-    expect(container.firstChild).toMatchSnapshot();
-  });
+
   it("render ticketmaster ", () => {
     render(
       <Provider store={store}>

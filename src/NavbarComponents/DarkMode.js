@@ -38,6 +38,7 @@ export default function DarkMode() {
           checked={isDarkMode}
           onChange={handleToggleDarkMode}
           size={25}
+          sunColor="black"
         />
       </div>
     </>
