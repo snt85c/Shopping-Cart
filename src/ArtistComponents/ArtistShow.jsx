@@ -3,6 +3,7 @@ import { Spinner } from "../Services";
 import EventList from "./ArtistEventList";
 import { useSelector } from "react-redux";
 import ArtistShowSocialsIcons from "./ArtistShowSocialIcons";
+import Footer from "../Footer"
 export default function ArtistShow({data}) {
 
   const metadata = useSelector((state) => state.reducer.artistMetadata);
@@ -11,8 +12,7 @@ export default function ArtistShow({data}) {
 
   return (
     <>
-      return (
-      <div className="flex flex-col min-h-[89vh] text-sm font-bold text-white  p-1 select-none ">
+      <div className="flex flex-col justify-between min-h-[85.1vh] text-sm font-bold text-white  select-none ">
         <div>
           <div className=" ml-5 mt-2 text-4xl md:text-6xl">{data.name}</div>
           <div className="ml-5 text-lg">
@@ -37,8 +37,8 @@ export default function ArtistShow({data}) {
           </div>
         </div>
         <ArtistShowSocialsIcons data={data} />
+      <Footer />
       </div>
-      );
-    </>
+      </>
   );
 }

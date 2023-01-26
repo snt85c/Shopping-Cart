@@ -36,7 +36,7 @@ export default function ArtistShowSocialsIcons({data}) {
       }
     });
     return (
-      <div className="flex flex-col justify-center items-center mb-8">
+      <div className="flex flex-col justify-center items-center">
         <div className="flex flex-row">{result}</div>
       </div>
     );

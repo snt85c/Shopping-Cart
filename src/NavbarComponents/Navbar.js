@@ -1,4 +1,3 @@
-
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import {
@@ -11,13 +10,14 @@ import Cart from "../CartComponents/Cart";
 import DarkMode from "./DarkMode";
 import { useDispatch } from "react-redux";
 import { setArtist } from "../redux/slice";
+import { FetchArtistMetadataFromLastFM, FetchEventsInTicketmasterAPI, FetchTopTracksFromLastFM } from "../Services";
 
 export default function Navbar({ setCart }) {
   const cart = useSelector((state) => state.reducer.cart);
   const [search, setSearch] = useState("");
   const [searchItems, setSearchItems] = useState([]);
   const [searchbarDisplay, setSearchbarDisplay] = useState("none");
-  const [cartIconDisplay, setCartIconDisplay] = useState("none")
+  const [cartIconDisplay, setCartIconDisplay] = useState("none");
   const navigate = useNavigate();
 
   function useOutsideAlerter(ref) {
@@ -50,8 +50,8 @@ export default function Navbar({ setCart }) {
     setSearch(event.target.value);
   }
 
-  function handleCartDisplay(){
-    setCartIconDisplay(cartIconDisplay === "block"?"none":"block")
+  function handleCartDisplay() {
+    setCartIconDisplay(cartIconDisplay === "block" ? "none" : "block");
   }
 
   function CartCounter() {
@@ -63,13 +63,13 @@ export default function Navbar({ setCart }) {
   }
 
   function SearchbarItems({ data }) {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     return (
       <>
         <div
           className="flex-row flex p-1 border border-white hover:border-amber-500 bg-black  cursor-pointer  hover:bg-gray-800 hover:text-amber-500"
           onClick={() => {
-            dispatch(setArtist(data))
+            dispatch(setArtist(data));
             navigate(`/${data.name.replace(/ /g, "_")}`);
             setSearchbarDisplay("none");
           }}
@@ -95,7 +95,7 @@ export default function Navbar({ setCart }) {
       <>
         <div
           className="absolute top-2 right-3 cursor-pointer text-amber-500"
-          onClick={()=>handleCartDisplay()}          
+          onClick={() => handleCartDisplay()}
         >
           <HiOutlineShoppingCart />
         </div>
@@ -111,7 +111,7 @@ export default function Navbar({ setCart }) {
       <>
         <div
           ref={wrapperRef}
-          className=" absolute flex flex-col z-20  right-auto top-24  md:right-12 md:top-14"
+          className=" absolute flex flex-col z-20  right-auto +5 top-24  md:right-12 md:top-14"
           style={{ display: searchbarDisplay }}
         >
           {searchItemsList}
@@ -125,13 +125,13 @@ export default function Navbar({ setCart }) {
       <div className=" w-full relative top-0 flex  flex-col md:flex-row justify-between items-center max-w-full border-b-amber-500 dark:bg-gray-900 bg-white border-b-2 font-extrabold text-4xl  h-[12vh]md:h-[6vh]  ">
         <div
           className="flex w-full md:justify-start pt-2 md:pt-0 md:pl-2 font-newake subpixel-antialiased tracking-wider justify-center cursor-pointer dark:text-white duration-1000 text-black "
-          onClick={() => /*(setCart({ ...cart, display: "none" }),*/ navigate("/")}
+          onClick={() => navigate("/")}
         >
           Ticketmaster
+          <DarkMode />
         </div>
 
         <div className="flex w-full md:justify-end md:mr-10 justify-center items-center">
-          <DarkMode />
           <CartIcon />
 
           <input

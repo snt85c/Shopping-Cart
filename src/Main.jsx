@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Routes, Route, HashRouter } from "react-router-dom";
 import { AlertContextProvider } from "./AlertComponents/AlertContextProvider";
 import telegramAlert from "./LoginComponent/TelegramAlerter";
 import Navbar from "./NavbarComponents/Navbar";
-import SuggestionPage from "./SuggestionComponents/SuggestionPage";
+import SuggestionPage from "./SuggestionComponents/SuggestionPage.jsx";
 import ArtistPage from "./ArtistComponents/ArtistPage";
 import EventPage from "./EventComponents/EventPage";
 import Alert from "./AlertComponents/Alert";
@@ -50,7 +50,6 @@ export default function Main() {
             <Route path="*" element={<NoPath />} />
           </Routes>
         </HashRouter>
-          <Footer />
       </AlertContextProvider>
     </>
   );

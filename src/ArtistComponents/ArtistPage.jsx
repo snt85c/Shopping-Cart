@@ -29,7 +29,6 @@ export default function ArtistPage({ onScreen }) {
   FetchArtistMetadataFromLastFM(data);
   FetchTopTracksFromLastFM(data);
 
- 
   return (
     <div>
       <div className="flex justify-between min-h-full dark:bg-gray-800 bg-gray-400 select-none">
@@ -44,7 +43,7 @@ export default function ArtistPage({ onScreen }) {
           }) no-repeat 50% 30%`,
         }}
       >
-        <ArtistShow data={data}/>
+        <ArtistShow data={data} />
       </div>
     </div>
   );

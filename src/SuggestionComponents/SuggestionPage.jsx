@@ -4,6 +4,7 @@ import SuggestionList from "./SuggestionList";
 import { useDispatch } from "react-redux";
 import SuggestionsShowBackgroundVideo from "./SuggestionVideoComponent";
 import { setArtist } from "../redux/slice";
+import Footer from "../Footer";
 
 export default function SuggestionPage() {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ export default function SuggestionPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

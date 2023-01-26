@@ -24,10 +24,11 @@ export function FetchArtistMetadataFromLastFM(data, setMetadata) {
     }
     getData();
     return () => (isSubscribed = false);
-  }, []);
+  }, [data]);
 }
 
-export function FetchTopTracksFromLastFM(data, setTopTracks) {
+export function FetchTopTracksFromLastFM(data) {
+  
   const dispatch = useDispatch()
   useEffect(() => {
     let isSubscribed = true;
@@ -45,7 +46,7 @@ export function FetchTopTracksFromLastFM(data, setTopTracks) {
     }
     getData();
     return () => (isSubscribed = false);
-  }, []);
+  }, [data]);
 }
 
 //search by Artist(attraction)
@@ -60,7 +61,7 @@ export function FetchAttractionToSearchFromTicktmasterAPI(search, setData) {
         const response = await fetch(url, { mode: "cors" });
         const result = await response.json();
         try {
-          result._embedded.attractions.forEach((item) => {
+          result?._embedded?.attractions.forEach((item) => {
             if (item.upcomingEvents._total !== 0) {
               attractions.push(item);
             }
@@ -79,7 +80,7 @@ export function FetchAttractionToSearchFromTicktmasterAPI(search, setData) {
 }
 
 //search all the events available for attraction(Artist) id
-export function FetchEventsInTicketmasterAPI(data, setEventData) {
+export function FetchEventsInTicketmasterAPI(data) {
   const dispatch = useDispatch()
   useEffect(() => {
     let isSubscribed = true;
