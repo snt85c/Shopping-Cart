@@ -1,6 +1,5 @@
 # Ticketmaster API Website
-[![Node.js CI](https://github.com/snt85c/Shopping-Cart/actions/workflows/node.js.yml/badge.svg)](https://github.com/snt85c/Shopping-Cart/actions/workflows/node.js.yml)
-
+[![Test](https://github.com/snt85c/Shopping-Cart/actions/workflows/test.js.yml/badge.svg)](https://github.com/snt85c/Shopping-Cart/actions/workflows/test.js.yml)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
