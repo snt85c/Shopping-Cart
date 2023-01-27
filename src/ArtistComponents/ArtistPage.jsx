@@ -31,7 +31,10 @@ export default function ArtistPage({ onScreen }) {
 
   return (
     <div>
-      <div className="flex justify-between min-h-full dark:bg-gray-800 bg-gray-400 select-none">
+      <div
+        aria-label="artist-page"
+        className="flex justify-between min-h-full dark:bg-gray-800 bg-gray-400 select-none"
+      >
         <ArtistBreadcrumbs />
         <BackArrowOverlay />
       </div>

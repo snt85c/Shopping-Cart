@@ -1,9 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  FetchArtistMetadataFromLastFM,
-  FetchEventsInTicketmasterAPI,
-  FetchTopTracksFromLastFM,
-} from "../Services";
 
 export const reducers = {
   setIsDarkMode: (state, actions) => {
@@ -13,7 +8,6 @@ export const reducers = {
     return { ...state, suggestions: actions.payload };
   },
   setArtist: (state, actions) => {
-
     return { ...state, artist: actions.payload };
   },
   setEvents: (state, actions) => {

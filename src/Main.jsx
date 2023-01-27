@@ -21,17 +21,27 @@ export default function Main() {
 
   useEffect(() => {
     telegramAlert();
-    //check if localStorage has a "cart", in that case pass it to the reducer 
+    //check if localStorage has a "cart", in that case pass it to the reducer
     if (JSON.parse(localStorage.getItem("cart"))) {
       cart = JSON.parse(localStorage.getItem("cart"));
-      dispatch(setCart({type:"SET_CART", payload:cart}));
+      dispatch(setCart({ type: "SET_CART", payload: cart }));
     }
   }, []);
-  
+
   useEffect(() => {
     //everytime the cart is modified, i should save it on localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
+
+  useEffect(async () => {
+    const result = await fetch(
+      "https://content.guardianapis.com/search?page=1&q=debate&api-key=8a25af15-fd86-463b-8508-e39cda81cad1"
+    )
+      .then((result) => result.json())
+      .then((result) => {
+        console.log(result);
+      });
+  }, []);
 
   return (
     <>
