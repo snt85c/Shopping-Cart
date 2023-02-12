@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/Shopping-Cart/static/css/main.a2a81940.css",
-    "main.js": "/Shopping-Cart/static/js/main.00758ce1.js",
-    "static/js/684.0d9efa32.chunk.js": "/Shopping-Cart/static/js/684.0d9efa32.chunk.js",
+    "main.css": "/Shopping-Cart/static/css/main.a9146b7d.css",
+    "main.js": "/Shopping-Cart/static/js/main.5eb6dcc4.js",
+    "static/js/684.7788d65c.chunk.js": "/Shopping-Cart/static/js/684.7788d65c.chunk.js",
     "static/js/352.4f7cc73b.chunk.js": "/Shopping-Cart/static/js/352.4f7cc73b.chunk.js",
     "static/media/bkgVideo.webm": "/Shopping-Cart/static/media/bkgVideo.4a0ef0500cae00b1d78f.webm",
     "static/media/Newake.otf": "/Shopping-Cart/static/media/Newake.d583d6567183791da8fb.otf",
     "static/media/happy_cart.webp": "/Shopping-Cart/static/media/happy_cart.c0176e4bf561e9ea2ad5.webp",
     "static/media/empty_cart.webp": "/Shopping-Cart/static/media/empty_cart.cc2e37fe3c83a2b25edc.webp",
     "index.html": "/Shopping-Cart/index.html",
-    "main.a2a81940.css.map": "/Shopping-Cart/static/css/main.a2a81940.css.map",
-    "main.00758ce1.js.map": "/Shopping-Cart/static/js/main.00758ce1.js.map",
-    "684.0d9efa32.chunk.js.map": "/Shopping-Cart/static/js/684.0d9efa32.chunk.js.map",
+    "main.a9146b7d.css.map": "/Shopping-Cart/static/css/main.a9146b7d.css.map",
+    "main.5eb6dcc4.js.map": "/Shopping-Cart/static/js/main.5eb6dcc4.js.map",
+    "684.7788d65c.chunk.js.map": "/Shopping-Cart/static/js/684.7788d65c.chunk.js.map",
     "352.4f7cc73b.chunk.js.map": "/Shopping-Cart/static/js/352.4f7cc73b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a2a81940.css",
-    "static/js/main.00758ce1.js"
+    "static/css/main.a9146b7d.css",
+    "static/js/main.5eb6dcc4.js"
   ]
 }
