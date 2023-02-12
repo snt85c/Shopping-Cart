@@ -19,7 +19,7 @@ export default function SuggestionPage() {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row-reverse mb-12  ">
+      <div className="flex flex-col md:flex-row-reverse mb-12 min-h-screen  ">
         <SuggestionsShowBackgroundVideo />
         <div className="flex flex-col md:w-1/2 justify-between duration-1000 ">
           <div className="m-1  fadeInAnimation">
@@ -27,7 +27,6 @@ export default function SuggestionPage() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

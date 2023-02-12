@@ -33,15 +33,6 @@ export default function Main() {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  useEffect(async () => {
-    const result = await fetch(
-      "https://content.guardianapis.com/search?page=1&q=debate&api-key=8a25af15-fd86-463b-8508-e39cda81cad1"
-    )
-      .then((result) => result.json())
-      .then((result) => {
-        console.log(result);
-      });
-  }, []);
 
   return (
     <>
@@ -59,6 +50,7 @@ export default function Main() {
 
             <Route path="*" element={<NoPath />} />
           </Routes>
+          <Footer />
         </HashRouter>
       </AlertContextProvider>
     </>

@@ -114,7 +114,7 @@ export function FetchSuggestFromTicketmasterAPI() {
     let isSubscribed = true;
     async function getData() {
       let suggest = [];
-      const url = `https://app.ticketmaster.com/discovery/v2/suggest?&countryCode=UK&apikey=${TiketmasterAPIKEY}`;
+      const url = `https://app.ticketmaster.com/discovery/v2/suggest?&countryCode=GB&apikey=${TiketmasterAPIKEY}`;
       const response = await fetch(url, { mode: "cors" });
       const result = await response.json();
       try {

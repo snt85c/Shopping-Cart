@@ -34,7 +34,6 @@ export default function EventPage({ onScreen, cart }) {
           <EventSeatMap data={data} />
         </div>
         <AddToCart data={data} cart={cart} />
-      <Footer />
       </div>
     </>
   );
